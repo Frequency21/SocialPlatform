@@ -45,26 +45,27 @@ Az alkalmazás egy egyszerű regisztrációt és bejelentkezést követően lehe
 
 ---
 
-|    Név    |
-| :-------: |
-|Kiss Olivér |
-| Burza Ralf |
-|Balogh Etele|
-|  Svatlana  |
+# Adatfolyam diagram
 
-</center>
+[első szint](https://drive.google.com/file/d/1SW9K7K-O7WFHSXmzR3vVcFwOKDXmNJM7/view?usp=sharing)
 
 ---
-## Követelmény katalógus :fire:
-- A látogató (még nem regisztrált, vagy be nem jelentkezett felhasználó) megtudjon tekinteni oldalakat
-- A még nem regisztrált felhasználó tudjon regisztrálni, amennyiben már van fókja, be kell tudni jelentkezni
-- Ha  már bejelentkezett, akkor ki is tudjon már
-- A belépett felhasználók tudjanak keresni csoportok és a többi felhasználó között
-- A felhasználók tudjanak csoportokhoz csatlakozni (ebben az esetben a csoport új bejegyzései megjelennek a hírfolyamukban)
-- A felhasználók tudjanak csoportokat létrehozni.
-- A felhasználók tudjanak "barátnak jelölést" végezni más felhasznáók felé
-- A felhasználók tudjanak üzenetet küldeni egymásközött
-- A felhasználók tudjanak bejelentést tenni csoportokról vagy más felhasználókrol (ilyen: "Néz már rá erre meg erre lesz szíves!") :question:
-- Az Admin felhasználó láthasson minden egyéb felhasználót és csoport bejegyzést (a privát üzeneteket ne)
-- Az Admin felhasználó tudjon csoportot vagy felhasználót törölni a rendszerből :cop:
 
+Megosztott projekt ötlet feladatok.
+Ezt kéne összemergelni a sajátunkéval.
+
+1. Felhasználók **regisztrálása**, **profilok** létrehozása
+2. Fényképek feltöltése, **kommentek** hozzáfűzése
+3. Ismerősök **bejelölése**, ismeretség **visszaigazolása**
+4. **Üzenet küldés**e ismerősöknek
+5. **Csoportok alapítása**
+6. Csoportok tagjainak létszáma
+7. **Ismerettség ajánlása** közös ismerősök alapján (vagy munkahely, iskola)
+8. Névnaposok, **születésnaposok** az adott hónapban
+9. Klubok ajánlása, ahol van közös ismerős
+10. Üzenetek küldése, fogadása (**engedélykérések**)
+11. Üzenetek kiírása üzenőfalra, válaszolás üzenőfalra írt üzenetre
+12. **Fényképalbumok** létrehozása, albumjellemzők (fényképek száma,
+    felhasznált tárhely)
+13. Meghívások kezelése, statisztika a meghívásokról (kinek hány
+    olyan ismerőse van, akit ő hívott meg)
