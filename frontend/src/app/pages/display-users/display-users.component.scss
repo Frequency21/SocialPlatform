@@ -1,0 +1,12 @@
+.user-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-content: center;
+    div {
+        margin: 1em;
+        span {
+            display: block;
+        }
+    }
+}
