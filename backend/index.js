@@ -1,7 +1,12 @@
 const express = require('express')
 const oracledb = require('oracledb');
+oracledb.outFormat = oracledb.OUT_FORMAT_OBJECT;
+
 const app = express();
+const bodyParser = require("body-parser");
 const port = 3000;
+
+app.use(bodyParser.json());
 
 // database configuration
 const dbConfig = require('./db.config');
@@ -33,14 +38,14 @@ async function selectAllUsers(req, res) {
       return res.send('query send no rows');
     } else {
       //send all users
-      return res.send(result.rows);
+      return res.json(result.rows);
     }
 
   }
 }
 
 //get /users
-app.get('/users', function (req, res) {
+app.get('/api/users', function (req, res) {
   selectAllUsers(req, res);
 })
 
@@ -68,18 +73,18 @@ async function selectUserById(req, res, id) {
       return res.send('query send no rows');
     } else {
       //send all users
-      return res.send(result.rows);
+      return res.json(result.rows);
     }
   }
 }
 
 //get /user?id=<id user>
-app.get('/user', function (req, res) {
+app.get('/api/user', function (req, res) {
   //get query param ?id
   let id = req.query.id;
   // id param if it is number
   if (isNaN(id)) {
-    res.send('Query param id is not number')
+    res.json('Query param id is not number')
     return
   }
   selectUserById(req, res, id);

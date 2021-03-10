@@ -8,6 +8,8 @@ import { User } from '../shared/models/user.model'
 })
 export class UserService {
 
+  rootUrl: string = '/api'
+
   // mock datas
   users: User[] = [
     {id: 1, name: 'oli', created: new Date(2021, 3, 10, 14, 33), email: 'taylor@gmail.com'},
@@ -18,9 +20,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getUsers(): Observable<User[]> {
-    return of(this.users);
-    // TODO valódi szerver kommunikáció
-    // return new Observable<User>();
+    return this.http.get<User[]>(this.rootUrl + '/users');
   }
 
 }
