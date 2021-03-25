@@ -58,55 +58,104 @@ Ezt követően a node db.config.js parancsot kiadva ha minden igaz csatlakoztunk
 
 A feladat egy online közösségi oldal és a hozzá tartozó adatbázison alapuló szerver-kliens architektúrájú webalkalmazás megvalósítása. Ahol az adatbázis Oracle technológián nyugszik míg a webalkalmazást Angular és Node.js keretrendszerek segítségével készítjük el.
 
-Az alkalmazás egy egyszerű regisztrációt és bejelentkezést követően lehetőséget nyújt arra, hogy új ismerősöket jelölhessünk be illetve meglévőekkel válthassunk üzenetet. Böngészhetünk nyilvános csoportok között melyekhez csatlakozhatunk. Csoportokat is alakíthatunk ahol hasonló érdeklődési körrel rendelkezők gyűlhetnek össze -- hobbi, iskola, munkahely. A profilunkat testreszabhatjuk, megadhatjuk a születési dátumunkat, nevünket, volt iskoláinkat, munkahelyeinket, lakhelyünket, hobbijainkat. Létrehozhatunk fényképalbumokat, melyeket rendszerezhetünk és nevet is adhatunk nekik. Illetve a hírfolyamon is elhelyezhetünk eseményeket, képeket, bejegyzéseket melyekre jöhetnek likeok illetve megjegyzések.
+Az alkalmazás egy egyszerű regisztrációt és bejelentkezést követően lehetőséget nyújt arra, hogy új ismerősöket jelölhessünk be illetve meglévőkkel válthassunk üzenetet. Böngészhetünk csoportok között melyekhez csatlakozhatunk. Csoportokat is alakíthatunk, ahol hasonló érdeklődési körrel rendelkezők gyűlhetnek össze -- hobbi, iskola, munkahely. A profilunkat testreszabhatjuk, megadhatjuk a születési dátumunkat, nevünket, volt iskoláinkat, munkahelyeinket, lakhelyünket, hobbijainkat. Létrehozhatunk fényképalbumokat, melyeket rendszerezhetünk és nevet is adhatunk nekik. Illetve a hírfolyamon is elhelyezhetünk eseményeket, képeket, bejegyzéseket melyekre jöhetnek likeok illetve megjegyzések.
 
 ---
 ## Követelmény katalógus :book:
-- Látogató tudjon megtekinteni nyilvános csoportokat, nyilvános bejegyzéseket (pl.: újságcikk, esemény)
+
+- **Látogató** tudjon megtekinteni csoportokat és azok nyilvános bejegyzéseit, illetve más felhasználók nyilvános bejegyzéseit (pl.: újságcikk, esemény)
 - Még nem regisztrált emailcímmel lehessen regisztrálni, azt követően lehessen belépni emailcím / jelszó párossal
-- A belépett felhasználó legyen képes
+- A belépett **felhasználó** legyen képes
   - kijelentkezni
   - a saját profilját szerkeszteni (profilkép, adatok módosítása)
-  - fényképalbumokat létrehozni
-  - a saját hírfolyamát szerkeszteni (események, fényképek megosztása)
-  - keresni nyilvános csoportok és felhasználók között
+  - **fényképalbum**okat létrehozni:
+    - lehessen a képeket **kategorizálni**
+    - kategóriáknak legyen neve
+  - a saját **hírfolyam**át szerkeszteni (események, fényképek megosztása -- **poszt**olás)
+  - keresni **csoport**ok és felhasználók között
   - ismerősnek jelölni / jelöléseket elfogadni
-  - üzenetet váltani ismerőssel
+  - **üzenet**et váltani ismerőssel
   - üzenetet váltani ismeretlennel (engedélykérések) :question:
-  - csoportot létrehozni / csoporthívást elfogadni
-  - a hírfolyam tartalmazza a csatlakozott csoportokhoz / visszaigazolt ismerősökhöz tartozó új bejegyzéseket
-  - bejelentést tenni csoportokról vagy más felhasználókrol :question:
-- Csoportok (nyilvános / privát)
-  - az alapító küldhessen meghívókat
-  - az alapító és az arra jogosultak adhassanak további rangokat (sima tag, csoport admin, moderátor, lelkes rajongó) :question::question::question:
-  - lehessen kiválasztani, hogy az egyes rangú felhasználók neve milyen színnel jelenjen meg a komment szekciókban
-- Az adminisztrátorok
-  - láthassanak minden egyéb felhasználót és csoport bejegyzést (a privát üzeneteket ne)
+  - ismerős hírfolyamán bejegyzést elhelyezni (posztolás) (pl.: születésnapi felköszöntés)
+  - csoportot létrehozni / **csoporthívás**t elfogadni
+  - **bejelentés**t tenni csoportokról vagy más felhasználókrol :question:
+- Csoportok (minden csoport nyilvános, látható hogy létezik)
+  - egy felhasználó hozza létre, ő lesz a tulaj
+  - a tulaj és az arra jogosultak adhassanak további rangokat (sima tag, csoport admin, moderátor, lelkes rajongó) :question:
+  - lehessen kiválasztani, hogy az egyes rangú felhasználók neve milyen színnel jelenjen meg a **komment** szekciókban
+  - bárki beléphet, viszont meghívni is lehet felhasználókat
+  - a posztok alapértelmezetten csoport láthatóságúak, viszont a tulaj nyilvánossá teheti
+- Az **adminisztrátor**ok
   - tudjon csoportot vagy felhasználót törölni a rendszerből :cop:
+
+### Részletezések
+Posztolni csoport vagy felhasználó hírfolyamába lehet. A poszt láthatóságáról a hírfolyam tulajdonosa dönthet,
+alapértelmezetten nem nyilvános. Ez azt jelenti, hogy:
+- csoport esetében, a posztot csak a csoport tagjai látják
+- felhasználó esetében a posztot, csak a hírfolyam tulajdonosa és közvetlen ismerősei láthatják.
+
+A posztokhoz tartozhatnak kommentek, bárki hagyhat kommentet aki láthatja a posztot.
+
+További finomítás: mik lehetnek az egyes egyedek attribútumai
+- felhasználó
+  - id
+  - admin (boolean)
+  - létrehozás dátuma
+  - profilkép
+  - adatok:
+    - név
+    - születési dátum
+    - volt munka / iskolahely (lista)
+    - aktuális munka / iskolahely (lista)
+- fényképalbum
+  - kihez tartozik (felh id)
+  - kategória id (lista)
+- kategória
+  - név
+  - leírás
+  - fénykép (lista)
+- csoport
+  - csoport id
+  - tulaj id
+  - tagok (id lista)
+  - adatok:
+    - név
+    - leírás
+- hírfolyam
+  - ez egy kapcsolótábla lesz a posztok és (felhasználók / csoport) id-k között ?
+  - mivel nincs többágú kapcsolat ezért két külön hírfolyam tábla kell majd :cry:
+- poszt
+  - szerző felhasználó id
+  - "címzett" csoport vagy felh. id
+    - itt sem lehet egybevenni őket (nincs többágú kapcsolat) ezért valszeg két "példány" kell majd
+  - létrehozás időpontja
+  - láthatóság (nyilvános: boolean)
+  - szöveg
+  - képek (lista)
+  - like / dislike számláló
+- komment
+  - poszt id (mihez tartozik)
+  - szerző felhasználó id
+  - szöveg
+  - like / dislike számláló
+- üzenet
+  - feladó id
+  - címzett id
+  - szöveg
+  - időpont
+- meghívás
+  - kit (id)
+  - hova (id)
+  - időpont
+  - elfogadva (boolean)
+- bejelentés
+  - feladó id
+  - feljelentett id
+  - időpont
+  - leírás
 
 ---
 
 # Adatfolyam diagram
 
 [első szint](https://drive.google.com/file/d/1SW9K7K-O7WFHSXmzR3vVcFwOKDXmNJM7/view?usp=sharing)
-
----
-
-Megosztott projekt ötlet feladatok.
-Ezt kéne összemergelni a sajátunkéval.
-
-1. Felhasználók **regisztrálása**, **profilok** létrehozása
-2. Fényképek feltöltése, **kommentek** hozzáfűzése
-3. Ismerősök **bejelölése**, ismeretség **visszaigazolása**
-4. **Üzenet küldés**e ismerősöknek
-5. **Csoportok alapítása**
-6. Csoportok tagjainak létszáma
-7. **Ismerettség ajánlása** közös ismerősök alapján (vagy munkahely, iskola)
-8. Névnaposok, **születésnaposok** az adott hónapban
-9. Klubok ajánlása, ahol van közös ismerős
-10. Üzenetek küldése, fogadása (**engedélykérések**)
-11. Üzenetek kiírása üzenőfalra, válaszolás üzenőfalra írt üzenetre
-12. **Fényképalbumok** létrehozása, albumjellemzők (fényképek száma,
-    felhasznált tárhely)
-13. Meghívások kezelése, statisztika a meghívásokról (kinek hány
-    olyan ismerőse van, akit ő hívott meg)
