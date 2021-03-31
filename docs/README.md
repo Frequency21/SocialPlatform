@@ -155,6 +155,19 @@ További finomítás: mik lehetnek az egyes egyedek attribútumai
   - leírás
 
 ---
+# EK diagram
+
+## EK leképezés
+Fénykép (_id_, kép, név, *kategoria_ids*)
+Kategória (_név_, *fénykép_ids*)
+Fényképalbum (_*Felhasználó.id*_,*kategória.név*)
+Felhasználó (_id_, jelszó, szül.dát, isAdmin, csatlakozásDátum, keresztnév, vezetéknév, munka-iskola, profilkép, *Hírfolyam.id*)
+Üzenet (_id_, _*Felhasználó.id*_, _*Címzett.id*_ , szöveg , küldésIdő)
+Meghívás (_*Felhasználó.id*_, _*Címzett.id*_, _*Csoport.id*_, küldésIdő, isAccepted)
+Csoport (_csoportId_, leírás, név, *tulaj.id*, *Hírfolyam.id*)
+Hírfolyam (_id_)
+Poszt (_id_, _*Hírfolyam.id*_, szöveg, dislike, like, időpont, isPublic)
+Komment (_id_, _*Felhaszánló.id*_ , _*Poszt.id*_ , szöveg, időpont, like, dislike)
 
 # Adatfolyam diagram
 
