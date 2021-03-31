@@ -123,7 +123,7 @@ További finomítás: mik lehetnek az egyes egyedek attribútumai
     - leírás
 - hírfolyam
   - ez egy kapcsolótábla lesz a posztok és (felhasználók / csoport) id-k között ?
-  - mivel nincs többágú kapcsolat ezért két külön hírfolyam tábla kell majd :cry:
+  - mivel nincs többágú kapcsolat ezért két külön hírfolyam tábla kell majd
 - poszt
   - szerző felhasználó id
   - "címzett" csoport vagy felh. id
@@ -160,18 +160,20 @@ További finomítás: mik lehetnek az egyes egyedek attribútumai
 ---
 # EK diagram
 
+![EK diagram](./ekSocialPlatform.png)
+
 ## EK leképezés
 
--Fénykép (_id_, kép, név, *kategoria_id*)
--Kategória (_név_)
--Fényképalbum (_*Felhasználó.id*_,*kategória.név*)
--Felhasználó (_id_, jelszó, szül.dát, isAdmin, csatlakozásDátum, keresztnév, vezetéknév, munka-iskola, profilkép, *Hírfolyam.id*)
--Üzenet (_id_, _*Felhasználó.id*_, _*Címzett.id*_ , szöveg , küldésIdő)
--Meghívás (_*Felhasználó.id*_, _*Címzett.id*_, _*Csoport.id*_, küldésIdő, isAccepted)
--Csoport (_csoportId_, leírás, név, *tulaj.id*, *Hírfolyam.id*)
--Hírfolyam (_id_)
--Poszt (_id_, _*Hírfolyam.id*_, szöveg, dislike, like, időpont, isPublic)
--Komment (_id_, _*Felhaszánló.id*_ , _*Poszt.id*_ , szöveg, időpont, like, dislike)
+- Fénykép (_id_, kép, név, *kategoria_id*)
+- Kategória (_név_)
+- Fényképalbum (_*Felhasználó\_id*_,*kategória.név*)
+- Felhasználó (_id_, jelszó, szül.dát, isAdmin, csatlakozásDátum, keresztnév, vezetéknév, munka-iskola, profilkép, *Hírfolyam\_id*)
+- Üzenet (_id_, _*Felhasználó\_id*_, _*Címzett\_id*_ , szöveg , küldésIdő)
+- Meghívás (_*Felhasználó\_id*_, _*Címzett\_id*_, _*Csoport\_id*_, küldésIdő, isAccepted)
+- Csoport (_csoportId_, leírás, név, *tulaj\_id*, *Hírfolyam\_id*)
+- Hírfolyam (_id_)
+- Poszt (_id_, _*Hírfolyam\_id*_, szöveg, dislike, like, időpont, isPublic)
+- Komment (_id_, _*Felhaszánló\_id*_ , _*Poszt\_id*_ , szöveg, időpont, like, dislike)
 
 ## Szerep funkció mátrix
 
