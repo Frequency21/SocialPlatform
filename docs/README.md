@@ -1,6 +1,6 @@
 #  Projekt: Social disctancing
 
-<img src="./docs/logo.png" alt="Egy kib@#Đott madár" width="300"/>
+<img src="./docs/logo.png" alt="bird" width="300"/>
 
 ## Projekt tagok
 
@@ -75,13 +75,13 @@ Az alkalmazás egy egyszerű regisztrációt és bejelentkezést követően lehe
   - keresni **csoport**ok és felhasználók között
   - ismerősnek jelölni / jelöléseket elfogadni
   - **üzenet**et váltani ismerőssel
-  - üzenetet váltani ismeretlennel (engedélykérések) :question:
+  <!-- - üzenetet váltani ismeretlennel (engedélykérések) :question: -->
   - ismerős hírfolyamán bejegyzést elhelyezni (posztolás) (pl.: születésnapi felköszöntés)
   - csoportot létrehozni / **csoporthívás**t elfogadni
-  - **bejelentés**t tenni csoportokról vagy más felhasználókrol :question:
+  - **bejelentés**t tenni csoportokról vagy más felhasználókrol <!-- :question: -->
 - Csoportok (minden csoport nyilvános, látható hogy létezik)
   - egy felhasználó hozza létre, ő lesz a tulaj
-  - a tulaj és az arra jogosultak adhassanak további rangokat (sima tag, csoport admin, moderátor, lelkes rajongó) :question:
+  - a tulaj és az arra jogosultak adhassanak további rangokat (sima tag, csoport admin, moderátor, lelkes rajongó) <!-- :question: -->
   - lehessen kiválasztani, hogy az egyes rangú felhasználók neve milyen színnel jelenjen meg a **komment** szekciókban
   - bárki beléphet, viszont meghívni is lehet felhasználókat
   - a posztok alapértelmezetten csoport láthatóságúak, viszont a tulaj nyilvánossá teheti
@@ -154,6 +154,9 @@ További finomítás: mik lehetnek az egyes egyedek attribútumai
   - időpont
   - leírás
 
+# Adatfolyam diagram
+
+[első szint](https://drive.google.com/file/d/1SW9K7K-O7WFHSXmzR3vVcFwOKDXmNJM7/view?usp=sharing)
 ---
 # EK diagram
 
@@ -170,6 +173,6 @@ További finomítás: mik lehetnek az egyes egyedek attribútumai
 -Poszt (_id_, _*Hírfolyam.id*_, szöveg, dislike, like, időpont, isPublic)
 -Komment (_id_, _*Felhaszánló.id*_ , _*Poszt.id*_ , szöveg, időpont, like, dislike)
 
-# Adatfolyam diagram
+## Szerep funkció mátrix
 
-[első szint](https://drive.google.com/file/d/1SW9K7K-O7WFHSXmzR3vVcFwOKDXmNJM7/view?usp=sharing)
+![szerep funkció mátrix](./szerep-funkcio-matrix.png)
