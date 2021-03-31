@@ -18,7 +18,9 @@ async function selectAllUsers(req, res) {
 
     console.log('connected to database');
     // run query to get all users
-    result = await connection.execute(`SELECT * FROM SD_USER`);
+    result = await connection.execute(
+      `SELECT ID as "id", NAME as "name", EMAIL as "email", CREATED as "created" FROM SD_USER`
+      );
 
   } catch (err) {
     //send error message
@@ -54,7 +56,7 @@ async function selectUserById(req, res, id) {
   try {
     connection = await oracledb.getConnection(connectionData);
     // run query to get user with user_id
-    result = await connection.execute(`SELECT * FROM CUSTOMER where ID=:id`, [id]);
+    result = await connection.execute(`SELECT ID as "id", NAME as "name", EMAIL as "email", CREATED as "created" FROM CUSTOMER where ID=:id`, [id]);
 
   } catch (err) {
     //send error message
