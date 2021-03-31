@@ -159,8 +159,8 @@ További finomítás: mik lehetnek az egyes egyedek attribútumai
 
 ## EK leképezés
 
--Fénykép (_id_, kép, név, *kategoria_ids*)
--Kategória (_név_, *fénykép_ids*)
+-Fénykép (_id_, kép, név, *kategoria_id*)
+-Kategória (_név_)
 -Fényképalbum (_*Felhasználó.id*_,*kategória.név*)
 -Felhasználó (_id_, jelszó, szül.dát, isAdmin, csatlakozásDátum, keresztnév, vezetéknév, munka-iskola, profilkép, *Hírfolyam.id*)
 -Üzenet (_id_, _*Felhasználó.id*_, _*Címzett.id*_ , szöveg , küldésIdő)
