@@ -75,13 +75,12 @@ Az alkalmazás egy egyszerű regisztrációt és bejelentkezést követően lehe
   - keresni **csoport**ok és felhasználók között
   - ismerősnek jelölni / jelöléseket elfogadni
   - **üzenet**et váltani ismerőssel
-  <!-- - üzenetet váltani ismeretlennel (engedélykérések) :question: -->
   - ismerős hírfolyamán bejegyzést elhelyezni (posztolás) (pl.: születésnapi felköszöntés)
   - csoportot létrehozni / **csoporthívás**t elfogadni
-  - **bejelentés**t tenni csoportokról vagy más felhasználókrol <!-- :question: -->
+  - **bejelentés**t tenni csoportokról vagy más felhasználókrol
 - Csoportok (minden csoport nyilvános, látható hogy létezik)
   - egy felhasználó hozza létre, ő lesz a tulaj
-  - a tulaj és az arra jogosultak adhassanak további rangokat (sima tag, csoport admin, moderátor, lelkes rajongó) <!-- :question: -->
+  - a tulaj és az arra jogosultak adhassanak további rangokat (sima tag, csoport admin, moderátor, lelkes rajongó)
   - lehessen kiválasztani, hogy az egyes rangú felhasználók neve milyen színnel jelenjen meg a **komment** szekciókban
   - bárki beléphet, viszont meghívni is lehet felhasználókat
   - a posztok alapértelmezetten csoport láthatóságúak, viszont a tulaj nyilvánossá teheti
@@ -164,16 +163,16 @@ További finomítás: mik lehetnek az egyes egyedek attribútumai
 
 ## EK leképezés
 
-- Fénykép (_id_, kép, név, *kategoria_id*)
-- Kategória (_név_)
-- Fényképalbum (_*Felhasználó\_id*_,*kategória.név*)
-- Felhasználó (_id_, jelszó, szül.dát, isAdmin, csatlakozásDátum, keresztnév, vezetéknév, munka-iskola, profilkép, *Hírfolyam\_id*)
-- Üzenet (_id_, _*Felhasználó\_id*_, _*Címzett\_id*_ , szöveg , küldésIdő)
-- Meghívás (_*Felhasználó\_id*_, _*Címzett\_id*_, _*Csoport\_id*_, küldésIdő, isAccepted)
-- Csoport (_csoportId_, leírás, név, *tulaj\_id*, *Hírfolyam\_id*)
-- Hírfolyam (_id_)
-- Poszt (_id_, _*Hírfolyam\_id*_, szöveg, dislike, like, időpont, isPublic)
-- Komment (_id_, _*Felhaszánló\_id*_ , _*Poszt\_id*_ , szöveg, időpont, like, dislike)
+- Fénykép (__id__, kép, név, *kategoria_id*)
+- Kategória (__név__)
+- Fényképalbum (__*Felhasználó\_id*__,*kategória.név*)
+- Felhasználó (__id__, jelszó, szül.dát, isAdmin, csatlakozásDátum, keresztnév, vezetéknév, munka-iskola, profilkép, *Hírfolyam\_id*)
+- Üzenet (__id__, __*Felhasználó\_id*__, __*Címzett\_id*__ , szöveg , küldésIdő)
+- Meghívás (__*Felhasználó\_id*__, __*Címzett\_id*__, __*Csoport\_id*__, küldésIdő, isAccepted)
+- Csoport (__csoportId__, leírás, név, *tulaj\_id*, *Hírfolyam\_id*)
+- Hírfolyam (__id__)
+- Poszt (__id__, __*Hírfolyam\_id*__, szöveg, dislike, like, időpont, isPublic)
+- Komment (__id__, __*Felhaszánló\_id*__ , __*Poszt\_id*__ , szöveg, időpont, like, dislike)
 
 ## Szerep funkció mátrix
 
