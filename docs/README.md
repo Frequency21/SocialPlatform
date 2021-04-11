@@ -164,15 +164,15 @@ További finomítás: mik lehetnek az egyes egyedek attribútumai
 ## EK leképezés
 
 - Fénykép (__id__, kép, név, *kategoria_id*)
-- Kategória (__név__)
-- Fényképalbum (__*Felhasználó\_id*__,*kategória.név*)
-- Felhasználó (__id__, jelszó, szül.dát, isAdmin, csatlakozásDátum, keresztnév, vezetéknév, munka-iskola, profilkép, *Hírfolyam\_id*)
-- Üzenet (__id__, __*Felhasználó\_id*__, __*Címzett\_id*__ , szöveg , küldésIdő)
-- Meghívás (__*Felhasználó\_id*__, __*Címzett\_id*__, __*Csoport\_id*__, küldésIdő, isAccepted)
+- Kategória (__név__, __*Fényképalbum\_id*__)
+- Fényképalbum (__id__, *Felhasználó\_id*)
+- Felhasználó (__id__, jelszó, szül_dát, admin_e, csatlakozásDátum, keresztnév, vezetéknév, munka_iskola, profilkép, *Hírfolyam\_id*)
+- Üzenet (**időpont**, __*Felhasználó\_id*__, __*Címzett\_id*__ , szöveg)
+- Meghívás (__*Felhasználó\_id*__, __*Címzett\_id*__, __*Csoport\_id*__, időpont, elfogadva)
 - Csoport (__csoportId__, leírás, név, *tulaj\_id*, *Hírfolyam\_id*)
 - Hírfolyam (__id__)
-- Poszt (__id__, __*Hírfolyam\_id*__, szöveg, dislike, like, időpont, isPublic)
-- Komment (__id__, __*Felhaszánló\_id*__ , __*Poszt\_id*__ , szöveg, időpont, like, dislike)
+- Poszt (**időpont**, __*Hírfolyam\_id*__, __*Felhasználó\_id*__, szöveg, dislike, like, nyilvános)
+- Komment (**időpont**, __*Felhaszánló\_id*__ , __*Poszt\_id*__ , szöveg, like, dislike)
 
 ## Szerep funkció mátrix
 
