@@ -1,7 +1,7 @@
 #  Projekt: Social disctancing
 
 <img src="./docs/logo.png" alt="bird" width="300"/>
-
+ 
 ## Projekt tagok
 
 |     Név      |
