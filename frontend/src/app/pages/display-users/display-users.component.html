@@ -1,18 +1,18 @@
 <h1>Users' information</h1>
 <hr>
 <ul class="users">
-    <div class="user-container">
-        <div>
-            <span>ID:</span>
-            <span>NAME:</span>
-            <span>EMAIL:</span>
-            <span>CREATED:</span>
-        </div>
-        <div *ngFor="let user of users">
-            <span>{{user.id}}</span>
-            <span>{{user.name}}</span>
-            <span>{{user.email}}</span>
-            <span>{{user.created | date:'medium'}}</span>
-        </div>
+  <div class="user-container">
+    <div>
+      <span>ID:</span>
+      <span>NAME:</span>
+      <span>EMAIL:</span>
+      <span>CREATED:</span>
     </div>
+    <div *ngFor="let user of users">
+      <span>{{user.id}}</span>
+      <span>{{user.vnev + " " + user.knev}}</span>
+      <span>{{user.email}}</span>
+      <span>{{user.csatl | date: 'medium'}}</span>
+    </div>
+  </div>
 </ul>

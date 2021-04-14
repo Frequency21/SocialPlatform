@@ -1,6 +1,12 @@
 export interface User {
     id: number;
-    name: string;
+    jelszo: string;
     email: string;
-    created: Date;
+    vnev: string;
+    knev: string;
+    csatl: string;
+    szul_dat: Date;
+    munka_iskola?: string;
+    picture?: Blob;
+    isAdmin: Boolean;
 }

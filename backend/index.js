@@ -1,6 +1,8 @@
 const express = require('express')
 const oracledb = require('oracledb');
 oracledb.outFormat = oracledb.OUT_FORMAT_OBJECT;
+// adatbázis timezone-ja
+process.env.ORA_SDTZ = 'Europe/Prague';
 
 const app = express();
 const bodyParser = require("body-parser");
@@ -14,13 +16,13 @@ const connectionData = dbConfig.connectionData;
 
 async function selectAllUsers(req, res) {
   try {
-    connection = await oracledb.getConnection(connectionData);
+    var connection = await oracledb.getConnection(connectionData);
 
     console.log('connected to database');
     // run query to get all users
-    result = await connection.execute(
-      `SELECT ID as "id", NAME as "name", EMAIL as "email", CREATED as "created" FROM SD_USER`
-      );
+    var result = await connection.execute(
+      `SELECT ID as "id", csatl_dat as "csatl", email as "email", f.nev.keresztnev as "knev", f.nev.vezeteknev as "vnev" FROM FELHASZNALO f`
+    );
 
   } catch (err) {
     //send error message
@@ -54,9 +56,9 @@ app.get('/api/users', function (req, res) {
 
 async function selectUserById(req, res, id) {
   try {
-    connection = await oracledb.getConnection(connectionData);
+    var connection = await oracledb.getConnection(connectionData);
     // run query to get user with user_id
-    result = await connection.execute(`SELECT ID as "id", NAME as "name", EMAIL as "email", CREATED as "created" FROM CUSTOMER where ID=:id`, [id]);
+    var result = await connection.execute(`SELECT ID as "id", NAME as "name", EMAIL as "email", CREATED as "created" FROM CUSTOMER where ID=:id`, [id]);
 
   } catch (err) {
     //send error message
@@ -83,9 +85,9 @@ async function selectUserById(req, res, id) {
 //get /user?id=<id user>
 app.get('/api/user', function (req, res) {
   //get query param ?id
-  let id = req.query.id;
+  var id = req.query.id;
   // id param if it is number
-  if (isNaN(id)) {
+  if (isNaN(+id)) {
     res.json('Query param id is not number')
     return
   }

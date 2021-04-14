@@ -18,7 +18,15 @@ export class DisplayUsersComponent implements OnInit {
   }
 
   getUsers(): void {
-    this.userService.getUsers().subscribe(users => this.users = users);
+    this.userService.getUsers().subscribe(users => {
+      this.users = users;
+      console.log(this.users);
+    });
+  }
+
+  getDate(): number {
+    if (!this.users) return 0;
+    return Date.parse(this.users[0].csatl);
   }
 
 }
