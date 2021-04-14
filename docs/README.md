@@ -9,7 +9,6 @@
 | Kiss Olivér  |
 |  Burza Ralf  |
 | Balogh Etele |
-|   Svatlana   |
 
 ---
 
