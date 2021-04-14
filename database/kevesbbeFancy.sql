@@ -52,7 +52,6 @@ CREATE TABLE Csoport
     CONSTRAINT FK_Csoport_Felhasznalo
         FOREIGN KEY (tulaj_id)
         REFERENCES Felhasznalo (ID)
-        ON UPDATE CASCADE
         ON DELETE CASCADE
 );
 /
@@ -71,17 +70,14 @@ CREATE TABLE Poszt
     CONSTRAINT fk_poszt_hirfolyam_csoport
         FOREIGN KEY (csoport_id)
         REFERENCES Csoport (csoport_id)
-        ON UPDATE CASCADE,
-        ON DELETE CASCADE
+        ON DELETE CASCADE,
     CONSTRAINT fk_poszt_hirfolyam_szerzo
         FOREIGN KEY (felhasznalo_id)
         REFERENCES Felhasznalo (ID)
-        ON UPDATE CASCADE
         ON DELETE CASCADE,
     CONSTRAINT fk_szerzo_id
-        FOREIGN KEY (felhasznalo_id)
-        REFERENCES Felhasznalo (felhasznalo_id)
-        ON UPDATE CASCADE
+        FOREIGN KEY (szerzo_id)
+        REFERENCES Felhasznalo (ID)
         ON DELETE CASCADE
 );
 /
@@ -99,12 +95,10 @@ CREATE TABLE Komment
     CONSTRAINT fk_komment_poszt
         FOREIGN KEY (poszt_idopont, poszt_felh_id)
         REFERENCES Poszt (idopont, szerzo_id)
-        ON UPDATE CASCADE,
-        ON DELETE CASCADE
+        ON DELETE CASCADE,
     CONSTRAINT fk_komment_felhasznalo
         FOREIGN KEY (komment_iro_id)
         REFERENCES Felhasznalo (ID)
-        ON UPDATE CASCADE
         ON DELETE CASCADE
 );
 /
@@ -118,11 +112,9 @@ CREATE TABLE Uzenet
     CONSTRAINT pk_uzenet_id PRIMARY KEY (idopont, kuldo_id),
     CONSTRAINT fk_uzenet_kuldo
         FOREIGN KEY (kuldo_id) REFERENCES Felhasznalo (ID)
-        ON UPDATE CASCADE
         ON DELETE CASCADE,
     CONSTRAINT fk_uzenet_cimzett
         FOREIGN KEY (cimzett_id) REFERENCES Felhasznalo (ID)
-        ON UPDATE CASCADE
         ON DELETE CASCADE
 );
 /
@@ -137,15 +129,12 @@ CREATE TABLE Meghivas
     CONSTRAINT pk_meghivas_id PRIMARY KEY (felhasznalo_id, cimzett_id, csoport_id, idopont),
     CONSTRAINT fk_meghivas_felhasznalo
         FOREIGN KEY (felhasznalo_id) REFERENCES Felhasznalo (ID)
-        ON UPDATE CASCADE
         ON DELETE CASCADE,
     CONSTRAINT fk_meghivas_cimzett
         FOREIGN KEY (cimzett_id) REFERENCES Felhasznalo (ID)
-        ON UPDATE CASCADE
         ON DELETE CASCADE,
     CONSTRAINT fk_meghivas_csoport
         FOREIGN KEY (csoport_id) REFERENCES Csoport (csoport_id)
-        ON UPDATE CASCADE
         ON DELETE CASCADE
 );
 /
@@ -157,12 +146,10 @@ CREATE TABLE Tagja
     CONSTRAINT pk_tagja_id PRIMARY KEY (felhasznalo_id, csoport_id),
     CONSTRAINT fk_tagja_felhasznalo
         FOREIGN KEY (felhasznalo_id) REFERENCES Felhasznalo (ID)
-        ON UPDATE CASCADE
         ON DELETE CASCADE,
     CONSTRAINT fk_tagja_csoport
         FOREIGN KEY (csoport_id)
         REFERENCES Csoport (csoport_id)
-        ON UPDATE CASCADE
         ON DELETE CASCADE
 );
 /
@@ -175,23 +162,20 @@ CREATE TABLE Ismeros
         PRIMARY KEY (felhasznalo1_id, felhasznalo2_id),
     CONSTRAINT fk_ismeros_ki
         FOREIGN KEY (felhasznalo1_id) REFERENCES Felhasznalo (ID)
-        ON UPDATE CASCADE
         ON DELETE CASCADE,
     CONSTRAINT fk_ismeros_kinek
         FOREIGN KEY (felhasznalo2_id) REFERENCES Felhasznalo (ID)
-        ON UPDATE CASCADE
         ON DELETE CASCADE
 );
 /
 
-/*FÉNYKÉPES RÉSZ KEZDETE*/
+/*FĂ‰NYKĂ‰PES RĂ‰SZ KEZDETE*/
 CREATE TABLE Fenykepalbum
 (
     album_id NUMBER GENERATED ALWAYS as IDENTITY PRIMARY KEY,
     tulaj_id NUMBER NOT NULL,
     CONSTRAINT fk_fenykepalbum_tulajdonos
         FOREIGN KEY (tulaj_id) REFERENCES Felhasznalo (ID)
-        ON UPDATE CASCADE
         ON DELETE CASCADE
 );
 /
@@ -202,7 +186,6 @@ CREATE TABLE Kategoria
     fenykepalbum_id NUMBER,
     CONSTRAINT fk_kategoria_fenykepalbum
         FOREIGN KEY (fenykepalbum_id) REFERENCES Fenykepalbum (album_id)
-        ON UPDATE CASCADE
         ON DELETE CASCADE
 );
 /
@@ -215,26 +198,11 @@ CREATE TABLE Fenykep
     kategoria_id VARCHAR2(16) NOT NULL,
     CONSTRAINT fk_fenykep_kategoria
         FOREIGN KEY (kategoria_id) REFERENCES Kategoria (nev)
-        ON UPDATE CASCADE
         ON DELETE CASCADE
 );
 /
 
-/*
-CREATE TABLE Felhasznalo
-(
-    ID           NUMBER GENERATED ALWAYS as IDENTITY PRIMARY KEY,
-    jelszo       VARCHAR2(32)                   NOT NULL,
-    email        VARCHAR2(128)                  NOT NULL UNIQUE,
-    nev          NEVTIPUS                       NOT NULL,
-    csatl_dat    TIMESTAMP WITH LOCAL TIME ZONE NOT NULL,
-    szul_dat     DATE                           NOT NULL,
-    munka_iskola VARCHAR2(64),
-    picture      BLOB,
-    isAdmin      NUMBER(1, 0)                   NOT NULL
-);
-*/
-
+-- insert statements
 -- developers
 INSERT INTO Felhasznalo (jelszo, email, nev, csatl_dat, szul_dat, munka_iskola, isAdmin) VALUES ('12345', 'oli@gmail.com', NEVTIPUS('Kiss', 'Olivér'), SYSTIMESTAMP, TO_DATE('2020/04/21', 'yyyy/mm/dd'), 'egyetem', 1);
 INSERT INTO Felhasznalo (jelszo, email, nev, csatl_dat, szul_dat, munka_iskola, isAdmin) VALUES ('12345', 'ralf@gmail.com', NEVTIPUS('Burza', 'Ralf'), SYSTIMESTAMP, TO_DATE('2020/04/21', 'yyyy/mm/dd'), 'egyetem', 1);
