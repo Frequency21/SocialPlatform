@@ -25,4 +25,8 @@ export class DisplayPostsComponent implements OnInit {
     });
   }
 
+  openDialog(): void {
+    console.log("cry");
+  }
+
 }

@@ -7,8 +7,8 @@ export interface Poszt {
     szerzo_nev: string;
     szerzo_profil_kep?: string;
 
-    csoport_id: number;
-    felhasznalo_id: number;
+    csoport_id?: number;
+    felhasznalo_id?: number;
     szoveg: string;
     ertekeles: Ertekeles;
     isPublic: boolean,

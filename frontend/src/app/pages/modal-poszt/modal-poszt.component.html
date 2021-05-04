@@ -2,12 +2,13 @@
   <mat-card>
     <form [formGroup]="form" (ngSubmit)="addPoszt()">
     <h3>Új Poszt</h3>
-    <mat-form-field>
       <mat-label>Szöveg</mat-label>
-      <textarea name="szoveg" id="1" cols="30" rows="10" formControlName="szoveg" class="max-width"></textarea>
-    </mat-form-field>
+      <textarea name="szoveg" id="1" cols="30" rows="10" formControlName="szoveg" class="max-width" required></textarea>
     <br>
-    <button type="submit" mat-raised-button color="primary" class="max-width">Közzététel</button>
+      <mat-checkbox formControlName="isPublic">Publikus</mat-checkbox>
+    <br>
+    <button type="submit" mat-raised-button color="primary" class="max-width" [disabled]="form.invalid">Közzététel</button>
     </form>
+    <button type="submit" mat-raised-button color="secondary" (click)="onNoClick()" class="max-width">Mégse</button>
   </mat-card>
 </div>

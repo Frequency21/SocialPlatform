@@ -41,6 +41,14 @@ export class DisplayUserComponent implements OnInit {
   }
 
   openDialog(){
-    this.dialog.open(ModalPosztComponent);
+
+    const dialogRef = this.dialog.open(ModalPosztComponent, {
+      width: '40%',
+      data: {szerzo_id : undefined, szerzo_nev: "", szerzo_profilkep: "", csoport_id:undefined, felhasznalo_id:undefined}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 }

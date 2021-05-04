@@ -2,3 +2,15 @@
 <div class="posts-container">
     <app-poszt *ngFor="let poszt of poszts" [poszt]="poszt"> </app-poszt>
 </div>
+
+<section>
+  <div class="example-button-row">
+    <div class="example-flex-container">
+      <div class="example-button-container">
+        <button mat-fab color="primary" aria-label="Add button" (click)="openDialog()">
+          <mat-icon>comment</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
