@@ -8,26 +8,16 @@
       <span>EMAIL:</span>
       <span>CREATED:</span>
     </div>-->
+
+
     <div *ngFor="let user of users">
-      <mat-card class="card">
-        <mat-card-header>
-          <mat-card-title>{{user.vnev + " " + user.knev}}</mat-card-title>
-          <mat-card-subtitle>#{{user.id}}</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-          <span>email: {{user.email}}</span>
-          <span>csatlakozás: {{user.csatl | date: 'medium'}}</span>
-        </mat-card-content>
-        <mat-card-actions>
-          <a class="lookup-btn" mat-button [routerLink]="['../user/',user.id]">
-            Megtekintés
-          </a>
-        </mat-card-actions>
-      </mat-card>
-      <!--<span>{{user.id}}</span>
-      <span>{{user.vnev + " " + user.knev}}</span>
-      <span>{{user.email}}</span>
-      <span>{{user.csatl | date: 'medium'}}</span>-->
+
+      <app-display-user>
+
+      </app-display-user>
+
     </div>
+
+
   </div>
 </ul>

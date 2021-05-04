@@ -2,7 +2,7 @@ import { ModalPosztComponent } from './../modal-poszt/modal-poszt.component';
 import { MatDialog } from '@angular/material/dialog';
 import { UserService } from 'src/app/services/user.service';
 import { User } from './../../shared/models/user.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -12,8 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DisplayUserComponent implements OnInit {
 
-  user?: User[];
-  is?: boolean;
+  @Input() user!: User;
 
   constructor(
     private _Activatedroute: ActivatedRoute,
@@ -32,12 +31,11 @@ export class DisplayUserComponent implements OnInit {
       this.user = user;
       console.log(this.user);
     });
-    this.is = true;
   }
 
   getDate(): number {
     if (!this.user) return 0;
-    return Date.parse(this.user[0].csatl);
+    return Date.parse(this.user.csatl);
   }
 
   openDialog(){

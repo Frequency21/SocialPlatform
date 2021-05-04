@@ -3,6 +3,7 @@ import { MatCardModule } from '@angular/material/card';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DisplayUsersComponent } from './display-users.component';
+import { DisplayUserModule } from '../display-user/display-user.module';
 
 
 
@@ -11,7 +12,8 @@ import { DisplayUsersComponent } from './display-users.component';
   imports: [
     CommonModule,
     RouterModule,
-    MatCardModule
+    MatCardModule,
+    DisplayUserModule
   ],
   exports: [DisplayUsersComponent]
 })

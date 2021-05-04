@@ -23,8 +23,8 @@ export class UserService {
     return this.http.get<User[]>(this.rootUrl + '/users');
   }
 
-  getUserByID(id: Number): Observable<User[]> {
-    return this.http.get<User[]>(this.rootUrl + '/user?id=' + id);
+  getUserByID(id: Number): Observable<User> {
+    return this.http.get<User>(this.rootUrl + '/user?id=' + id);
   }
 
   getIsmeroses(felhasznalo_id: number): Observable<User[]> {
