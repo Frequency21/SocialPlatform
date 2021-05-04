@@ -1,1 +1,21 @@
-<p>register works!</p>
+
+<form [formGroup]="form" (ngSubmit)="registration()" id="register-form">
+  <mat-form-field>
+    <mat-label>Felhasználónév</mat-label>
+    <input matInput type="text" name="nickname" placeholder="Pl. Patko85" required formControlName="username">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>E-mail</mat-label>
+    <input type="email" name="email" matInput placeholder="Pl. pat@example.com" formControlName="email">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Jelszó</mat-label>
+    <input type="password" name="password" matInput placeholder="Jelszó" formControlName="password1">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Jelszó újra</mat-label>
+    <input type="password" name="password" matInput #password2 placeholder="Jelszó újra" formControlName="password2">
+  </mat-form-field>
+  <button type="submit" mat-raised-button color="primary"
+    [disabled]="form.invalid">REGISZTRÁCIÓ</button>
+</form>

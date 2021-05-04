@@ -180,13 +180,16 @@ CREATE TABLE Fenykepalbum
 );
 /
 
+
 CREATE TABLE Kategoria
 (
-    nev             VARCHAR2(16) PRIMARY KEY,
+    nev             VARCHAR2(16),
     fenykepalbum_id NUMBER,
     CONSTRAINT fk_kategoria_fenykepalbum
         FOREIGN KEY (fenykepalbum_id) REFERENCES Fenykepalbum (album_id)
-        ON DELETE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT pk_kategoria
+    PRIMARY KEY (nev, fenykepalbum_id)
 );
 /
 
@@ -430,6 +433,54 @@ INSERT INTO Uzenet(idopont,kuldo_id,cimzett_id,szoveg) VALUES(SYSTIMESTAMP,45,30
 INSERT INTO Uzenet(idopont,kuldo_id,cimzett_id,szoveg) VALUES(SYSTIMESTAMP,6,17,'Tempora aperiam exercitationem animi exercitationem illum accusantium. Recusandae voluptatibus blanditiis asperiores. Molestias adipisci laboriosam omnis iure illo.');
 INSERT INTO Uzenet(idopont,kuldo_id,cimzett_id,szoveg) VALUES(SYSTIMESTAMP,51,47,'Tranquille fin premier rare. Muet nous espace gagner trace cruel riche disparaître. Défaut aussitôt droit après immense courant. Douleur bas chercher meilleur.');
 INSERT INTO Uzenet(idopont,kuldo_id,cimzett_id,szoveg) VALUES(SYSTIMESTAMP,42,64,'Particular bar able. Religious line serve right edge. Degree list miss Congress think hear. Protect soldier color serious film. If technology pretty investment feeling really police.');
+
+INSERT INTO Ismeros(felhasznalo1_id, felhasznalo2_id) VALUES(1,2);
+INSERT INTO Ismeros(felhasznalo1_id, felhasznalo2_id) VALUES(1,3);
+INSERT INTO Ismeros(felhasznalo1_id, felhasznalo2_id) VALUES(1,54);
+INSERT INTO Ismeros(felhasznalo1_id, felhasznalo2_id) VALUES(3,4);
+INSERT INTO Ismeros(felhasznalo1_id, felhasznalo2_id) VALUES(21,30);
+INSERT INTO Ismeros(felhasznalo1_id, felhasznalo2_id) VALUES(7,12);
+insert into ismeros(felhasznalo1_id, felhasznalo2_id) VALUES (2, 3);
+insert into ismeros(felhasznalo1_id, felhasznalo2_id) VALUES (3, 6);
+insert into ismeros(felhasznalo1_id, felhasznalo2_id) VALUES (1, 4);
+insert into ismeros(felhasznalo1_id, felhasznalo2_id) VALUES (2, 5);
+insert into ismeros(felhasznalo1_id, felhasznalo2_id) VALUES (5, 6);
+
+
+/*
+felhasználó hírfolyamán található posztok
+*/
+create or replace view felh_poszt as
+select
+    f.id id,
+    szerzo.picture szerzo_profil_kep,
+    idopont,
+    szerzo_id,
+    szerzo.nev.vezeteknev || ' ' || szerzo.nev.keresztnev szerzo_nev,
+    szoveg,
+    ertekeles,
+    isPublic
+FROM
+    felhasznalo f
+    inner join
+    poszt p
+    on
+    f.id = p.felhasznalo_id
+    inner join felhasznalo szerzo
+    on
+    p.szerzo_id = szerzo.id;
+
+INSERT INTO
+Poszt(idopont, szerzo_id, csoport_id, felhasznalo_id, szoveg, ertekeles, isPublic)
+VALUES
+(SYSTIMESTAMP, 1, NULL, 2, 'boldog szülinapot jajx :*', ERTEKELES(5,0), 0);
+
+INSERT INTO
+Poszt(idopont, szerzo_id, csoport_id, felhasznalo_id, szoveg, ertekeles, isPublic)
+VALUES
+(SYSTIMESTAMP, 1, NULL, 3, 'boldog szülinapot jajx :*', ERTEKELES(2,0), 0);
+
+
 
 COMMIT;
 /

@@ -1,0 +1,17 @@
+.group-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-content: center;
+    div {
+        margin: 1em;
+        span {
+            display: block;
+        }
+    }
+  }
+  
+  .card {
+  background-color: #C1EEFF;
+  }
+  

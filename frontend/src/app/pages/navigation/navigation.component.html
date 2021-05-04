@@ -1,0 +1,42 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <a mat-button [routerLink]="['/']">
+      SocialDistancingTM
+    </a>
+    <a mat-button [routerLink]="['/display/users']">
+      Felhasználók
+    </a>
+    <a mat-button [routerLink]="['/display/groups']">
+      Csoportok
+    </a>
+    <a mat-button [routerLink]="['/display/poszts']">
+      Posztok
+    </a>
+    <span class="vspace"></span>
+    <a mat-button [routerLink]="['/display/friends']">
+      Ismerősök
+    </a>
+    <span class="vspace"></span>
+    <button mat-button [matMenuTriggerFor]="menu">
+      tmp username&nbsp;
+      <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item disabled [routerLink]="['/profil']">
+        <mat-icon>person</mat-icon>
+        <span>Profil</span>
+      </button>
+      <button mat-menu-item disabled [routerLink]="['/settings']">
+        <mat-icon>settings</mat-icon>
+        <span>Beállítások</span>
+      </button>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>arrow_back</mat-icon>
+        <span>Kijelentkezés</span>
+      </button>
+    </mat-menu>
+
+  </mat-toolbar-row>
+
+</mat-toolbar>

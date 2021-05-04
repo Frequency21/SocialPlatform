@@ -1,0 +1,12 @@
+
+#register-form {
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .mat-form-field {
+        padding: 20px;
+    }
+}

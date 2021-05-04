@@ -1,16 +1,18 @@
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
-import { User } from "../../shared/models/user.model";
+import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/shared/models/user.model';
 
 @Component({
-  selector: 'app-display-users',
-  templateUrl: './display-users.component.html',
-  styleUrls: ['./display-users.component.scss']
+  selector: 'app-display-ismerosok',
+  templateUrl: './display-ismerosok.component.html',
+  styleUrls: ['./display-ismerosok.component.scss']
 })
-export class DisplayUsersComponent implements OnInit {
+export class DisplayIsmerosokComponent implements OnInit {
 
   users?: User[];
+
+  queryUserId = 1;
 
   constructor(private userService: UserService, private router: Router) { }
 
@@ -19,7 +21,7 @@ export class DisplayUsersComponent implements OnInit {
   }
 
   getUsers(): void {
-    this.userService.getUsers().subscribe(users => {
+    this.userService.getIsmeroses(this.queryUserId).subscribe(users => {
       this.users = users;
       console.log(this.users);
     });
@@ -29,5 +31,4 @@ export class DisplayUsersComponent implements OnInit {
     if (!this.users) return 0;
     return Date.parse(this.users[0].csatl);
   }
-
 }

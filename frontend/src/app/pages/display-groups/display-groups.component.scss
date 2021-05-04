@@ -1,15 +1,16 @@
-.user-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    align-content: center;
-    div {
-        margin: 1em;
-        span {
-            display: block;
-        }
-    }
+.group-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-content: center;
+  div {
+      margin: 1em;
+      span {
+          display: block;
+      }
+  }
 }
+
 
 .card:hover{
   box-shadow: 2px 2px 5px #C1EEFF;

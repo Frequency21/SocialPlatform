@@ -1,0 +1,13 @@
+<div class="centering">
+  <mat-card>
+    <form [formGroup]="form" (ngSubmit)="addPoszt()">
+    <h3>Új Poszt</h3>
+    <mat-form-field>
+      <mat-label>Szöveg</mat-label>
+      <textarea name="szoveg" id="1" cols="30" rows="10" formControlName="szoveg" class="max-width"></textarea>
+    </mat-form-field>
+    <br>
+    <button type="submit" mat-raised-button color="primary" class="max-width">Közzététel</button>
+    </form>
+  </mat-card>
+</div>
