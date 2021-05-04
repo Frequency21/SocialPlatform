@@ -22,14 +22,12 @@ public class UserController {
             @RequestParam("id") int id
     ) {
         User user = userRepo.getUser(id);
-
         return ResponseEntity.ok(user);
     }
 
     @RequestMapping(value = "/api/users", method = RequestMethod.GET)
     public ResponseEntity<List<User>> getUsers() {
         List<User> users = userRepo.getUsers();
-
         return ResponseEntity.ok(users);
     }
 
