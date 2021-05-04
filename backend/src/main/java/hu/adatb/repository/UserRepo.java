@@ -21,19 +21,6 @@ public class UserRepo {
     private final static String SELECT_USER = "select ID, JELSZO, EMAIL, f.NEV.VEZETEKNEV as VNEV, f.NEV.KERESZTNEV as KNEV, CSATL_DAT, SZUL_DAT, MUNKA_ISKOLA, PICTURE, ISADMIN, TYPE from felhasznalo f where id = :id";
     private final static String SELECT_ALL_USER = "select ID, JELSZO, EMAIL, f.nev.VEZETEKNEV as vnev, f.NEV.KERESZTNEV as knev, CSATL_DAT, SZUL_DAT, MUNKA_ISKOLA from felhasznalo f";
 
-    /*
-    * private Long id;
-    private String vnev;
-    private String knev;
-    private Date csatl;
-    @JsonProperty("szul_dat")
-    private Date szulDat;
-    private String email;
-    private String jelszo;
-    private byte[] picture;
-    private boolean isAdmin;
-    @JsonProperty("munka_iskola")
-    private String munkaIskola;*/
 
     @Transactional
     public User getUser(int id) {
@@ -43,17 +30,18 @@ public class UserRepo {
                 SELECT_USER,
                 map, rs -> {
                     User u = new User();
-                    rs.next();
-                    u.setId(rs.getLong("ID"));
-                    u.setJelszo(rs.getString("JELSZO"));
-                    u.setEmail(rs.getString("EMAIL"));
-                    u.setVnev(rs.getString("VNEV"));
-                    u.setKnev(rs.getString("KNEV"));
-                    u.setCsatl(rs.getDate("CSATL_DAT"));
-                    u.setSzulDat(rs.getDate("SZUL_DAT"));
-                    u.setMunkaIskola(rs.getString("MUNKA_ISKOLA"));
-                    u.setPicture(rs.getBytes("PICTURE"));
-                    u.setAdmin(rs.getBoolean("ISADMIN"));
+                    if (rs.next()) {
+                        u.setId(rs.getLong("ID"));
+                        u.setJelszo(rs.getString("JELSZO"));
+                        u.setEmail(rs.getString("EMAIL"));
+                        u.setVnev(rs.getString("VNEV"));
+                        u.setKnev(rs.getString("KNEV"));
+                        u.setCsatl(rs.getDate("CSATL_DAT"));
+                        u.setSzulDat(rs.getDate("SZUL_DAT"));
+                        u.setMunkaIskola(rs.getString("MUNKA_ISKOLA"));
+                        u.setPicture(rs.getBytes("PICTURE"));
+                        u.setAdmin(rs.getBoolean("ISADMIN"));
+                    }
                     return u;
                 });
         return user;
