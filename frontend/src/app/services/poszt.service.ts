@@ -16,4 +16,9 @@ export class PosztService {
     return this.http.get<Poszt[]>(this.rootUrl + '/poszts');
   }
 
+  addPoszt(poszt: Poszt): Observable<Poszt> {
+    console.log("helloka!");
+    return this.http.post<Poszt>(this.rootUrl + '/poszt/add', poszt);
+  }
+
 }

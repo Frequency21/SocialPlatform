@@ -1,3 +1,4 @@
+import { PosztService } from 'src/app/services/poszt.service';
 import { DialogData } from './../../shared/models/postDialog.model';
 import { Poszt } from 'src/app/shared/models/poszt.model';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -21,7 +22,8 @@ export class ModalPosztComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<ModalPosztComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private posztService: PosztService
   ) { }
 
   ngOnInit(): void {
@@ -44,6 +46,9 @@ export class ModalPosztComponent implements OnInit {
       isPublic : !(this.form.value.isPublic)
     };
     console.log(newPost);
+    this.posztService.addPoszt(newPost).subscribe(poszt => {
+      console.log(poszt);
+    });
     this.onNoClick();
   }
 
