@@ -20,21 +20,26 @@ export class HttpClientService {
 
 
   public createAccount(user: User) {
-    // const username = 'admin';
-    // const password = 'admin';
-
-    // const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.httpClient.post<Account>(this.localhost+'user/register', user);
+    return this.httpClient.post<number>(this.localhost+'user/register', user);
   }
 
   public login(username: String, password: String)
   {
-    const data = username + ':' + password;
-    return this.httpClient.post<User>(this.localhost+'user/login', data);
+    return this.httpClient.post<User>(this.localhost+'user/login', {"username": username, "password": password} );
   }
 
   public getUsers()
   {
     return this.httpClient.get<User[]>(this.localhost+'user/all');
+  }
+
+  public deleteUser(id:number)
+  {
+    return this.httpClient.delete<Boolean>(this.httpClient+'user/delete'+ id);
+  }
+
+  public updateUser(user: User)
+  {
+    return this.httpClient.post<User>(this.localhost+'user/update', user);
   }
 }
