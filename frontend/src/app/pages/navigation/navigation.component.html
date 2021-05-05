@@ -23,7 +23,7 @@
     </button>
 
     <mat-menu #menu="matMenu">
-      <button mat-menu-item disabled [routerLink]="['/profil']" *ngIf="loginService.isUserLoggedIn()">
+      <button mat-menu-item [routerLink]="['/profile']" *ngIf="!loginService.isUserLoggedIn()">
         <mat-icon>person</mat-icon>
         <span>Profil</span>
       </button>

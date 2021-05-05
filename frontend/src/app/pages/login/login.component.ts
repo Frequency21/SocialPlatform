@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
         // console.log(data.houseNumber);
         sessionStorage.setItem('username', data.knev);
 
-        alert("Login");
+        alert("Login succesful");
       }));
     }
     catch(error) {

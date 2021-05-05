@@ -28,14 +28,14 @@ export class HttpClientService {
     return this.httpClient.post<User>(this.localhost+'user/login', {"username": username, "password": password} );
   }
 
-  public getUsers()
+  public getUser(userId: number)
   {
-    return this.httpClient.get<User[]>(this.localhost+'user/all');
+    return this.httpClient.get<User>(this.localhost+'api/user?id=' + userId);
   }
 
   public deleteUser(id:number)
   {
-    return this.httpClient.delete<Boolean>(this.httpClient+'user/delete'+ id);
+    return this.httpClient.delete<Boolean>(this.httpClient+'user/delete?id='+ id);
   }
 
   public updateUser(user: User)

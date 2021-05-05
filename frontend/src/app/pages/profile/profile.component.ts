@@ -5,13 +5,15 @@ import { HttpClientService } from 'src/app/services/httpclient.service';
 import { User } from 'src/app/shared/models/user.model';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class ProfileComponent implements OnInit {
 
   user!: User;
+
+  public userId: number = 0;
 
   form: FormGroup = new FormGroup({
     username: new FormControl(),
@@ -33,13 +35,24 @@ export class RegisterComponent implements OnInit {
     private httpClientService: HttpClientService,
     ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+  }
 
-  registration(): void {
-
-
+  public getUser(): void {
     try {
-      this.httpClientService.createAccount(this.user)
+      this.httpClientService.getUser(this.userId)
+      .subscribe((data => {
+        this.user = data;
+        alert("Successful")
+      }))
+    } catch(error) {
+      alert(error);
+    }
+  }
+
+  public updateUser(): void {   
+    try {
+      this.httpClientService.updateUser(this.user)
       .subscribe((data => {
         
         alert("Update succesful")
@@ -47,6 +60,22 @@ export class RegisterComponent implements OnInit {
     }catch(error) {
       alert(error);
     }
+  }
+
+
+  public deleteUser(): void {
+    try{
+      this.httpClientService.deleteUser(this.userId)
+        .subscribe((data => {
+  
+          alert("Delete succesful");
+        }));
+      }
+      catch(error) {
+        alert(error);
+      }
+
+    this.router.navigate(['logout']);
   }
 
 }

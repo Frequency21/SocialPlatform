@@ -11,13 +11,15 @@ import { DisplayIsmerosokComponent } from './pages/display-ismerosok/display-ism
 import { AuthGaurdService } from './services/auth-gaurd.service';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomeComponent },
   { path: 'home', pathMatch: 'full', component: HomeComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'register', pathMatch: 'full', component: RegisterComponent },
+  { path: 'login', pathMatch: 'full', component: LoginComponent },
   { path: 'logout', pathMatch: 'full', component: HomeComponent, canActivate:[AuthGaurdService] },
+  { path: 'profile', pathMatch: 'full', component: ProfileComponent },
   // TODO: itt majd a display-t le cserélni SocialDistancing-re. :D
   { path: 'display/users', component: DisplayUsersComponent },
   { path: 'display/groups', component: DisplayGroupsComponent },

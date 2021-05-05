@@ -30,11 +30,12 @@ import { DisplayIsmerosokModule } from './pages/display-ismerosok/display-ismero
 import { ModalPosztComponent } from './pages/modal-poszt/modal-poszt.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginModule } from './pages/login/login.module';
+import { ProfileModule } from './pages/profile/profile.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,7 +60,8 @@ import { LoginModule } from './pages/login/login.module';
     DisplayGroupsModule,
     DisplayIsmerosokModule,
     ModalPosztModule,
-    LoginModule
+    LoginModule,
+    ProfileModule
   ],
   providers: [],
   bootstrap: [AppComponent]
