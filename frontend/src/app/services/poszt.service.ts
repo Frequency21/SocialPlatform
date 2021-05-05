@@ -1,3 +1,4 @@
+import { Komment } from './../shared/models/komment.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -19,6 +20,11 @@ export class PosztService {
   addPoszt(poszt: Poszt): Observable<Poszt> {
     console.log("helloka!");
     return this.http.post<Poszt>(this.rootUrl + '/poszt/add', poszt);
+  }
+
+  addKomment(komment: Komment): Observable<Komment> {
+    console.log("AddKomment(" + komment + ")");
+    return this.http.post<Komment>(this.rootUrl + "/poszt/addKomment", komment);
   }
 
 }

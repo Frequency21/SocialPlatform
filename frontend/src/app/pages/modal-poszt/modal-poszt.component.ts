@@ -31,7 +31,7 @@ export class ModalPosztComponent implements OnInit {
 
   addPoszt(): void {
     var newPost: Poszt = {
-      idopont : (new Date().toLocaleString()),
+      idopont : "",
       szerzo_id : this.data.szerzo_id,
 
       szerzo_nev : this.data.szerzo_nev,
