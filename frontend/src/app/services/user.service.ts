@@ -8,12 +8,12 @@ import { User, Ismeros,  Fenykepalbum, Kategoria, Fenykep} from '../shared/model
 })
 export class UserService {
 
-  rootUrl: string = '/api'
+  rootUrl: string = '/api/user'
 
   constructor(private http: HttpClient) { }
 
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.rootUrl + '/users');
+    return this.http.get<User[]>(this.rootUrl + '/all');
   }
 
   getUserByID(id: Number): Observable<User> {

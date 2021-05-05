@@ -39,8 +39,6 @@ public class ImageService {
 
         Path destination = Paths.get(storageDirectory.toString() + File.separatorChar + fileName);
 
-        System.out.println(destination);
-
         try {
             Files.copy(file.getInputStream(), destination, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
@@ -50,7 +48,7 @@ public class ImageService {
         // the response will be the download URL of the image
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("api/images/getImage/")
-                .path( String.join("/", prefixPath) + "/" + fileName)
+                .path(fileName)
                 .toUriString();
         // return the download image url as a response entity
         return ResponseEntity.ok(fileDownloadUri);
@@ -59,9 +57,6 @@ public class ImageService {
     public  byte[] getImageWithMediaType(String imageName, String... prefixPath) throws IOException {
         Path destination = Paths.get(storageDirectoryPath + String.join("" + File.separatorChar, prefixPath)
                 + File.separatorChar + imageName);// retrieve the image by its name
-
-        System.out.println(destination);
-
         return IOUtils.toByteArray(destination.toUri());
     }
 

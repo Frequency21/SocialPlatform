@@ -1,5 +1,5 @@
 export interface User {
-    id: number;
+    id: number | null;
     email: string;
     vnev: string;
     knev: string;

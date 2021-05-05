@@ -16,6 +16,13 @@
     <mat-label>Jelszó újra</mat-label>
     <input type="password" name="password" matInput #password2 placeholder="Jelszó újra" formControlName="password2">
   </mat-form-field>
+
+  <input type="file" (change)="onSelectFile($event)">
+
+  <div *ngIf="imgSrc">
+    <img [src]="imgSrc"/>
+  </div>
+
   <button type="submit" mat-raised-button color="primary"
     [disabled]="form.invalid">REGISZTRÁCIÓ</button>
 </form>
