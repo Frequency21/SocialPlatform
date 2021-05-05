@@ -1,3 +1,5 @@
+import { MatDialog } from '@angular/material/dialog';
+import { ModalKommentComponent } from './../modal-komment/modal-komment.component';
 import { Component, OnInit } from '@angular/core';
 import { PosztService } from 'src/app/services/poszt.service';
 import { Poszt } from 'src/app/shared/models/poszt.model';
@@ -11,7 +13,10 @@ export class DisplayPostsComponent implements OnInit {
 
   poszts?: Poszt[];
 
-  constructor(private posztService: PosztService) { }
+  constructor(
+    private posztService: PosztService,
+    public dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
     this.getPoszts();
@@ -25,8 +30,16 @@ export class DisplayPostsComponent implements OnInit {
     });
   }
 
-  openDialog(): void {
-    console.log("cry");
+  openDialog(val_id: number): void {
+    const dialogRef = this.dialog.open(ModalKommentComponent, {
+      width: '40%',
+      //Ide kellene Deny, és a bejelentkezése
+      data: {komment_iro_id : undefined, poszt_felh_id: val_id, poszt_idopont: ""}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
 }

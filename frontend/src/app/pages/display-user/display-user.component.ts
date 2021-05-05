@@ -42,7 +42,8 @@ export class DisplayUserComponent implements OnInit {
 
     const dialogRef = this.dialog.open(ModalPosztComponent, {
       width: '40%',
-      data: {szerzo_id : undefined, szerzo_nev: "", szerzo_profilkep: "", csoport_id:undefined, felhasznalo_id:undefined}
+      //Ide kellene Deny, és a bejelentkezése
+      data: {szerzo_id : undefined, szerzo_nev: "", szerzo_profilkep: "", csoport_id:undefined, felhasznalo_id:this.user.id}
     });
 
     dialogRef.afterClosed().subscribe(result => {

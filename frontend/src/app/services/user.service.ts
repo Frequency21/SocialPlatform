@@ -10,13 +10,6 @@ export class UserService {
 
   rootUrl: string = '/api'
 
-  // mock datas
-  // users: User[] = [
-  //   {id: 1, name: 'oli', created: new Date(2021, 3, 10, 14, 33), email: 'taylor@gmail.com'},
-  //   {id: 2, name: 'ralf', created: new Date(2021, 3, 10, 14, 34), email: 'deny@gmail.com'},
-  //   {id: 3, name: 'etele', created: new Date(2021, 3, 10, 14, 35), email: 'yndi@gmail.com'},
-  // ]
-
   constructor(private http: HttpClient) { }
 
   getUsers(): Observable<User[]> {
@@ -24,7 +17,8 @@ export class UserService {
   }
 
   getUserByID(id: Number): Observable<User> {
-    return this.http.get<User>(this.rootUrl + '/user?id=' + id);
+    console.log(this.rootUrl+'/user/'+id);
+    return this.http.get<User>(this.rootUrl + '/user/' + id);
   }
 
   getIsmeroses(felhasznalo_id: number): Observable<User[]> {

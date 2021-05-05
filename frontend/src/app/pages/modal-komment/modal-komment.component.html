@@ -1,0 +1,13 @@
+<div class="centering">
+  <mat-card>
+    <form [formGroup]="form" (ngSubmit)="posztKomment()">
+      <h3>Új Komment</h3>
+      <textarea name="szoveg" id="1" cols="30" rows="10" formControlName="szoveg" class="max-width" required></textarea>
+      <br>
+      <mat-checkbox formControlName="isPublic">Publikus</mat-checkbox>
+    <br>
+      <button type="submit" mat-raised-button color="primary" class="max-width" [disabled]="form.invalid">Közzététel</button>
+    </form>
+    <button type="submit" mat-raised-button color="secondary" (click)="onNoClick()" class="max-width">Mégse</button>
+  </mat-card>
+</div>

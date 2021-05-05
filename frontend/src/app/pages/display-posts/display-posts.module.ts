@@ -1,3 +1,4 @@
+import { ModalKommentComponent } from './../modal-komment/modal-komment.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { NgModule } from '@angular/core';
@@ -9,6 +10,7 @@ import { PosztModule } from '../poszt/poszt.module';
 
 @NgModule({
   declarations: [DisplayPostsComponent],
+  entryComponents: [ModalKommentComponent],
   imports: [
     CommonModule,
     MatButtonModule,

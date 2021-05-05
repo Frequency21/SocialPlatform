@@ -18,7 +18,7 @@ public class UserRepo {
     private NamedParameterJdbcTemplate namedJdbc;
     @Autowired
     private JdbcTemplate jdbcTemplate;
-    private final static String SELECT_USER = "select ID, JELSZO, EMAIL, f.NEV.VEZETEKNEV as VNEV, f.NEV.KERESZTNEV as KNEV, CSATL_DAT, SZUL_DAT, MUNKA_ISKOLA, PICTURE, ISADMIN, TYPE from felhasznalo f where id = :id";
+    private final static String SELECT_USER = "select ID, JELSZO, EMAIL, f.NEV.VEZETEKNEV as VNEV, f.NEV.KERESZTNEV as KNEV, CSATL_DAT, SZUL_DAT, MUNKA_ISKOLA, PICTURE, ISADMIN from felhasznalo f where id = :id";
     private final static String SELECT_ALL_USER = "select ID, JELSZO, EMAIL, f.nev.VEZETEKNEV as vnev, f.NEV.KERESZTNEV as knev, CSATL_DAT, SZUL_DAT, MUNKA_ISKOLA from felhasznalo f";
 
 

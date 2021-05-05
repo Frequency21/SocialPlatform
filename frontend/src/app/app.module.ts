@@ -1,3 +1,4 @@
+import { ModalKommentModule } from './pages/modal-komment/modal-komment.module';
 import { ModalPosztModule } from './pages/modal-poszt/modal-poszt.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -55,7 +56,8 @@ import { ModalPosztComponent } from './pages/modal-poszt/modal-poszt.component';
     DisplayGroupModule,
     DisplayGroupsModule,
     DisplayIsmerosokModule,
-    ModalPosztModule
+    ModalPosztModule,
+    ModalKommentModule
   ],
   providers: [],
   bootstrap: [AppComponent]
