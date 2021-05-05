@@ -8,25 +8,20 @@ import { User, Ismeros,  Fenykepalbum, Kategoria, Fenykep} from '../shared/model
 })
 export class UserService {
 
-  rootUrl: string = '/api/user'
+  rootUrl: string = 'api/user/'
 
   constructor(private http: HttpClient) { }
 
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.rootUrl + '/all');
+    return this.http.get<User[]>(this.rootUrl + 'all');
   }
 
   getUserByID(id: Number): Observable<User> {
-    console.log(this.rootUrl+'/user/'+id);
-    return this.http.get<User>(this.rootUrl + '/user/' + id);
+    return this.http.get<User>(this.rootUrl + id);
   }
 
   getIsmeroses(felhasznalo_id: number): Observable<User[]> {
-    return this.http.get<User[]>(this.rootUrl + '/ismerosok?fh='+felhasznalo_id);
-  }
-
-  getFenykepAlbum(album_id: number): Observable<Fenykepalbum> {
-    return this.http.get<Fenykepalbum>(this.rootUrl + '/fenykepalbum?album='+ album_id);
+    return this.http.get<User[]>(this.rootUrl + 'ismerosok?fh='+felhasznalo_id);
   }
 
   getKategorias(fenykepalbum_id: number): Observable<Kategoria> {

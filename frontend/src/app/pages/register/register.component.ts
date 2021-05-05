@@ -58,7 +58,7 @@ export class RegisterComponent implements OnInit {
     try {
       this.httpClientService.createAccount(this.user)
       .subscribe((data => {
-        
+
         alert("Update succesful")
       }))
     }catch(error) {

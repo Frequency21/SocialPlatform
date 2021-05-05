@@ -45,7 +45,9 @@ export class LoginComponent implements OnInit {
         // console.log(data.area);
         // console.log(data.addressType);
         // console.log(data.houseNumber);
-        sessionStorage.setItem('username', data.knev);
+        sessionStorage.setItem('userID', String(data.id));
+        sessionStorage.setItem('knev', data.knev);
+        sessionStorage.setItem('vnev', data.vnev);
 
         alert("Login succesful");
       }));
