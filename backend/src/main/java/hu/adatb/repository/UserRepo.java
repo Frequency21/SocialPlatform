@@ -26,7 +26,7 @@ public class UserRepo {
     public User getUser(int id) {
         MapSqlParameterSource map = new MapSqlParameterSource("id", id);
 
-        User user = namedJdbc.query(
+        return namedJdbc.query(
                 SELECT_USER,
                 map, rs -> {
                     User u = new User();
@@ -44,12 +44,11 @@ public class UserRepo {
                     }
                     return u;
                 });
-        return user;
     }
 
     @Transactional
     public List<User> getUsers() {
-        List<User> user = jdbcTemplate.query(
+        return jdbcTemplate.query(
                 SELECT_ALL_USER,
                 rs -> {
                     List<User> users = new ArrayList<>();
@@ -62,13 +61,11 @@ public class UserRepo {
                         u.setVnev(rs.getString("VNEV"));
                         u.setKnev(rs.getString("KNEV"));
                         u.setCsatl(rs.getDate("CSATL_DAT"));
-//                         SZUL_DAT
                         u.setMunkaIskola(rs.getString("MUNKA_ISKOLA"));
                         users.add(u);
                     }
                     return users;
                 });
-        return user;
     }
 
 }

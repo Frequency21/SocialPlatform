@@ -11,13 +11,13 @@ import java.util.HashMap;
 import java.util.List;
 
 
-@CrossOrigin("*")
 @RestController
+@RequestMapping("/user")
 public class UserController {
     @Autowired
     private UserRepo userRepo;
 
-    @RequestMapping(value = "/api/user", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public ResponseEntity<User> getUser(
             @RequestParam("id") int id
     ) {
@@ -25,7 +25,7 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-    @RequestMapping(value = "/api/user/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "{id}", method = RequestMethod.GET)
     public ResponseEntity<User> getUserById(
             @PathVariable("id") int id
     ) {
@@ -33,7 +33,7 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-    @RequestMapping(value = "/api/users", method = RequestMethod.GET)
+    @RequestMapping(value = "all", method = RequestMethod.GET)
     public ResponseEntity<List<User>> getUsers() {
         List<User> users = userRepo.getUsers();
         return ResponseEntity.ok(users);

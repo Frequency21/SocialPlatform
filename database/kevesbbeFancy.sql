@@ -169,18 +169,6 @@ CREATE TABLE Ismeros
 );
 /
 
-/*FĂ‰NYKĂ‰PES RĂ‰SZ KEZDETE*/
-CREATE TABLE Fenykepalbum
-(
-    album_id NUMBER GENERATED ALWAYS as IDENTITY PRIMARY KEY,
-    tulaj_id NUMBER NOT NULL,
-    CONSTRAINT fk_fenykepalbum_tulajdonos
-        FOREIGN KEY (tulaj_id) REFERENCES Felhasznalo (ID)
-        ON DELETE CASCADE
-);
-/
-
-
 CREATE TABLE Kategoria
 (
     nev             VARCHAR2(16),
