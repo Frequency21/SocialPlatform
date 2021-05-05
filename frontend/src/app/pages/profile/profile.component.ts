@@ -1,21 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ImageService } from 'src/app/services/image.service';
-import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import { HttpClientService } from 'src/app/services/httpclient.service';
 import { User } from 'src/app/shared/models/user.model';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class ProfileComponent implements OnInit {
 
-  public selectedFile?: File;
-  public imgSrc?: string;
   user!: User;
+
+  public userId: number = 0;
 
   form: FormGroup = new FormGroup({
     username: new FormControl(),
@@ -33,30 +31,28 @@ export class RegisterComponent implements OnInit {
   });
 
   constructor(
-    private imageService: ImageService,
     private router: Router,
     private httpClientService: HttpClientService,
     ) { }
 
-  ngOnInit(): void { }
-
-  registration(): void {
-    let formData = new FormData();
-
-    formData.set('file', this.selectedFile as Blob, this.selectedFile?.name);
-    this.imageService.uploadImage(formData).subscribe(
-      res => {
-        this.imgSrc = res;
-      }
-    );
-
+  ngOnInit(): void {
   }
 
-  onSelectFile(event: any) {
-    this.selectedFile = event.target.files[event.target.files.length - 1] as File;
-
+  public getUser(): void {
     try {
-      this.httpClientService.createAccount(this.user)
+      this.httpClientService.getUser(this.userId)
+      .subscribe((data => {
+        this.user = data;
+        alert("Successful")
+      }))
+    } catch(error) {
+      alert(error);
+    }
+  }
+
+  public updateUser(): void {   
+    try {
+      this.httpClientService.updateUser(this.user)
       .subscribe((data => {
         
         alert("Update succesful")
@@ -64,6 +60,22 @@ export class RegisterComponent implements OnInit {
     }catch(error) {
       alert(error);
     }
+  }
+
+
+  public deleteUser(): void {
+    try{
+      this.httpClientService.deleteUser(this.userId)
+        .subscribe((data => {
+  
+          alert("Delete succesful");
+        }));
+      }
+      catch(error) {
+        alert(error);
+      }
+
+    this.router.navigate(['logout']);
   }
 
 }
