@@ -12,28 +12,36 @@
     <a mat-button [routerLink]="['/display/poszts']">
       Posztok
     </a>
-    <span class="vspace"></span>
     <a mat-button [routerLink]="['/display/friends']">
       Ismerősök
     </a>
     <span class="vspace"></span>
-    <button mat-button [matMenuTriggerFor]="menu">
+    <span class="vspace"></span>
+    <button mat-button [matMenuTriggerFor]="menu" >
       tmp username&nbsp;
       <mat-icon>arrow_drop_down</mat-icon>
     </button>
 
     <mat-menu #menu="matMenu">
-      <button mat-menu-item disabled [routerLink]="['/profil']">
+      <button mat-menu-item disabled [routerLink]="['/profil']" *ngIf="loginService.isUserLoggedIn()">
         <mat-icon>person</mat-icon>
         <span>Profil</span>
       </button>
-      <button mat-menu-item disabled [routerLink]="['/settings']">
+      <button mat-menu-item disabled [routerLink]="['/settings']" *ngIf="loginService.isUserLoggedIn()">
         <mat-icon>settings</mat-icon>
         <span>Beállítások</span>
       </button>
-      <button mat-menu-item (click)="logout()">
+      <button mat-menu-item (click)="logout()" *ngIf="loginService.isUserLoggedIn()">
         <mat-icon>arrow_back</mat-icon>
         <span>Kijelentkezés</span>
+      </button>
+      <button mat-menu-item (click)="login()" *ngIf="!loginService.isUserLoggedIn()">
+        <mat-icon>login</mat-icon>
+        <span>Bejelentkezés</span>
+      </button>
+      <button mat-menu-item (click)="register()" *ngIf="!loginService.isUserLoggedIn()">
+        <mat-icon>perm_identity</mat-icon>
+        <span>Regisztráció</span>
       </button>
     </mat-menu>
 

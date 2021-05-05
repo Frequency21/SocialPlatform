@@ -8,9 +8,16 @@ import { DisplayGroupsComponent } from './pages/display-groups/display-groups.co
 import { RegisterComponent } from './pages/register/register.component';
 import { DisplayGroupComponent } from './pages/display-group/display-group.component';
 import { DisplayIsmerosokComponent } from './pages/display-ismerosok/display-ismerosok.component';
+import { AuthGaurdService } from './services/auth-gaurd.service';
+import { HomeComponent } from './pages/home/home.component';
+import { LoginComponent } from './pages/login/login.component';
 
 const routes: Routes = [
-  { path: 'login', component: RegisterComponent },
+  { path: '', pathMatch: 'full', component: HomeComponent },
+  { path: 'home', pathMatch: 'full', component: HomeComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'logout', pathMatch: 'full', component: HomeComponent, canActivate:[AuthGaurdService] },
   // TODO: itt majd a display-t le cserélni SocialDistancing-re. :D
   { path: 'display/users', component: DisplayUsersComponent },
   { path: 'display/groups', component: DisplayGroupsComponent },

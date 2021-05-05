@@ -28,10 +28,13 @@ import { DisplayGroupModule } from './pages/display-group/display-group.module';
 import { DisplayGroupsModule } from './pages/display-groups/display-groups.module';
 import { DisplayIsmerosokModule } from './pages/display-ismerosok/display-ismerosok.module';
 import { ModalPosztComponent } from './pages/modal-poszt/modal-poszt.component';
+import { HomeComponent } from './pages/home/home.component';
+import { LoginModule } from './pages/login/login.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +58,8 @@ import { ModalPosztComponent } from './pages/modal-poszt/modal-poszt.component';
     DisplayGroupModule,
     DisplayGroupsModule,
     DisplayIsmerosokModule,
-    ModalPosztModule
+    ModalPosztModule,
+    LoginModule
   ],
   providers: [],
   bootstrap: [AppComponent]
