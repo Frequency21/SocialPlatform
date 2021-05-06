@@ -8,10 +8,12 @@ import { Observable } from 'rxjs';
 })
 export class ImageService {
     constructor(private httpClient: HttpClient) { }
-    public baseUrl = 'api/images';
-    public uploadImage(formData: FormData): Observable<any> {
+    public baseUrl = '/api/images/';
+    
+    /* api path */
+    public uploadImage(formData: FormData, path: string): Observable<any> {
         const file = formData.get('file') as File;
-        const url = this.baseUrl + `/upload?file=${file.name}`;
+        const url = this.baseUrl + `${path}?file=${file.name}`;
         return this.httpClient.post(url, formData, { responseType: 'text' });
     }
 }

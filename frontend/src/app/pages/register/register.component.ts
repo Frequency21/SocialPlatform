@@ -3,7 +3,6 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ImageService } from 'src/app/services/image.service';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
-import { HttpClientService } from 'src/app/services/httpclient.service';
 import { User } from 'src/app/shared/models/user.model';
 
 @Component({
@@ -18,9 +17,7 @@ export class RegisterComponent implements OnInit {
   user!: User;
 
   form: FormGroup = new FormGroup({
-    username: new FormControl(),
     email: new FormControl(),
-
     // email: new FormControl(),
     vnev: new FormControl(),
     knev: new FormControl(),
@@ -35,35 +32,50 @@ export class RegisterComponent implements OnInit {
   constructor(
     private imageService: ImageService,
     private router: Router,
-    private httpClientService: HttpClientService,
-    ) { }
+    private userService: UserService
+  ) { }
 
   ngOnInit(): void { }
 
   registration(): void {
-    let formData = new FormData();
 
+    let newUser: User = {
+      id: null,
+      email: this.form.value.email,
+      jelszo: this.form.value.password1,
+      vnev: this.form.value.vnev,
+      knev: this.form.value.knev,
+      csatl: new Date(Date.now()),
+      szul_dat: new Date(Date.now()),//this.form.value.szul_dat,
+      munka_iskola: this.form.value.munka_iskola,
+      picture: undefined,
+      isAdmin: false,
+    }
+
+
+    let formData = new FormData();
     formData.set('file', this.selectedFile as Blob, this.selectedFile?.name);
-    this.imageService.uploadImage(formData).subscribe(
-      res => {
-        this.imgSrc = res;
-      }
-    );
+
+    this.userService.createAccount(newUser)
+      .subscribe(
+        id => {
+          console.log('get id: ' + id);
+          console.log('start upload image');
+          this.userService.uploadProfile(formData, id)
+            .subscribe(
+              path => {
+                console.log('succesfully upload img to: ' + path);
+              },
+              console.error
+            )
+        },
+        console.error
+      )
 
   }
 
   onSelectFile(event: any) {
     this.selectedFile = event.target.files[event.target.files.length - 1] as File;
-
-    try {
-      this.httpClientService.createAccount(this.user)
-      .subscribe((data => {
-
-        alert("Update succesful")
-      }))
-    }catch(error) {
-      alert(error);
-    }
   }
 
 }

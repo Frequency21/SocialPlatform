@@ -1,5 +1,6 @@
 package hu.adatb.controller;
 
+import hu.adatb.repository.UserRepo;
 import hu.adatb.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -16,11 +17,18 @@ import java.io.IOException;
 public class ImageController {
 
     @Autowired
-    public ImageService imageService;
+    private ImageService imageService;
+    @Autowired
+    private UserRepo userRepo;
 
-    @PostMapping(value = "upload")
-    public ResponseEntity uploadImage(@RequestParam MultipartFile file) {
-        return this.imageService.uploadToLocalFileSystem(file, "user", "tmp");
+    @PostMapping(value = "upload/user/{id}/profile")
+    public ResponseEntity uploadImage(
+            @RequestParam MultipartFile file,
+            @PathVariable("id") long id
+    ) {
+        // TODO: 2021. 05. 06. save img path, change path in db-s to varcchar(500)..
+        // userRepo.saveImage(...);
+        return this.imageService.uploadToLocalFileSystem(file, "user", "profile", "" + id);
     }
 
     @GetMapping(

@@ -29,10 +29,10 @@ public class ImageService {
         Path storageDirectory = Paths.get(storageDirectoryPath + String.join("" + File.separatorChar,
                 prefixPath));
 
-        if(!Files.exists(storageDirectory)){ // if the folder does not exist
+        if (!Files.exists(storageDirectory)) { // if the folder does not exist
             try {
                 Files.createDirectories(storageDirectory);
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -54,12 +54,11 @@ public class ImageService {
         return ResponseEntity.ok(fileDownloadUri);
     }
 
-    public  byte[] getImageWithMediaType(String imageName, String... prefixPath) throws IOException {
+    public byte[] getImageWithMediaType(String imageName, String... prefixPath) throws IOException {
         Path destination = Paths.get(storageDirectoryPath + String.join("" + File.separatorChar, prefixPath)
                 + File.separatorChar + imageName);// retrieve the image by its name
         return IOUtils.toByteArray(destination.toUri());
     }
-
 
 
 }

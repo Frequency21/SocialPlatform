@@ -9,21 +9,22 @@ import { Poszt } from '../shared/models/poszt.model';
 })
 export class PosztService {
 
-  rootUrl: string = '/api'
+  rootUrl: string = 'api/post/'
 
   constructor(private http: HttpClient) { }
 
   getPoszts(): Observable<Poszt[]> {
-    return this.http.get<Poszt[]>(this.rootUrl + '/poszts');
+    return this.http.get<Poszt[]>(this.rootUrl + 'all');
   }
 
   addPoszt(poszt: Poszt): Observable<Poszt> {
-    return this.http.post<Poszt>(this.rootUrl + '/poszt/add', poszt);
+    console.log("helloka!");
+    return this.http.post<Poszt>(this.rootUrl + 'add', poszt);
   }
 
   addKomment(komment: Komment): Observable<Komment> {
     console.log("AddKomment(" + komment + ")");
-    return this.http.post<Komment>(this.rootUrl + "/poszt/addKomment", komment);
+    return this.http.post<Komment>(this.rootUrl + "addKomment", komment);
   }
 
 }

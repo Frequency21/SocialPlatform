@@ -29,6 +29,6 @@ export class DisplayIsmerosokComponent implements OnInit {
 
   getDate(): number {
     if (!this.users) return 0;
-    return Date.parse(this.users[0].csatl);
+    return this.users[0].csatl.getTime();
   }
 }

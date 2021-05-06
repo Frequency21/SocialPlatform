@@ -1,21 +1,23 @@
+
 package hu.adatb.controller;
 
 import hu.adatb.model.User;
 import hu.adatb.repository.UserRepo;
+import hu.adatb.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 
 @RestController
-@RequestMapping("api/user")
+@RequestMapping("/api/user/")
 public class UserController {
     @Autowired
     private UserRepo userRepo;
+    @Autowired
+    private ImageService imageService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ResponseEntity<User> getUser(
@@ -39,14 +41,18 @@ public class UserController {
         return ResponseEntity.ok(users);
     }
 
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public ResponseEntity<?> testing() {
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("name", "taylor");
-        ArrayList<String> array = new ArrayList<String>();
-        array.add("21");
-        array.add("42");
-        result.put("favorite numbers", array);
-        return ResponseEntity.ok(result);
+    @RequestMapping(value = "register", method = RequestMethod.POST)
+    public Long register(
+            @RequestBody User user
+    ) {
+        return userRepo.insertUser(user);
     }
+
+    @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+    public boolean deleteUser(
+            @PathVariable("id") int id
+    ) {
+        return userRepo.deleteUser(id);
+    }
+
 }

@@ -1,9 +1,10 @@
 export interface User {
     id: number | null;
     email: string;
+    jelszo: string;
     vnev: string;
     knev: string;
-    csatl: string;
+    csatl: Date;
     szul_dat: Date;
     munka_iskola?: string;
     picture?: Blob;

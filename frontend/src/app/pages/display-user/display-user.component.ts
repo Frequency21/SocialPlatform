@@ -35,7 +35,7 @@ export class DisplayUserComponent implements OnInit {
 
   getDate(): number {
     if (!this.user) return 0;
-    return Date.parse(this.user.csatl);
+    return this.user.csatl.getTime();
   }
 
   openDialog(){

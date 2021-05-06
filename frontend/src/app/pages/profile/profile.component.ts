@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClientService } from 'src/app/services/httpclient.service';
+import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/shared/models/user.model';
 
 @Component({
@@ -33,49 +34,47 @@ export class ProfileComponent implements OnInit {
   constructor(
     private router: Router,
     private httpClientService: HttpClientService,
-    ) { }
+    private userService: UserService
+  ) { }
 
   ngOnInit(): void {
   }
 
   public getUser(): void {
     try {
-      this.httpClientService.getUser(this.userId)
-      .subscribe((data => {
-        this.user = data;
-        alert("Successful")
-      }))
-    } catch(error) {
+      this.userService.getUser(this.userId)
+        .subscribe(data => {
+          this.user = data;
+          console.log(this.user);
+          alert("Successful")
+        })
+    } catch (error) {
       alert(error);
     }
   }
 
-  public updateUser(): void {   
+  // TODO: userServicebe vinni
+  public updateUser(): void {
     try {
       this.httpClientService.updateUser(this.user)
-      .subscribe((data => {
-        
-        alert("Update succesful")
-      }))
-    }catch(error) {
+        .subscribe(data => {
+          alert("Update succesful")
+        })
+    } catch (error) {
       alert(error);
     }
   }
 
 
   public deleteUser(): void {
-    try{
-      this.httpClientService.deleteUser(this.userId)
-        .subscribe((data => {
-  
-          alert("Delete succesful");
-        }));
-      }
-      catch(error) {
-        alert(error);
-      }
-
-    this.router.navigate(['logout']);
+    this.userService.deleteUser(this.userId)
+      .subscribe(data => {
+        if (data)
+          alert("Sikeres törlés");
+        else {
+          alert("Nem sikerült a törlés");
+        }
+      });
   }
 
 }
