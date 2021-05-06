@@ -162,16 +162,16 @@ További finomítás: mik lehetnek az egyes egyedek attribútumai
 
 ## EK leképezés
 
-- Fénykép (__id__, kép, név, *kategoria_id*)
-- Kategória (__név__, __*Fényképalbum\_id*__)
-- Fényképalbum (__id__, *Felhasználó\_id*)
-- Felhasználó (__id__, jelszó, szül_dát, admin_e, csatlakozásDátum, keresztnév, vezetéknév, munka_iskola, profilkép, *Hírfolyam\_id*)
-- Üzenet (**időpont**, __*Felhasználó\_id*__, __*Címzett\_id*__ , szöveg)
-- Meghívás (__*Felhasználó\_id*__, __*Címzett\_id*__, __*Csoport\_id*__, időpont, elfogadva)
-- Csoport (__csoportId__, leírás, név, *tulaj\_id*, *Hírfolyam\_id*)
-- Hírfolyam (__id__)
-- Poszt (**időpont**, __*Hírfolyam\_id*__, __*Felhasználó\_id*__, szöveg, dislike, like, nyilvános)
-- Komment (**időpont**, __*Felhaszánló\_id*__ , __*Poszt\_id*__ , szöveg, like, dislike)
+- Fénykép (__id__, kep, kep_nev, <ins>*kat_nev*</ins>, <ins>*felh_id*</ins>)
+- Kategória (__név__, <ins>*Felhasznalo\_id*</ins>)
+- Felhasználó (__id__, jelszo, email, keresztnev, vezeteknev, szul_dát, csatl_dat, munka_iskola, picture, isAdmin)
+- Üzenet (**id**, időpont <ins>*Felhasználó\_id*</ins>, <ins>*Címzett\_id*</ins> , szöveg)
+- Meghívás (<ins>*Felhasználó\_id*</ins>, <ins>*Címzett\_id*</ins>, <ins>*Csoport\_id*</ins>, időpont, elfogadva)
+- Csoport (__csoportId__, leiras, nev, <ins>*tulaj\_id*</ins>)
+- Poszt (**id**, időpont, <ins>*szerzo_id*</ins>, <ins>*csoport_id*</ins> , <ins>*felhasznalo\_id*</ins>, szoveg, dislike, like, isPublic)
+- Komment (**id**, idopont, <ins>*komment_iro_id*</ins>, <ins>*poszt\_felh\_id*</ins>, <ins>*poszt\_id*</ins> , szoveg, like, dislike, isPublic)
+- Tagja (<ins>***felhasznalo\_id***</ins>, <ins>***csoport\_id***</ins>)
+- Ismeros ( <ins>***felhasznalo1\_id***</ins>, <ins>***felhasznalo2_id***</ins> )
 
 ## Szerep funkció mátrix
 
