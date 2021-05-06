@@ -19,24 +19,25 @@ import java.util.List;
 
 @Repository
 public class UserRepo {
+    private final JdbcTemplate jdbcTemplate;
+    private final NamedParameterJdbcTemplate namedJdbc;
     private static final String INSERT_USER = "insert into FELHASZNALO(JELSZO, EMAIL, NEV, CSATL_DAT, SZUL_DAT, " +
             "MUNKA_ISKOLA, ISADMIN) VALUES (:JELSZO, :EMAIL, NEVTIPUS(:VNEV, :KNEV), :CSATL_DAT, :SZUL_DAT, " +
             ":MUNKA_ISKOLA, :ISADMIN)";
     private static final String DELETE_USER = "delete from FELHASZNALO where ID = ?";
     private static final String INSERT_PICTURE = "update FELHASZNALO set PICTURE = ? where ID = ?";
-    @Autowired
-    private NamedParameterJdbcTemplate namedJdbc;
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
     private static final String SELECT_USER = "select ID, JELSZO, EMAIL, f.NEV.VEZETEKNEV as VNEV, f.NEV.KERESZTNEV " +
             "as KNEV, CSATL_DAT, SZUL_DAT, MUNKA_ISKOLA, PICTURE, ISADMIN from felhasznalo f where id = :id";
-
     private static final String SELECT_USER_BY_EMAIL_AND_PASSWORD = "select ID, JELSZO, EMAIL, f.NEV.VEZETEKNEV as " +
             "VNEV, f.NEV.KERESZTNEV as KNEV, CSATL_DAT, SZUL_DAT, MUNKA_ISKOLA, PICTURE, ISADMIN from felhasznalo f " +
             "where EMAIL = :EMAIL and JELSZO = :JELSZO";
-
     private static final String SELECT_ALL_USER = "select ID, JELSZO, EMAIL, f.NEV.VEZETEKNEV as VNEV, " +
             "f.NEV.KERESZTNEV as KNEV, CSATL_DAT, SZUL_DAT, MUNKA_ISKOLA, PICTURE, ISADMIN from felhasznalo f";
+
+    public UserRepo(NamedParameterJdbcTemplate namedJdbc, JdbcTemplate jdbcTemplate) {
+        this.namedJdbc = namedJdbc;
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     private static User extractUser(ResultSet rs) throws SQLException {
         User u = new User();

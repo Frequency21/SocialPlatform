@@ -4,7 +4,6 @@ import hu.adatb.repository.UserRepo;
 import hu.adatb.service.ImageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,11 +16,14 @@ import java.io.IOException;
 @RequestMapping(value = "/api/")
 public class ImageController {
 
-    @Autowired
-    private ImageService imageService;
-    @Autowired
-    private UserRepo userRepo;
-    private static final Logger log = LoggerFactory.getLogger(ImageController.class);
+    private final ImageService imageService;
+    private final UserRepo userRepo;
+    private final Logger log = LoggerFactory.getLogger(ImageController.class);
+
+    public ImageController(ImageService imageService, UserRepo userRepo) {
+        this.imageService = imageService;
+        this.userRepo = userRepo;
+    }
 
     @PostMapping(value = "user/profile/{id}")
     public ResponseEntity<String> uploadProfileImage(

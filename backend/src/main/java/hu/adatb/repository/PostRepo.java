@@ -15,10 +15,8 @@ import java.util.List;
 
 @Repository
 public class PostRepo {
-    @Autowired
-    private NamedParameterJdbcTemplate namedJdbc;
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private final NamedParameterJdbcTemplate namedJdbc;
+    private final JdbcTemplate jdbcTemplate;
 
     private static final String SELECT_ALL = "select IDOPONT, SZERZO_ID, CSOPORT_ID, FELHASZNALO_ID, SZOVEG, " +
             "p.ERTEKELES.LIKE_SZAMLALO as \"like\", p.ERTEKELES.DISLIKE_SZAMLALO as dislike, ISPUBLIC from POSZT p";
@@ -26,6 +24,11 @@ public class PostRepo {
     private static final String SELECT_ALL_BY_USER_ID = "select IDOPONT, SZERZO_ID, CSOPORT_ID, FELHASZNALO_ID, SZOVEG, " +
             "p.ERTEKELES.LIKE_SZAMLALO as \"like\", p.ERTEKELES.DISLIKE_SZAMLALO as dislike, ISPUBLIC from POSZT p " +
             "where FELHASZNALO_ID = :FELHASZNALO_ID";
+
+    public PostRepo(NamedParameterJdbcTemplate namedJdbc, JdbcTemplate jdbcTemplate) {
+        this.namedJdbc = namedJdbc;
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
 
     private static List<Post> extractPosts(ResultSet rs) throws SQLException {

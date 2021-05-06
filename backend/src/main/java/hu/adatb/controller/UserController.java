@@ -3,10 +3,8 @@ package hu.adatb.controller;
 
 import hu.adatb.model.User;
 import hu.adatb.repository.UserRepo;
-import hu.adatb.service.ImageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,11 +14,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/user/")
 public class UserController {
-    @Autowired
-    private UserRepo userRepo;
-    @Autowired
-    private ImageService imageService;
-    private static final Logger log = LoggerFactory.getLogger(UserController.class);
+    private final UserRepo userRepo;
+    private final Logger log = LoggerFactory.getLogger(UserController.class);
+
+    public UserController(UserRepo userRepo) {
+        this.userRepo = userRepo;
+    }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ResponseEntity<User> getUser(
