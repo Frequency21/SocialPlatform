@@ -37,7 +37,7 @@ CREATE TABLE Felhasznalo
     csatl_dat    DATE          NOT NULL,
     szul_dat     DATE          NOT NULL,
     munka_iskola VARCHAR2(64),
-    picture      BLOB,
+    picture      VARCHAR2(300),
     isAdmin      NUMBER(1, 0)  NOT NULL
 );
 /
@@ -123,7 +123,7 @@ CREATE TABLE Meghivas
     felhasznalo_id NUMBER,
     cimzett_id     NUMBER,
     csoport_id     NUMBER,
-    idopont        DATE         not null,
+    idopont        DATE         NOT NULL,
     isAccepted     NUMBER(1, 0) NOT NULL,
     CONSTRAINT pk_meghivas_id PRIMARY KEY (felhasznalo_id, cimzett_id, csoport_id, idopont),
     CONSTRAINT fk_meghivas_felhasznalo
@@ -183,7 +183,7 @@ CREATE TABLE Kategoria
 CREATE TABLE Fenykep
 (
     kep_id  NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    kep     BLOB NOT NULL,
+    kep     VARCHAR2(300) NOT NULL,
     kep_nev VARCHAR2(200),
     kat_nev VARCHAR2(200),
     felh_id NUMBER,
@@ -194,8 +194,8 @@ CREATE TABLE Fenykep
 /
 
 
-SELECT ID as "id", csatl_dat as "csatl", email as "email", f.nev.keresztnev as "knev", f.nev.vezeteknev as "vnev"
-FROM felhasznalo f;
+-- SELECT ID as "id", csatl_dat as "csatl", email as "email", f.nev.keresztnev as "knev", f.nev.vezeteknev as "vnev"
+-- FROM felhasznalo f;
 
 
 /*

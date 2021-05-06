@@ -3,7 +3,6 @@ package hu.adatb.controller;
 
 import hu.adatb.model.User;
 import hu.adatb.repository.UserRepo;
-import hu.adatb.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +15,6 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserRepo userRepo;
-    @Autowired
-    private ImageService imageService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ResponseEntity<User> getUser(

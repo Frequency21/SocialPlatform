@@ -2,6 +2,8 @@ package hu.adatb.service;
 
 import org.apache.commons.io.IOUtils;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -23,6 +25,7 @@ public class ImageService {
 
     public final String storageDirectoryPath = System.getProperty("user.dir") + File.separatorChar + "uploads" +
             File.separatorChar;
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     public ResponseEntity uploadToLocalFileSystem(MultipartFile file, String... prefixPath) {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
@@ -57,6 +60,7 @@ public class ImageService {
     public byte[] getImageWithMediaType(String imageName, String... prefixPath) throws IOException {
         Path destination = Paths.get(storageDirectoryPath + String.join("" + File.separatorChar, prefixPath)
                 + File.separatorChar + imageName);// retrieve the image by its name
+        log.debug(destination.toString());
         return IOUtils.toByteArray(destination.toUri());
     }
 
