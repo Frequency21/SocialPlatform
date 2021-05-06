@@ -27,7 +27,7 @@ public class ImageService {
             File.separatorChar;
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    public ResponseEntity uploadToLocalFileSystem(MultipartFile file, String... prefixPath) {
+    public ResponseEntity<String> uploadToLocalFileSystem(MultipartFile file, String... prefixPath) {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         Path storageDirectory = Paths.get(storageDirectoryPath + String.join("" + File.separatorChar,
                 prefixPath));

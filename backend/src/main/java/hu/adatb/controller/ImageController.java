@@ -11,7 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
-
 @RestController
 @RequestMapping(value = "api/images")
 public class ImageController {
@@ -22,13 +21,13 @@ public class ImageController {
     private UserRepo userRepo;
 
     @PostMapping(value = "upload/user/{id}/profile")
-    public ResponseEntity uploadImage(
+    public ResponseEntity<String> uploadImage(
             @RequestParam MultipartFile file,
             @PathVariable("id") long id
     ) {
         // TODO: 2021. 05. 06. save img path, change path in db-s to varcchar(500)..
         // userRepo.saveImage(...);
-        return this.imageService.uploadToLocalFileSystem(file, "user", "profile", "" + id);
+        return imageService.uploadToLocalFileSystem(file, "user", "profile", "" + id);
     }
 
     @GetMapping(
