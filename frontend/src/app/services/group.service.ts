@@ -8,15 +8,15 @@ import { Observable, of } from 'rxjs';
 })
 export class GroupService {
 
-  rootUrl: string = '/api'
+  rootUrl: string = '/api/'
 
   constructor(private http: HttpClient) { }
 
   getGroups(): Observable<Group[]> {
-    return this.http.get<Group[]>(this.rootUrl + '/groups');
+    return this.http.get<Group[]>(this.rootUrl + 'groups');
   }
 
   getGroupById(id: Number): Observable<Group[]> {
-    return this.http.get<Group[]>(this.rootUrl + '/group?id=' + id);
+    return this.http.get<Group[]>(this.rootUrl + 'group?id=' + id);
   }
 }

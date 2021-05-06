@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ImageService } from 'src/app/services/image.service';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import { User } from 'src/app/shared/models/user.model';
@@ -18,19 +17,16 @@ export class RegisterComponent implements OnInit {
 
   form: FormGroup = new FormGroup({
     email: new FormControl(),
-    // email: new FormControl(),
     vnev: new FormControl(),
     knev: new FormControl(),
-    //csatl: new FormControl(),
+    csatl: new FormControl(),
     szul_dat: new FormControl(),
     munka_iskola: new FormControl(),
-    // picture?: new FormControl(),
     password1: new FormControl(),
     password2: new FormControl(),
   });
 
   constructor(
-    private imageService: ImageService,
     private router: Router,
     private userService: UserService
   ) { }
@@ -45,31 +41,35 @@ export class RegisterComponent implements OnInit {
       jelszo: this.form.value.password1,
       vnev: this.form.value.vnev,
       knev: this.form.value.knev,
-      csatl: new Date(Date.now()),
+      csatl: this.form.value.csatl,
       szul_dat: new Date(Date.now()),//this.form.value.szul_dat,
       munka_iskola: this.form.value.munka_iskola,
       picture: undefined,
       isAdmin: false,
     }
 
+    console.log(this.form.value.csatl);
 
     let formData = new FormData();
-    formData.set('file', this.selectedFile as Blob, this.selectedFile?.name);
+    if (this.selectedFile)
+      formData.set('file', this.selectedFile as Blob, this.selectedFile?.name);
 
     this.userService.createAccount(newUser)
       .subscribe(
         id => {
           console.log('get id: ' + id);
-          console.log('start upload image');
-          this.userService.uploadProfile(formData, id)
+          if (id) {
+            console.log('start upload image');
+            this.userService.uploadProfile(formData, id)
             .subscribe(
               path => {
                 console.log('succesfully upload img to: ' + path);
-              },
-              console.error
+                // if ()
+                newUser.picture = path;
+              }
             )
-        },
-        console.error
+          }
+        }
       )
 
   }

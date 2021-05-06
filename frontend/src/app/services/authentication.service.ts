@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 
 
 @Injectable({
@@ -8,23 +7,15 @@ import { map } from 'rxjs/operators';
 })
 export class AuthenticationService {
 
-  constructor(
-    private httpClient:HttpClient
-  ) {
-     }
+  constructor(private httpClient: HttpClient) { }
 
   // tslint:disable-next-line:typedef
   isUserLoggedIn() {
-    let user = sessionStorage.getItem('username');
+    let user = sessionStorage.getItem('email');
     return !(user === null);
   }
 
-  isUserisAdministrator() {
-    let r_id = sessionStorage.getItem("restaurant");
-    return this.isUserLoggedIn() && (!(r_id === 'null'));
-  }
-
   logOut() {
-    sessionStorage.removeItem('username');
+    sessionStorage.removeItem('email');
   }
 }

@@ -2,22 +2,25 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { User, Ismeros, Fenykepalbum, Kategoria, Fenykep } from '../shared/models/user.model'
-import { ImageService } from './image.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  rootUrl: string = 'api/user/'
+  rootUrl: string = '/api/user/'
 
-  constructor(
-    private http: HttpClient,
-    private imageService: ImageService
-    ) { }
+  constructor(private http: HttpClient) { }
 
   public createAccount(user: User) {
-    return this.http.post<number>('/api/user/register', user);
+    return this.http.post<number>(this.rootUrl + 'register', user);
+  }
+
+  public login(email: string, jelszo: string) {
+    let formData = new FormData();
+    formData.append("email", email);
+    formData.append("jelszo", jelszo);
+    return this.http.post<User>(this.rootUrl + 'login', formData);
   }
 
   getUser(id: number): Observable<User> {
@@ -33,12 +36,11 @@ export class UserService {
   }
 
   public deleteUser(id: number) {
-    return this.http.delete<Boolean>('/api/user/' + id);
+    return this.http.delete<Boolean>(this.rootUrl + id);
   }
 
-
   uploadProfile(formData: FormData, id: number): Observable<any> {
-    return this.imageService.uploadImage(formData, `upload/user/${id}/profile`);
+    return this.http.post(this.rootUrl + `profile/${id}`, formData);
   }
 
   getIsmeroses(felhasznalo_id: number): Observable<User[]> {

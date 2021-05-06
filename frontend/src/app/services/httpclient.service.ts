@@ -4,7 +4,7 @@ import { User } from '../shared/models/user.model';
 
 export class LoginDetails{
   constructor(
-    public username: string,
+    public emai: string,
     public password: string,
   ) {}
 }
@@ -15,11 +15,6 @@ export class LoginDetails{
 export class HttpClientService {
 
   constructor(private httpClient: HttpClient) { }
-
-  public login(username: String, password: String)
-  {
-    return this.httpClient.post<User>('/api/user/login', {"username": username, "password": password} );
-  }
 
   public updateUser(user: User)
   {

@@ -4,9 +4,7 @@ import org.apache.commons.io.IOUtils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -27,10 +25,8 @@ public class ImageService {
             File.separatorChar;
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    public ResponseEntity<String> uploadToLocalFileSystem(MultipartFile file, String... prefixPath) {
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        Path storageDirectory = Paths.get(storageDirectoryPath + String.join("" + File.separatorChar,
-                prefixPath));
+    public String uploadToLocalFileSystem(MultipartFile file, String apiPath, String name, String... prefixPath) {
+        Path storageDirectory = Paths.get(storageDirectoryPath + String.join("" + File.separatorChar, prefixPath));
 
         if (!Files.exists(storageDirectory)) { // if the folder does not exist
             try {
@@ -40,7 +36,7 @@ public class ImageService {
             }
         }
 
-        Path destination = Paths.get(storageDirectory.toString() + File.separatorChar + fileName);
+        Path destination = Paths.get(storageDirectory.toString() + File.separatorChar + name);
 
         try {
             Files.copy(file.getInputStream(), destination, StandardCopyOption.REPLACE_EXISTING);
@@ -48,21 +44,20 @@ public class ImageService {
             e.printStackTrace();
         }
 
-        // the response will be the download URL of the image
-        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("api/images/getImage/")
-                .path(fileName)
+        String result = ServletUriComponentsBuilder
+                .fromCurrentContextPath()
+                .path(apiPath)
+                .path(name)
                 .toUriString();
-        // return the download image url as a response entity
-        return ResponseEntity.ok(fileDownloadUri);
+        log.debug("uploadToLocalFileSystem: " + result);
+        return result;
     }
 
-    public byte[] getImageWithMediaType(String imageName, String... prefixPath) throws IOException {
+    public byte[] getImage(String name, String... prefixPath) throws IOException {
         Path destination = Paths.get(storageDirectoryPath + String.join("" + File.separatorChar, prefixPath)
-                + File.separatorChar + imageName);// retrieve the image by its name
-        log.debug(destination.toString());
+                + File.separatorChar + name);// retrieve the image by its name
+        log.debug("getImage: " + destination);
         return IOUtils.toByteArray(destination.toUri());
     }
-
 
 }

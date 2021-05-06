@@ -1,7 +1,7 @@
 import { Router } from "@angular/router";
 import { Component, OnInit } from '@angular/core';
-import { HttpClientService } from "src/app/services/httpclient.service";
 import { AuthenticationService } from "src/app/services/authentication.service";
+import { UserService } from "src/app/services/user.service";
 
 @Component({
   selector: 'app-navigation',
@@ -11,14 +11,14 @@ import { AuthenticationService } from "src/app/services/authentication.service";
 export class NavigationComponent implements OnInit {
 
   isLoginSuccess = false;
-  username = '';
+  email = '';
   password = '';
   invalidLogin = false;
 
   name = sessionStorage.getItem('name');
 
   constructor(private router: Router,
-    private httpClientService: HttpClientService,
+    private userService: UserService,
     public loginService: AuthenticationService,
     public authentocationService: AuthenticationService) { }
 
@@ -42,10 +42,10 @@ export class NavigationComponent implements OnInit {
     this.invalidLogin = false;
 
     try{
-      this.httpClientService.login(this.username, this.password)
+      this.userService.login(this.email, this.password)
         .subscribe(data => {
 
-          // sessionStorage.setItem('username', data.userName);
+          // sessionStorage.setItem('email', data.email);
           // sessionStorage.setItem('name', data.lastName+" "+data.firstName);
           // sessionStorage.setItem('email', data.email);
           // sessionStorage.setItem('restaurant', data.restaurant);         

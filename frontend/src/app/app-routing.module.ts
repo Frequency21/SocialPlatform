@@ -7,7 +7,6 @@ import { DisplayUsersComponent } from './pages/display-users/display-users.compo
 import { DisplayGroupsComponent } from './pages/display-groups/display-groups.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { DisplayGroupComponent } from './pages/display-group/display-group.component';
-import { DisplayIsmerosokComponent } from './pages/display-ismerosok/display-ismerosok.component';
 import { AuthGaurdService } from './services/auth-gaurd.service';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -26,7 +25,6 @@ const routes: Routes = [
   { path: 'display/user/:id', component: DisplayUserComponent },
   { path: 'display/group/:id', component: DisplayGroupComponent },
   { path: 'display/poszts', component: DisplayPostsComponent },
-  { path: 'display/friends', component: DisplayIsmerosokComponent },
 ];
 
 @NgModule({

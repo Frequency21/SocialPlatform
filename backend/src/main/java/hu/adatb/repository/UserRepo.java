@@ -10,8 +10,8 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import javax.transaction.Transactional;
-import java.net.http.HttpResponse;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,37 +23,52 @@ public class UserRepo {
             "MUNKA_ISKOLA, ISADMIN) VALUES (:JELSZO, :EMAIL, NEVTIPUS(:VNEV, :KNEV), :CSATL_DAT, :SZUL_DAT, " +
             ":MUNKA_ISKOLA, :ISADMIN)";
     private static final String DELETE_USER = "delete from FELHASZNALO where ID = ?";
+    private static final String INSERT_PICTURE = "update FELHASZNALO set PICTURE = ? where ID = ?";
     @Autowired
     private NamedParameterJdbcTemplate namedJdbc;
     @Autowired
     private JdbcTemplate jdbcTemplate;
     private static final String SELECT_USER = "select ID, JELSZO, EMAIL, f.NEV.VEZETEKNEV as VNEV, f.NEV.KERESZTNEV " +
             "as KNEV, CSATL_DAT, SZUL_DAT, MUNKA_ISKOLA, PICTURE, ISADMIN from felhasznalo f where id = :id";
-    private static final String SELECT_ALL_USER = "select ID, JELSZO, EMAIL, f.nev.VEZETEKNEV as vnev, " +
-            "f.NEV.KERESZTNEV as knev, CSATL_DAT, SZUL_DAT, MUNKA_ISKOLA from felhasznalo f";
+
+    private static final String SELECT_USER_BY_EMAIL_AND_PASSWORD = "select ID, JELSZO, EMAIL, f.NEV.VEZETEKNEV as " +
+            "VNEV, f.NEV.KERESZTNEV as KNEV, CSATL_DAT, SZUL_DAT, MUNKA_ISKOLA, PICTURE, ISADMIN from felhasznalo f " +
+            "where EMAIL = :EMAIL and JELSZO = :JELSZO";
+
+    private static final String SELECT_ALL_USER = "select ID, JELSZO, EMAIL, f.NEV.VEZETEKNEV as VNEV, " +
+            "f.NEV.KERESZTNEV as KNEV, CSATL_DAT, SZUL_DAT, MUNKA_ISKOLA, PICTURE, ISADMIN from felhasznalo f";
+
+    private static User extractUser(ResultSet rs) throws SQLException {
+        User u = new User();
+        if (rs.next()) getUser(rs, u);
+        return u;
+    }
+
+    private static void getUser(ResultSet rs, User u) throws SQLException {
+        u.setId(rs.getLong("ID"));
+        u.setEmail(rs.getString("EMAIL"));
+        u.setJelszo(rs.getString("JELSZO"));
+        u.setVnev(rs.getString("VNEV"));
+        u.setKnev(rs.getString("KNEV"));
+        u.setCsatl(rs.getDate("CSATL_DAT"));
+        u.setSzulDat(rs.getDate("SZUL_DAT"));
+        u.setMunkaIskola(rs.getString("MUNKA_ISKOLA"));
+        u.setPicture(rs.getString("PICTURE"));
+        u.setAdmin(rs.getBoolean("ISADMIN"));
+    }
 
     public User getUser(int id) {
         MapSqlParameterSource map = new MapSqlParameterSource("id", id);
-
-        return namedJdbc.query(
-                SELECT_USER,
-                map, rs -> {
-                    User u = new User();
-                    if (rs.next()) {
-                        u.setId(rs.getLong("ID"));
-                        u.setJelszo(rs.getString("JELSZO"));
-                        u.setEmail(rs.getString("EMAIL"));
-                        u.setVnev(rs.getString("VNEV"));
-                        u.setKnev(rs.getString("KNEV"));
-                        u.setCsatl(rs.getDate("CSATL_DAT"));
-                        u.setSzulDat(rs.getDate("SZUL_DAT"));
-                        u.setMunkaIskola(rs.getString("MUNKA_ISKOLA"));
-                        u.setPicture(rs.getBytes("PICTURE"));
-                        u.setAdmin(rs.getBoolean("ISADMIN"));
-                    }
-                    return u;
-                });
+        return namedJdbc.query(SELECT_USER, map, UserRepo::extractUser);
     }
+
+    public User getUser(String email, String password) {
+        MapSqlParameterSource map = new MapSqlParameterSource()
+                .addValue("EMAIL", email)
+                .addValue("JELSZO", password);
+        return namedJdbc.query(SELECT_USER_BY_EMAIL_AND_PASSWORD, map, UserRepo::extractUser);
+    }
+
 
     public List<User> getUsers() {
         return jdbcTemplate.query(
@@ -63,19 +78,14 @@ public class UserRepo {
                     User u;
                     while (rs.next()) {
                         u = new User();
-                        u.setId(rs.getLong("ID"));
-                        u.setJelszo(rs.getString("JELSZO"));
-                        u.setEmail(rs.getString("EMAIL"));
-                        u.setVnev(rs.getString("VNEV"));
-                        u.setKnev(rs.getString("KNEV"));
-                        u.setCsatl(rs.getDate("CSATL_DAT"));
-                        u.setMunkaIskola(rs.getString("MUNKA_ISKOLA"));
+                        getUser(rs, u);
                         users.add(u);
                     }
                     return users;
                 });
     }
 
+    /* picture direkt nincs, azt csak sikeres regisztrációt követően */
     public Long insertUser(User user) {
         KeyHolder kh = new GeneratedKeyHolder();
         MapSqlParameterSource map = new MapSqlParameterSource()
@@ -83,7 +93,7 @@ public class UserRepo {
                 .addValue("EMAIL", user.getEmail())
                 .addValue("VNEV", user.getVnev())
                 .addValue("KNEV", user.getKnev())
-                .addValue("CSATL_DAT", new Date(System.currentTimeMillis()))
+                .addValue("CSATL_DAT", user.getCsatl())
                 .addValue("SZUL_DAT", user.getSzulDat())
                 .addValue("MUNKA_ISKOLA", user.getMunkaIskola())
                 .addValue("ISADMIN", user.isAdmin());
@@ -99,4 +109,10 @@ public class UserRepo {
         return jdbcTemplate.update(DELETE_USER, id) == 1;
     }
 
+    public void savePicture(long id, String uri) {
+        jdbcTemplate.update(INSERT_PICTURE, ps -> {
+            ps.setString(1, uri);
+            ps.setLong(2, id);
+        });
+    }
 }

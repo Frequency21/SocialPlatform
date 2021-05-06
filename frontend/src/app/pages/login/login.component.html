@@ -1,6 +1,6 @@
 <div class="container">
     <div>
-      User Name : <input type="text" name="username" [(ngModel)]="username">
+      User Name : <input type="text" name="email" [(ngModel)]="email">
       Password : <input type="password" name="password" [(ngModel)]="password">
     </div>
     <button (click)=checkLogin() class="btn btn-success">
@@ -9,7 +9,7 @@
   </div>
   
   <tr *ngFor="let user of users">
-    <td>{{user.firstName}}</td>
+    <td>{{user.knev}}</td>
     <td>{{user.email}}</td>
     <td>
       <button class="btn btn-danger" >Delete</button>

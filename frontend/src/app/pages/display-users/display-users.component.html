@@ -6,6 +6,7 @@
 
       <mat-card class="card">
         <mat-card-header>
+          <img mat-card-avatar *ngIf="user.picture" [src]="user!.picture"/>
           <mat-card-title>{{user.vnev + " " + user.knev}}</mat-card-title>
           <mat-card-subtitle>#{{user.id}}</mat-card-subtitle>
         </mat-card-header>

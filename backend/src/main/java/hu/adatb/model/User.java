@@ -15,7 +15,7 @@ public class User {
     private Date szulDat;
     private String email;
     private String jelszo;
-    private byte[] picture;
+    private String picture;
     private boolean isAdmin;
     @JsonProperty("munka_iskola")
     private String munkaIskola;
@@ -78,11 +78,11 @@ public class User {
         this.jelszo = jelszo;
     }
 
-    public byte[] getPicture() {
+    public String getPicture() {
         return picture;
     }
 
-    public void setPicture(byte[] picture) {
+    public void setPicture(String picture) {
         this.picture = picture;
     }
 
@@ -101,6 +101,4 @@ public class User {
     public void setMunkaIskola(String munkaIskola) {
         this.munkaIskola = munkaIskola;
     }
-
-
 }

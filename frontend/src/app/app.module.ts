@@ -27,11 +27,14 @@ import { DisplayUsersModule } from './pages/display-users/display-users.module';
 import { DisplayPostsModule } from './pages/display-posts/display-posts.module';
 import { DisplayGroupModule } from './pages/display-group/display-group.module';
 import { DisplayGroupsModule } from './pages/display-groups/display-groups.module';
-import { DisplayIsmerosokModule } from './pages/display-ismerosok/display-ismerosok.module';
 import { ModalPosztComponent } from './pages/modal-poszt/modal-poszt.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginModule } from './pages/login/login.module';
 import { ProfileModule } from './pages/profile/profile.module';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+
+// MatNativeDateModule, 
 
 @NgModule({
   declarations: [
@@ -51,6 +54,8 @@ import { ProfileModule } from './pages/profile/profile.module';
     MatCardModule,
     MatToolbarModule,
     MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
 
     RegisterModule,
     NavigationModule,
@@ -59,7 +64,6 @@ import { ProfileModule } from './pages/profile/profile.module';
     DisplayPostsModule,
     DisplayGroupModule,
     DisplayGroupsModule,
-    DisplayIsmerosokModule,
     ModalPosztModule,
     ModalKommentModule,
     LoginModule,

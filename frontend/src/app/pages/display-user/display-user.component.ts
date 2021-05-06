@@ -43,7 +43,7 @@ export class DisplayUserComponent implements OnInit {
     const dialogRef = this.dialog.open(ModalPosztComponent, {
       width: '40%',
       //Ide kellene Deny, és a bejelentkezése
-      data: {szerzo_id : sessionStorage.getItem("userID"), szerzo_nev: sessionStorage.getItem("vnev") + " " + sessionStorage.getItem("knev"), szerzo_profilkep: "", csoport_id:undefined, felhasznalo_id:this.user.id}
+      data: {szerzo_id : sessionStorage.getItem("email"), szerzo_nev: sessionStorage.getItem("vnev") + " " + sessionStorage.getItem("knev"), szerzo_profilkep: "", csoport_id:undefined, felhasznalo_id:this.user.id}
     });
 
     dialogRef.afterClosed().subscribe(result => {

@@ -2,6 +2,8 @@ package hu.adatb.controller;
 
 import hu.adatb.repository.UserRepo;
 import hu.adatb.service.ImageService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.MediaType;
@@ -12,30 +14,34 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 @RestController
-@RequestMapping(value = "api/images")
+@RequestMapping(value = "/api/")
 public class ImageController {
 
     @Autowired
     private ImageService imageService;
     @Autowired
     private UserRepo userRepo;
+    private static final Logger log = LoggerFactory.getLogger(ImageController.class);
 
-    @PostMapping(value = "upload/user/{id}/profile")
-    public ResponseEntity<String> uploadImage(
+    @PostMapping(value = "user/profile/{id}")
+    public ResponseEntity<String> uploadProfileImage(
             @RequestParam MultipartFile file,
             @PathVariable("id") long id
     ) {
-        // TODO: 2021. 05. 06. save img path, change path in db-s to varcchar(500)..
-        // userRepo.saveImage(...);
-        return imageService.uploadToLocalFileSystem(file, "user", "profile", "" + id);
+        String uri = imageService.uploadToLocalFileSystem(file, "/api/user/profile/", "" + id, "user", "profile");
+        userRepo.savePicture(id, uri);
+        return ResponseEntity.ok(uri);
     }
 
     @GetMapping(
-            value = "getImage/{imageName:.+}",
+            value = "user/profile/{id}",
             produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_GIF_VALUE, MediaType.IMAGE_PNG_VALUE}
     )
-    public @ResponseBody
-    byte[] getImageWithMediaType(@PathVariable(name = "imageName") String fileName) throws IOException {
-        return this.imageService.getImageWithMediaType(fileName, "user", "tmp");
+    public byte[] getProfileImage(
+            @PathVariable("id") long id
+    ) throws IOException {
+        log.debug("/api/user/profile/" + id);
+        return imageService.getImage("" + id, "user", "profile");
     }
+
 }

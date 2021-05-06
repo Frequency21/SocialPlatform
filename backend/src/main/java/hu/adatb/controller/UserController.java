@@ -3,10 +3,15 @@ package hu.adatb.controller;
 
 import hu.adatb.model.User;
 import hu.adatb.repository.UserRepo;
+import hu.adatb.service.ImageService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -15,6 +20,9 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserRepo userRepo;
+    @Autowired
+    private ImageService imageService;
+    private static final Logger log = LoggerFactory.getLogger(UserController.class);
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ResponseEntity<User> getUser(
@@ -36,6 +44,14 @@ public class UserController {
     public ResponseEntity<List<User>> getUsers() {
         List<User> users = userRepo.getUsers();
         return ResponseEntity.ok(users);
+    }
+
+    @RequestMapping(value = "login", method = RequestMethod.POST)
+    public User login(
+            @RequestParam("email") String email,
+            @RequestParam("jelszo") String password
+    ) {
+        return userRepo.getUser(email, password);
     }
 
     @RequestMapping(value = "register", method = RequestMethod.POST)

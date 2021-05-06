@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClientService } from 'src/app/services/httpclient.service';
+import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/shared/models/user.model';
 
 @Component({
@@ -10,14 +10,14 @@ import { User } from 'src/app/shared/models/user.model';
 })
 export class LoginComponent implements OnInit {
 
-  username = '';
+  email = '';
   password = '';
   invalidLogin = false;
 
   users: User[] = [];
 
   constructor(private router: Router,
-    private httpClientService: HttpClientService,
+    private userService: UserService,
     ) { }
 
   ngOnInit() {
@@ -32,9 +32,9 @@ export class LoginComponent implements OnInit {
     this.invalidLogin = false;
 
     try{
-    this.httpClientService.login(this.username, this.password)
+    this.userService.login(this.email, this.password)
       .subscribe((data => {
-        // console.log(data.userName);
+        // console.log(data.email);
         // console.log(data.firstName);
         // console.log(data.lastName);
         // console.log(data.password);
@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
         // console.log(data.area);
         // console.log(data.addressType);
         // console.log(data.houseNumber);
-        sessionStorage.setItem('userID', String(data.id));
+        sessionStorage.setItem('email', String(data.email));
         sessionStorage.setItem('knev', data.knev);
         sessionStorage.setItem('vnev', data.vnev);
 

@@ -1,4 +1,3 @@
-
 <form [formGroup]="form" (ngSubmit)="registration()" id="register-form">
   <mat-form-field>
     <mat-label>E-mail</mat-label>
@@ -6,19 +5,24 @@
   </mat-form-field>
   <mat-form-field>
     <mat-label>Vezetéknév</mat-label>
-    <input type="vnev" name="vnev" matInput placeholder="Pl. Pat" formControlName="vnev">
+    <input type="text" name="vnev" matInput placeholder="Pl. Pat" formControlName="vnev">
   </mat-form-field>
   <mat-form-field>
     <mat-label>Keresztnév</mat-label>
-    <input type="knev" name="knev" matInput placeholder="Pl. Ko" formControlName="knev">
+    <input type="text" name="knev" matInput placeholder="Pl. Ko" formControlName="knev">
   </mat-form-field>
   <mat-form-field>
     <mat-label>Születési dátum</mat-label>
-    <input type="szul_dat" name="szul_dat" matInput placeholder="YYYY/MM/DD" formControlName="szul_dat">
+    
+    <input matInput [matDatepicker]="picker" formControlName="csatl">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+
+    <!-- <input type="date" name="szul_dat" matInput placeholder="YYYY/MM/DD" formControlName="szul_dat"> -->
   </mat-form-field>
   <mat-form-field>
     <mat-label>Munka/Iskola</mat-label>
-    <input type="munka_iskola" name="munka_iskola" matInput placeholder="Pl. Iskola" formControlName="munka_iskola">
+    <input type="text" name="munka_iskola" matInput placeholder="Pl. Iskola" formControlName="munka_iskola">
   </mat-form-field>
   <mat-form-field>
     <mat-label>Jelszó</mat-label>

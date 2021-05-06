@@ -17,16 +17,11 @@ export class ProfileComponent implements OnInit {
   public userId: number = 0;
 
   form: FormGroup = new FormGroup({
-    username: new FormControl(),
     email: new FormControl(),
-
-    // email: new FormControl(),
     vnev: new FormControl(),
     knev: new FormControl(),
-    //csatl: new FormControl(),
     szul_dat: new FormControl(),
     munka_iskola: new FormControl(),
-    // picture?: new FormControl(),
     password1: new FormControl(),
     password2: new FormControl(),
   });
