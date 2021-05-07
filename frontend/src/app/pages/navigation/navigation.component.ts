@@ -15,9 +15,9 @@ export class NavigationComponent implements OnInit, OnDestroy {
   isLoginSuccess = false;
   email = '';
   password = '';
-  invalidLogin = false;
   user?: User;
   subscription: Subscription;
+  isLoggedIn: boolean = false;
 
   name = sessionStorage.getItem('name');
 
@@ -48,10 +48,11 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this.router.navigate(['register']);
   }
 
+
+
+
   // tslint:disable-next-line:typedef
   checkLogin() {
-    this.invalidLogin = false;
-
     try {
       this.userService.login(this.email, this.password)
         .subscribe(data => {
@@ -62,13 +63,10 @@ export class NavigationComponent implements OnInit, OnDestroy {
           // sessionStorage.setItem('restaurant', data.restaurant);         
 
           // this.msgPopUp();
-        }, error => {
-          // this.msgPopUp(, 1);
-          console.log(error.error.message);
         });
     }
     catch (error) {
-      this.invalidLogin = true;
+      alert(error);
     }
   }
 

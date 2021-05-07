@@ -22,23 +22,23 @@
     </button>
 
     <mat-menu #menu="matMenu">
-      <button mat-menu-item [routerLink]="['/profile']" *ngIf="loginService.isUserLoggedIn()">
+      <button mat-menu-item [routerLink]="['/profile']" *ngIf="!!user">
         <mat-icon>person</mat-icon>
         <span>Profil</span>
       </button>
-      <button mat-menu-item disabled [routerLink]="['/settings']" *ngIf="loginService.isUserLoggedIn()">
+      <button mat-menu-item disabled [routerLink]="['/settings']" *ngIf="!!user">
         <mat-icon>settings</mat-icon>
         <span>Beállítások</span>
       </button>
-      <button mat-menu-item (click)="logout()" *ngIf="loginService.isUserLoggedIn()">
+      <button mat-menu-item (click)="logout()" *ngIf="!!user">
         <mat-icon>arrow_back</mat-icon>
         <span>Kijelentkezés</span>
       </button>
-      <button mat-menu-item (click)="login()" *ngIf="!loginService.isUserLoggedIn()">
+      <button mat-menu-item (click)="login()" *ngIf="!user">
         <mat-icon>login</mat-icon>
         <span>Bejelentkezés</span>
       </button>
-      <button mat-menu-item (click)="register()" *ngIf="!loginService.isUserLoggedIn()">
+      <button mat-menu-item (click)="register()" *ngIf="!user">
         <mat-icon>perm_identity</mat-icon>
         <span>Regisztráció</span>
       </button>

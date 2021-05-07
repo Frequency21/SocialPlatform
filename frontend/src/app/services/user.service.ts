@@ -33,6 +33,10 @@ export class UserService {
     );
   }
 
+  public logout() {
+    this._user.next(undefined);
+  }
+
   getUser(id: number): Observable<User> {
     return this.http.get<User>(this.rootUrl + id);
   }
