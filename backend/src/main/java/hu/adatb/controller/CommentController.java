@@ -7,6 +7,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -37,6 +38,23 @@ public class CommentController {
             @RequestBody Comment to
     ) {
         return commentRepo.update(id, to);
+    }
+
+    // TODO: 2021. 05. 07. összes komment adott poszthoz idősorrendben növekvő
+    @GetMapping(value = "posztok/{id}")
+    public List<Comment> getCommentsForPost(
+            @PathVariable("id") long id
+    ) {
+        return new ArrayList<>();
+    }
+
+    // TODO: 2021. 05. 07. kommentelés poszt alá
+    @PostMapping(value = "{poszt_id}")
+    public long getCommentsForPost(
+            @PathVariable("poszt_id") long posztId,
+            @RequestBody Comment comment
+    ) {
+        return 1;
     }
 
     @DeleteMapping("{id}")

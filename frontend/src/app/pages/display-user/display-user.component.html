@@ -1,16 +1,16 @@
 <mat-toolbar id="user-sav">
   <mat-toolbar-row>
-    <span>{{user.knev + " " + user.vnev}}</span>
+    <span>{{user?.knev + " " + user?.vnev}}</span>
     <span>|</span>
-    <span>Email: {{user.email}}</span>
+    <span>Email: {{user?.email}}</span>
     <span>|</span>
-    <span>Csatlakozott: {{user.csatl| date: 'medium'}}</span>
+    <span>Csatlakozott: {{user?.csatl| date: 'medium'}}</span>
     <span>|</span>
-    <span>Munka/Iskola: {{user.munka_iskola}}</span>
+    <span>Munka/Iskola: {{user?.munka_iskola}}</span>
   </mat-toolbar-row>
 </mat-toolbar>
-<mat-card id="profilePicture">
-  <img mat-card-avatar *ngIf="user.picture" [src]="user!.picture" id="pic"/>
+<mat-card id="profilePicture" *ngIf="user?.picture">
+  <img mat-card-avatar [src]="user.picture" id="pic"/>
 </mat-card>
 
 <section>

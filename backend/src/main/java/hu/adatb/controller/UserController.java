@@ -74,6 +74,16 @@ public class UserController {
         return userRepo.updateUser(user);
     }
 
+    // TODO: 2021. 05. 07. ismerősnek jelölés
+    // /api/user?id_1=1&id_2=2
+    @PostMapping(value = "{id_1}/{id_2}")
+    public boolean friendRequest(
+            @RequestParam("id_1") long id1,
+            @RequestParam("id_2") long id2
+    ) {
+        return true;
+    }
+
     @DeleteMapping(value = "{id}")
     public boolean deleteUser(
             @PathVariable("id") int id

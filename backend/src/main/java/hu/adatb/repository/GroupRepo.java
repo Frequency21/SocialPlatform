@@ -60,8 +60,8 @@ public class GroupRepo {
         return jdbcTemplate.query(SELECT_ALL, GroupRepo::mapRow);
     }
 
-    public boolean update(long id, Group to) {
-        return jdbcTemplate.update(UPDATE_BY_ID, to.getLeiras(), to.getNev(), to.getTulajId(), id) == 1;
+    public boolean update(Group to) {
+        return jdbcTemplate.update(UPDATE_BY_ID, to.getLeiras(), to.getNev(), to.getTulajId(), to.getCsoportId()) == 1;
     }
 
     public boolean delete(long id) {

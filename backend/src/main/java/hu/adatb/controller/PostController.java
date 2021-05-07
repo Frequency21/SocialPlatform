@@ -34,6 +34,15 @@ public class PostController {
         return ResponseEntity.ok(postRepo.getPostByUserId(id));
     }
 
+    // TODO: 2021. 05. 07. post hozzáadás hírfolyamhoz
+    @PostMapping(value = "addKomment/{userId}")
+    public long addPost(
+            @RequestBody Post post,
+            @PathVariable("userId") long id
+    ) {
+        return 1;
+    }
+
     @ExceptionHandler({DataIntegrityViolationException.class})
     public HttpStatus conflict() {
         return HttpStatus.CONFLICT;

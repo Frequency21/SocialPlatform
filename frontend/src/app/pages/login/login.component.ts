@@ -31,11 +31,12 @@ export class LoginComponent implements OnInit {
   checkLogin() {
     try{
     this.userService.login(this.email, this.password)
-      .subscribe((data => {
-        if(data.id != null) {
-          alert("Login succesful");
+      .subscribe((user => {
+        if(user.id != null) {
+          localStorage.setItem("id", String(user.id))
+          this.router.navigate(['/']);
         } else {
-          alert("Invalid login");
+          alert("Rossz felhasználónév, vagy jelszó");
         }
      }));
     }

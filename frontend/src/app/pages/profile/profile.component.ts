@@ -82,13 +82,13 @@ export class ProfileComponent implements OnInit {
      // console.log("userid: "+this.user.id);
         let newUser: User = {
           id: this.user.id,
-          email: !!this.form.value.email ? this.form.value.email : this.oldUser.email,
-          jelszo: !!this.form.value.password1 ? this.form.value.password1 : this.oldUser.jelszo,
-          vnev: !!this.form.value.vnev ? this.form.value.vnev : this.oldUser.vnev,
-          knev: !!this.form.value.knev ? this.form.value.knev : this.oldUser.knev,
-          szul_dat: !!this.form.value.szul_dat ? this.form.value.szul_dat : this.oldUser.szul_dat,
+          email: this.form.value.email ? this.form.value.email : this.oldUser.email,
+          jelszo: this.form.value.password1 ? this.form.value.password1 : this.oldUser.jelszo,
+          vnev: this.form.value.vnev ? this.form.value.vnev : this.oldUser.vnev,
+          knev: this.form.value.knev ? this.form.value.knev : this.oldUser.knev,
+          szul_dat: this.form.value.szul_dat ? this.form.value.szul_dat : this.oldUser.szul_dat,
           csatl: this.oldUser.csatl,
-          munka_iskola: !!this.form.value.munka_iskola ? this.form.value.szul_dat : this.oldUser.munka_iskola,
+          munka_iskola: this.form.value.munka_iskola ? this.form.value.munka_iskola : this.oldUser.munka_iskola,
           picture: undefined,
           isAdmin: false,
         }

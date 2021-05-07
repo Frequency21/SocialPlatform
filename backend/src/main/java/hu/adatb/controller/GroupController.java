@@ -39,12 +39,11 @@ public class GroupController {
         return groupRepo.delete(id);
     }
 
-    @PatchMapping(value = "{id}")
+    @PatchMapping()
     public boolean update(
-            @RequestBody Group group,
-            @PathVariable("id") long id
+            @RequestBody Group group
     ) {
-        return groupRepo.update(id, group);
+        return groupRepo.update(group);
     }
 
     @ExceptionHandler({DataIntegrityViolationException.class})
