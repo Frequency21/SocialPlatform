@@ -59,7 +59,7 @@ export class UserService {
   }
 
   uploadProfile(formData: FormData, id: number): Observable<any> {
-    return this.http.post(this.rootUrl + `profile/${id}`, formData);
+    return this.http.post(this.rootUrl + `profile/${id}`, formData, {responseType: 'arraybuffer'});
   }
 
   getIsmeroses(felhasznalo_id: number): Observable<User[]> {
