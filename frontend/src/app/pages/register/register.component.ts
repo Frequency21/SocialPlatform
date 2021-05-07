@@ -48,7 +48,7 @@ export class RegisterComponent implements OnInit {
       isAdmin: false,
     }
 
-    console.log(this.form.value.csatl);
+    // console.log(this.form.value.csatl);
 
     let formData = new FormData();
     if (this.selectedFile)
@@ -57,13 +57,13 @@ export class RegisterComponent implements OnInit {
     this.userService.createAccount(newUser)
       .subscribe(
         id => {
-          console.log('get id: ' + id);
+          // console.log('get id: ' + id);
           if (id) {
-            console.log('start upload image');
+            // console.log('start upload image');
             this.userService.uploadProfile(formData, id)
             .subscribe(
               path => {
-                console.log('succesfully upload img to: ' + path);
+                // console.log('succesfully upload img to: ' + path);
                 // if ()
                 newUser.picture = path;
               }

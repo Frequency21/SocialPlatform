@@ -39,7 +39,7 @@ export class DisplayUserComponent implements OnInit {
   getUser(id: number): void {
     this.userService.getUserByID(id).subscribe(user => {
       this.user = user;
-      console.log(this.user);
+      // console.log(this.user);
     });
   }
 
@@ -76,7 +76,7 @@ export class DisplayUserComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      // console.log('The dialog was closed');
     });
   }
 

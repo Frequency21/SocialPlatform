@@ -30,7 +30,7 @@ export class DisplayGroupComponent implements OnInit {
   getGroup(id: Number): void {
     this.groupService.getGroupById(id).subscribe(group => {
       this.group = group;
-      console.log(this.group);
+      // console.log(this.group);
     })
   }
 

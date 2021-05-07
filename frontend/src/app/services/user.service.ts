@@ -28,8 +28,8 @@ export class UserService {
     formData.append("jelszo", jelszo);
     return this.http.post<User>(this.rootUrl + 'login', formData).pipe(
       tap(user => {
-        console.log('after login, user is:');
-        console.log(user);
+        // console.log('after login, user is:');
+        // console.log(user);
         this._user.next(user);
         this.router.navigate(['profile']);
         return user;

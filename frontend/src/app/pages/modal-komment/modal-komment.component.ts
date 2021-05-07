@@ -40,9 +40,9 @@ export class ModalKommentComponent implements OnInit {
       },
       isPublic: (this.form.value.isPublic != null)
     }
-    console.log(newKomment);
+    // console.log(newKomment);
     this.posztService.addKomment(newKomment).subscribe(retKomment => {
-      console.log(retKomment);
+      // console.log(retKomment);
     });
     this.onNoClick();
   }

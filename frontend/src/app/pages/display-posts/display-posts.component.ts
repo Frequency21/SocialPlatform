@@ -25,8 +25,8 @@ export class DisplayPostsComponent implements OnInit {
   getPoszts(): void {
     this.posztService.getPoszts().subscribe(poszts => {
       this.poszts = poszts;
-      console.log(poszts);
-      console.log(this.poszts);
+      // console.log(poszts);
+      // console.log(this.poszts);
     });
   }
 
@@ -38,7 +38,7 @@ export class DisplayPostsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      // console.log('The dialog was closed');
     });
   }
 

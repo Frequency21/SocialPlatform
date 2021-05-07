@@ -21,7 +21,7 @@ export class DisplayGroupsComponent implements OnInit {
   getGroups(): void {
     this.groupService.getGroups().subscribe(groups => {
       this.groups = groups;
-      console.log(this.groups)
+      // console.log(this.groups)
     })
   }
 
