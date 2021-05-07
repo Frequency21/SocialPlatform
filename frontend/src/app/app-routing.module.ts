@@ -1,3 +1,4 @@
+import { ChitChatComponent } from './pages/chit-chat/chit-chat.component';
 import { DisplayUserComponent } from './pages/display-user/display-user.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'display/user/:id', component: DisplayUserComponent },
   { path: 'display/group/:id', component: DisplayGroupComponent },
   { path: 'display/poszts', component: DisplayPostsComponent },
+  { path: 'chitChat', component: ChitChatComponent }
 ];
 
 @NgModule({

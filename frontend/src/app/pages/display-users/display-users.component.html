@@ -19,6 +19,9 @@
           <a class="lookup-btn" mat-button [routerLink]="['../user/',user.id]">
             Megtekintés
           </a>
+          <button class="add-friend" mat-mini-fab *ngIf="!isLoggedIn()">
+            <mat-icon class="mat-18">add</mat-icon>
+          </button>
         </mat-card-actions>
       </mat-card>
 

@@ -17,7 +17,7 @@ import { RouterModule } from '@angular/router';
     MatIconModule,
     MatMenuModule,
     MatButtonModule,
-    MatToolbarModule,
+    MatToolbarModule
   ],
   exports: [NavigationComponent]
 })

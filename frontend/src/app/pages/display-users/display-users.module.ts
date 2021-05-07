@@ -1,3 +1,5 @@
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { NgModule } from '@angular/core';
@@ -13,6 +15,8 @@ import { DisplayUserModule } from '../display-user/display-user.module';
     CommonModule,
     RouterModule,
     MatCardModule,
+    MatIconModule,
+    MatButtonModule,
     DisplayUserModule
   ],
   exports: [DisplayUsersComponent]

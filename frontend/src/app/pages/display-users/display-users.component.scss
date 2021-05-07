@@ -16,6 +16,7 @@
 }
 
 .lookup-btn {
+  display: inline-block;
   text-decoration: none;
   color: rgba(0,0,0,0.8);
 }
@@ -24,4 +25,9 @@
   color: #ff9f35;
   text-decoration: underline;
   transition: 1s;
+}
+
+.add-friend {
+  display: inline-block;
+  right: 0;
 }

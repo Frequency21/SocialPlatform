@@ -56,7 +56,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
           // sessionStorage.setItem('email', data.email);
           // sessionStorage.setItem('name', data.lastName+" "+data.firstName);
           // sessionStorage.setItem('email', data.email);
-          // sessionStorage.setItem('restaurant', data.restaurant);         
+          // sessionStorage.setItem('restaurant', data.restaurant);
 
           // this.msgPopUp();
         }, error => {

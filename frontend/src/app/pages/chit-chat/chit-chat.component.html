@@ -1,0 +1,22 @@
+<div class="user-list">
+  <section class="user">
+    |kép| Kiss János
+  </section>
+  <section class="user">
+    |kép| Nagy Katalin
+  </section>
+</div>
+
+<div class="message-area">
+  <div class="message-container">
+    some wierd ass text
+  </div>
+  <div class="input-form">
+    <form [formGroup]="form" class="message-input" (ngSubmit)="sendMessage()">
+      <input type="text" formControlName="szoveg" class="textarea" name="" id="" cols="30" rows="10" placeholder="Üzenet . . ." required/>
+      <button type="submit" class="send" mat-mini-fab color="primary" [disabled]="form.invalid">
+        <mat-icon>send</mat-icon>
+      </button>
+    </form>
+  </div>
+</div>

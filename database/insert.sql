@@ -15,6 +15,9 @@ insert into POSZT(IDOPONT, SZERZO_ID, CSOPORT_ID, FELHASZNALO_ID, SZOVEG, ERTEKE
 values (systimestamp, 1, null, 2, 'boldog születésnapot', ERTEKELES(1,2), 1);
 
 insert into POSZT(IDOPONT, SZERZO_ID, CSOPORT_ID, FELHASZNALO_ID, SZOVEG, ERTEKELES, ISPUBLIC)
+values (systimestamp, 1, null, 2, 'Go to hell', ERTEKELES(6,4), 0);
+
+insert into POSZT(IDOPONT, SZERZO_ID, CSOPORT_ID, FELHASZNALO_ID, SZOVEG, ERTEKELES, ISPUBLIC)
 values (systimestamp, 2, null, 1, 'köszi :*', ERTEKELES(1,2), 1);
 
 insert into POSZT(IDOPONT, SZERZO_ID, CSOPORT_ID, FELHASZNALO_ID, SZOVEG, ERTEKELES, ISPUBLIC)
