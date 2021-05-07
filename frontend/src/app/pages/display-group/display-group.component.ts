@@ -16,7 +16,7 @@ export class DisplayGroupComponent implements OnInit {
   ize = 1;
   poszts?: Poszt[];
 
-  constructor(private _Activatedroute: ActivatedRoute, 
+  constructor(private _Activatedroute: ActivatedRoute,
     private groupService: GroupService,
     private posztService: PosztService,
     ) { }

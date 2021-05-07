@@ -1,6 +1,7 @@
 import { Ertekeles } from "./ertekeles.model";
 
 export interface Poszt {
+    id?: number;
     idopont: string;
     szerzo_id: number;
 

@@ -6,6 +6,7 @@ import { User } from './../../shared/models/user.model';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Poszt } from 'src/app/shared/models/poszt.model';
+import { ModalKommentComponent } from '../modal-komment/modal-komment.component';
 
 @Component({
   selector: 'app-display-user',
@@ -16,6 +17,9 @@ export class DisplayUserComponent implements OnInit {
 
   @Input() user!: User;
   poszts?: Poszt[];
+  szerzo?: number;
+  nev?: string;
+  kep?: string;
 
   constructor(
     private _Activatedroute: ActivatedRoute,
@@ -51,16 +55,37 @@ export class DisplayUserComponent implements OnInit {
     return this.user.csatl.getTime();
   }
 
-  openDialog(){
-
+  openPosztDialog(){
+    this.currentUser();
     const dialogRef = this.dialog.open(ModalPosztComponent, {
       width: '40%',
-      //Ide kellene Deny, és a bejelentkezése
-      data: {szerzo_id : sessionStorage.getItem("email"), szerzo_nev: sessionStorage.getItem("vnev") + " " + sessionStorage.getItem("knev"), szerzo_profilkep: "", csoport_id:undefined, felhasznalo_id:this.user.id}
+      data: {szerzo_id : this.szerzo, szerzo_nev: this.nev, szerzo_profilkep: this.kep, csoport_id:undefined, felhasznalo_id:this.user.id}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
+  }
+
+  openKommentDialog(val_id: number): void {
+    this.currentUser();
+    console.log("poszt id: " + Number(val_id));
+    const dialogRef = this.dialog.open(ModalKommentComponent, {
+      width: '40%',
+      data: {komment_iro_id : this.szerzo, poszt_felh_id: val_id, poszt_idopont: ""}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  private currentUser() {
+
+    this.userService.userSource.subscribe(user => {
+      this.szerzo = Number(user.id);
+      this.nev = user.vnev + " " + user.knev;
+      this.kep = String(user.picture);
+    })
   }
 }

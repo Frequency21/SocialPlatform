@@ -1,3 +1,4 @@
+import { ModalKommentComponent } from './../modal-komment/modal-komment.component';
 import { DisplayPostsModule } from './../display-posts/display-posts.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
@@ -14,7 +15,10 @@ import { MatButton } from '@angular/material/button';
 
 @NgModule({
   declarations: [DisplayUserComponent],
-  entryComponents: [ModalPosztComponent],
+  entryComponents: [
+    ModalPosztComponent,
+    ModalKommentComponent
+  ],
   imports: [
     DisplayPostsModule,
     CommonModule,
