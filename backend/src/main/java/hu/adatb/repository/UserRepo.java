@@ -35,7 +35,7 @@ public class UserRepo {
             "f.NEV.KERESZTNEV as KNEV, CSATL_DAT, SZUL_DAT, MUNKA_ISKOLA, PICTURE, ISADMIN from felhasznalo f";
     private static final String UPDATE_USER = "UPDATE FELHASZNALO " +
             "SET JELSZO = :JELSZO, EMAIL = :EMAIL, NEV = NEVTIPUS(:VNEV, :KNEV), " +
-            "CSATL_DAT = :CSATL_DAT, SZUL_DAT = :SZUL_DAT, MUNKA_ISKOLA = :MUNKA_ISKOLA " +
+            "SZUL_DAT = :SZUL_DAT, MUNKA_ISKOLA = :MUNKA_ISKOLA " +
             "WHERE id = :id";
 
     public UserRepo(NamedParameterJdbcTemplate namedJdbc, JdbcTemplate jdbcTemplate) {
@@ -117,7 +117,6 @@ public class UserRepo {
                 .addValue("EMAIL", user.getEmail())
                 .addValue("VNEV", user.getVnev())
                 .addValue("KNEV", user.getKnev())
-                .addValue("CSATL_DAT", user.getCsatl())
                 .addValue("SZUL_DAT", user.getSzulDat())
                 .addValue("MUNKA_ISKOLA", user.getMunkaIskola());
         try {

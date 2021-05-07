@@ -16,6 +16,7 @@ export class ProfileComponent implements OnInit {
   public selectedFile?: File;
   public imgSrc?: string;
   user?: User;
+  oldUser!: User;
 
   subscription: Subscription;
 
@@ -39,7 +40,16 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    try {
+      if(this.user)
+        if(this.user.id != null)
+        this.userService.getUser(this.user.id)
+          .subscribe(data => {
+            this.oldUser = data;
+        })
+    } catch (error) {
+      alert(error);
+    }
   }
 
   public getUser(): void {
@@ -48,9 +58,7 @@ export class ProfileComponent implements OnInit {
         if(this.user.id != null)
         this.userService.getUser(this.user.id)
           .subscribe(data => {
-            this.user = data;
-            // console.log(this.user);
-            alert("Successful")
+            return data;
         })
     } catch (error) {
       alert(error);
@@ -59,22 +67,33 @@ export class ProfileComponent implements OnInit {
 
   // TODO: userServicebe vinni
   updateUser(): void {
+
     if(this.user) {
+      try {
+        if(this.user)
+          if(this.user.id != null)
+          this.userService.getUser(this.user.id)
+            .subscribe(data => {
+              this.oldUser = data;
+          })
+      } catch (error) {
+        alert(error);
+      }
      // console.log("userid: "+this.user.id);
         let newUser: User = {
           id: this.user.id,
-          email: this.form.value.email,
-          jelszo: this.form.value.password1,
-          vnev: this.form.value.vnev,
-          knev: this.form.value.knev,
-          csatl: new Date(Date.now()),
-          szul_dat: this.form.value.szul_dat,
-          munka_iskola: this.form.value.munka_iskola,
+          email: !!this.form.value.email ? this.form.value.email : this.oldUser.email,
+          jelszo: !!this.form.value.password1 ? this.form.value.password1 : this.oldUser.jelszo,
+          vnev: !!this.form.value.vnev ? this.form.value.vnev : this.oldUser.vnev,
+          knev: !!this.form.value.knev ? this.form.value.knev : this.oldUser.knev,
+          szul_dat: !!this.form.value.szul_dat ? this.form.value.szul_dat : this.oldUser.szul_dat,
+          csatl: this.oldUser.csatl,
+          munka_iskola: !!this.form.value.munka_iskola ? this.form.value.szul_dat : this.oldUser.munka_iskola,
           picture: undefined,
           isAdmin: false,
         }
     
-    // console.log(newUser);
+       console.log(newUser);
     
         let formData = new FormData();
         if (this.selectedFile)
