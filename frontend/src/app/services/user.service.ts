@@ -22,6 +22,15 @@ export class UserService {
     return this.http.post<number>(this.rootUrl + 'register', user);
   }
 
+  public updateUser(user: User)
+  {
+    return this.http.post<number>(this.rootUrl + 'update', user);
+  }
+
+  public deleteUser(user: User) {
+    return this.http.post<Boolean>(this.rootUrl + 'delete', user);
+  }
+
   public login(email: string, jelszo: string) {
     let formData = new FormData();
     formData.append("email", email);
@@ -52,10 +61,6 @@ export class UserService {
 
   getUserByID(id: Number): Observable<User> {
     return this.http.get<User>(this.rootUrl + id);
-  }
-
-  public deleteUser(id: number) {
-    return this.http.delete<Boolean>(this.rootUrl + id);
   }
 
   uploadProfile(formData: FormData, id: number): Observable<any> {

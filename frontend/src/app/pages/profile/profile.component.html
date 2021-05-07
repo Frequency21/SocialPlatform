@@ -1,11 +1,4 @@
-<div>
-User id: : <input type="text" name="userId" [(ngModel)]="userId">
-</div>
-<button (click)="getUser()" class="btn btn-success">
-Get user by ID
-</button>
-
-<form [formGroup]="form" (ngSubmit)="updateUser()" id="register-form">
+<form [formGroup]="form" (ngSubmit)="updateUser()"  id="register-form">
   <mat-form-field>
     <mat-label>Felhasználónév</mat-label>
     <input matInput type="text" name="nickname" placeholder="Pl. Patko85" required formControlName="email">
@@ -24,7 +17,12 @@ Get user by ID
   </mat-form-field>
   <mat-form-field>
     <mat-label>Születési dátum</mat-label>
-    <input type="szul_dat" name="szul_dat" matInput placeholder="YYYY/MM/DD" formControlName="szul_dat">
+    
+    <input matInput [matDatepicker]="picker" formControlName="szul_dat">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+
+    <!-- <input type="date" name="szul_dat" matInput placeholder="YYYY/MM/DD" formControlName="szul_dat"> -->
   </mat-form-field>
   <mat-form-field>
     <mat-label>Munka/Iskola</mat-label>
@@ -38,7 +36,10 @@ Get user by ID
     <mat-label>Jelszó újra</mat-label>
     <input type="password" name="password" matInput #password2 placeholder="Jelszó újra" formControlName="password2">
   </mat-form-field>
-  <button type="submit" mat-raised-button color="primary">Jelszó megváltoztatása</button>
-</form>
+  <input id="file-input" type="file" (change)="onSelectFile($event)">
+  <div class="btn-group">
+    <button type="submit"  class="btn btn-primary" >Felhasználó változtatása</button>
+    <button type="button"  class="btn btn-danger" (click)="deleteUser()">Felhasználó törlése</button>
+  </div>
 
-<button class="btn btn-danger" (click)="deleteUser()">Felhasználó törlése</button>
+</form>

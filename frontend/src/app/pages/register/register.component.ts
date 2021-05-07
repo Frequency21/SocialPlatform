@@ -41,14 +41,14 @@ export class RegisterComponent implements OnInit {
       jelszo: this.form.value.password1,
       vnev: this.form.value.vnev,
       knev: this.form.value.knev,
-      csatl: this.form.value.csatl,
-      szul_dat: new Date(Date.now()),//this.form.value.szul_dat,
+      csatl: new Date(Date.now()),
+      szul_dat: this.form.value.szul_dat,
       munka_iskola: this.form.value.munka_iskola,
       picture: undefined,
       isAdmin: false,
     }
 
-    // console.log(this.form.value.csatl);
+    console.log(this.form.value.szul_dat);
 
     let formData = new FormData();
     if (this.selectedFile)
@@ -57,9 +57,9 @@ export class RegisterComponent implements OnInit {
     this.userService.createAccount(newUser)
       .subscribe(
         id => {
-          // console.log('get id: ' + id);
-          if (id) {
-            // console.log('start upload image');
+          console.log('get id: ' + id);
+          if (id && this.selectedFile) {
+            console.log('start upload image');
             this.userService.uploadProfile(formData, id)
             .subscribe(
               path => {
@@ -69,6 +69,7 @@ export class RegisterComponent implements OnInit {
               }
             )
           }
+          this.router.navigate(['login']);
         }
       )
 

@@ -34,21 +34,6 @@ export class LoginComponent implements OnInit {
     try{
     this.userService.login(this.email, this.password)
       .subscribe((data => {
-        // console.log(data.email);
-        // console.log(data.firstName);
-        // console.log(data.lastName);
-        // console.log(data.password);
-        // console.log(data.email);
-        // console.log(data.phone);
-        // console.log(data.zipCode);
-        // console.log(data.city);
-        // console.log(data.area);
-        // console.log(data.addressType);
-        // console.log(data.houseNumber);
-        // sessionStorage.setItem('email', String(data.email));
-        // sessionStorage.setItem('knev', data.knev);
-        // sessionStorage.setItem('vnev', data.vnev);
-
         alert("Login succesful");
       }));
     }

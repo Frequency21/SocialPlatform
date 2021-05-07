@@ -23,7 +23,8 @@ export class NavigationComponent implements OnInit, OnDestroy {
   constructor(private router: Router,
     private userService: UserService,
     public loginService: AuthenticationService,
-    public authentocationService: AuthenticationService) {
+    public authentocationService: AuthenticationService
+  ) {
     this.subscription = this.userService.userSource.subscribe(user => this.user = user);
   }
 
@@ -45,9 +46,6 @@ export class NavigationComponent implements OnInit, OnDestroy {
   public register() {
     this.router.navigate(['register']);
   }
-
-
-
 
   // tslint:disable-next-line:typedef
   checkLogin() {

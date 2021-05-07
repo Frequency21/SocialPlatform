@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { HttpClientService } from 'src/app/services/httpclient.service';
+import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/shared/models/user.model';
 
@@ -12,9 +12,12 @@ import { User } from 'src/app/shared/models/user.model';
 })
 export class ProfileComponent implements OnInit {
 
-  user!: User;
+  public selectedFile?: File;
+  public imgSrc?: string;
+  public user!: User;
 
   public userId: number = 0;
+  subscription: Subscription;
 
   form: FormGroup = new FormGroup({
     email: new FormControl(),
@@ -28,11 +31,13 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private httpClientService: HttpClientService,
-    private userService: UserService
-  ) { }
+    private userService: UserService,
+  ) {    
+     this.subscription = this.userService.userSource.subscribe(user => {this.user = user;    console.log(this.user);});
+  }
 
   ngOnInit(): void {
+
   }
 
   public getUser(): void {
@@ -49,20 +54,48 @@ export class ProfileComponent implements OnInit {
   }
 
   // TODO: userServicebe vinni
-  public updateUser(): void {
-    try {
-      this.httpClientService.updateUser(this.user)
-        .subscribe(data => {
-          alert("Update succesful")
-        })
-    } catch (error) {
-      alert(error);
-    }
+  updateUser(): void {
+    console.log(this.user);
+      let newUser: User = {
+        id: this.user.id,
+        email: this.form.value.email,
+        jelszo: this.form.value.password1,
+        vnev: this.form.value.vnev,
+        knev: this.form.value.knev,
+        csatl: new Date(Date.now()),
+        szul_dat: this.form.value.szul_dat,
+        munka_iskola: this.form.value.munka_iskola,
+        picture: undefined,
+        isAdmin: false,
+      }
+  
+      console.log(newUser);
+  
+      let formData = new FormData();
+      if (this.selectedFile)
+        formData.set('file', this.selectedFile as Blob, this.selectedFile?.name);
+      
+      this.userService.updateUser(newUser)
+        .subscribe(
+          id => {
+            console.log('get id: ' + id);
+            if (id && this.selectedFile) {
+              console.log('start upload image');
+              this.userService.uploadProfile(formData, id)
+              .subscribe(
+                path => {
+                  console.log('succesfully upload img to: ' + path);
+                  // if ()
+                  newUser.picture = path;
+                }
+              )
+            }
+          }
+        )
   }
 
-
   public deleteUser(): void {
-    this.userService.deleteUser(this.userId)
+    this.userService.deleteUser(this.user)
       .subscribe(data => {
         if (data)
           alert("Sikeres törlés");
@@ -72,4 +105,8 @@ export class ProfileComponent implements OnInit {
       });
   }
 
+  onSelectFile(event: any) {
+    this.selectedFile = event.target.files[event.target.files.length - 1] as File;
+  }
 }
+
