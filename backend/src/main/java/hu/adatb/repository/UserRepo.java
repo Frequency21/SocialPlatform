@@ -33,6 +33,10 @@ public class UserRepo {
             "where EMAIL = :EMAIL and JELSZO = :JELSZO";
     private static final String SELECT_ALL_USER = "select ID, JELSZO, EMAIL, f.NEV.VEZETEKNEV as VNEV, " +
             "f.NEV.KERESZTNEV as KNEV, CSATL_DAT, SZUL_DAT, MUNKA_ISKOLA, PICTURE, ISADMIN from felhasznalo f";
+    private static final String UPDATE_USER = "UPDATE FELHASZNALO " +
+            "SET JELSZO = :JELSZO, EMAIL = :EMAIL, NEV = NEVTIPUS(:VNEV, :KNEV), " +
+            "CSATL_DAT = :CSATL_DAT, SZUL_DAT = :SZUL_DAT, MUNKA_ISKOLA = :MUNKA_ISKOLA " +
+            "WHERE id = :id";
 
     public UserRepo(NamedParameterJdbcTemplate namedJdbc, JdbcTemplate jdbcTemplate) {
         this.namedJdbc = namedJdbc;
@@ -105,6 +109,26 @@ public class UserRepo {
         }
         return kh.getKey().longValue();
     }
+
+    public Long updateUser(User user) {
+        MapSqlParameterSource map = new MapSqlParameterSource()
+                .addValue("id", user.getId())
+                .addValue("JELSZO", user.getJelszo())
+                .addValue("EMAIL", user.getEmail())
+                .addValue("VNEV", user.getVnev())
+                .addValue("KNEV", user.getKnev())
+                .addValue("CSATL_DAT", user.getCsatl())
+                .addValue("SZUL_DAT", user.getSzulDat())
+                .addValue("MUNKA_ISKOLA", user.getMunkaIskola());
+        try {
+            namedJdbc.update(UPDATE_USER, map);
+        } catch (DataAccessException dae) {
+            System.out.println(dae);
+            return null;
+        }
+        return user.getId();
+    }
+
 
     public boolean deleteUser(int id) {
         return jdbcTemplate.update(DELETE_USER, id) == 1;

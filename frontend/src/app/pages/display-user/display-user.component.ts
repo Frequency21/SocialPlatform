@@ -46,7 +46,7 @@ export class DisplayUserComponent implements OnInit {
   getPoszts(id: number): void {
     this.posztService.getPosztsByFelhasznaloId(id).subscribe(poszts => {
       this.poszts = poszts;
-      console.log(poszts);
+     // console.log(poszts);
     });
   }
 
@@ -63,7 +63,7 @@ export class DisplayUserComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      // console.log('The dialog was closed');
     });
   }
 

@@ -61,6 +61,14 @@ public class UserController {
         return userRepo.insertUser(user);
     }
 
+    @RequestMapping(value = "update", method = RequestMethod.POST)
+    public Long updateUser(
+            @RequestBody User user
+    ) {
+
+        return userRepo.updateUser(user);
+    }
+
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
     public boolean deleteUser(
             @PathVariable("id") int id

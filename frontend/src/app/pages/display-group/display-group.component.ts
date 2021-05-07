@@ -37,7 +37,7 @@ export class DisplayGroupComponent implements OnInit {
   getPoszts(id: number): void {
     this.posztService.getPosztsByCsoportId(id).subscribe(poszts => {
       this.poszts = poszts;
-      console.log(poszts);
+      //console.log(poszts);
     });
   }
 

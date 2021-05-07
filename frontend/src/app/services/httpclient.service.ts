@@ -16,8 +16,4 @@ export class HttpClientService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public updateUser(user: User)
-  {
-    return this.httpClient.post<User>('/api/user/update', user);
-  }
 }

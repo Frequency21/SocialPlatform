@@ -12,11 +12,11 @@ export class LoginComponent implements OnInit {
 
   email = '';
   password = '';
-  invalidLogin = false;
 
   users: User[] = [];
 
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     private userService: UserService,
     ) { }
 
@@ -29,16 +29,18 @@ export class LoginComponent implements OnInit {
   }
 
   checkLogin() {
-    this.invalidLogin = false;
-
     try{
     this.userService.login(this.email, this.password)
       .subscribe((data => {
-        alert("Login succesful");
-      }));
+        if(data.id != null) {
+          alert("Login succesful");
+        } else {
+          alert("Invalid login");
+        }
+     }));
     }
     catch(error) {
-      this.invalidLogin = true;
+      alert("Invalid login");
     }
 
   }
