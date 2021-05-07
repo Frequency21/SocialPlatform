@@ -28,6 +28,9 @@ CREATE TYPE ERTEKELES AS OBJECT
 );
 /
 
+COMMIT;
+/
+
 CREATE TABLE Felhasznalo
 (
     ID           NUMBER GENERATED ALWAYS as IDENTITY PRIMARY KEY,
@@ -192,10 +195,7 @@ CREATE TABLE Fenykep
 );
 /
 
-
--- SELECT ID as "id", csatl_dat as "csatl", email as "email", f.nev.keresztnev as "knev", f.nev.vezeteknev as "vnev"
--- FROM felhasznalo f;
-
+-- nézettáblák begin
 
 /*
 felhasználó hírfolyamán található posztok
@@ -205,7 +205,7 @@ select f.id id,
        szerzo.picture szerzo_profil_kep,
        idopont,
        szerzo_id,
-       szerzo.nev.vezeteknev || ' ' || szerzo.nev.keresztnev szerzo_nev,
+       szerzo.nev.VEZETEKNEV || ' ' || szerzo.nev.KERESZTNEV szerzo_nev,
        szoveg,
        ertekeles,
        isPublic
@@ -213,11 +213,41 @@ FROM felhasznalo f
          inner join
      poszt p
      on
-         f.id = p.felhasznalo_id
+             f.id = p.felhasznalo_id
          inner join felhasznalo szerzo
                     on
-                        p.szerzo_id = szerzo.id;
+                            p.szerzo_id = szerzo.id;
 /
+
+-- nézettáblák end
+
+-- eljárások / functionök begin
+
+-- eljárások / functionök end
+
+-- triggerek begin
+
+-- az ismerettség szimmetrikus reláció, értelmetlen lenne letárolni, hogy
+-- 1 ismeri 2-őt és 2 ismeri 1-et, ezért az ISMEROS tábla az id-kat rendezve
+-- tárolja --> egy trigger gondoskodik erről mind insert mind update előtt
+
+create or replace trigger ISMEROS_TRIGGER
+    before insert or update
+    on ISMEROS
+    for each row
+declare
+    v_swap NUMBER;--ISMEROS.FELHASZNALO1_ID%type;
+begin
+    if :NEW.FELHASZNALO1_ID > :NEW.FELHASZNALO2_ID
+    then
+        v_swap := :NEW.FELHASZNALO1_ID;
+        :NEW.FELHASZNALO1_ID := :NEW.FELHASZNALO2_ID;
+        :NEW.FELHASZNALO2_ID := v_swap;
+    end if;
+end;
+/
+
+-- triggerek end
 
 COMMIT;
 /

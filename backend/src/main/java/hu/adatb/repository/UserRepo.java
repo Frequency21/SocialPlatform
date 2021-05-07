@@ -3,6 +3,7 @@ package hu.adatb.repository;
 import hu.adatb.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -37,12 +38,17 @@ public class UserRepo {
             "SET JELSZO = :JELSZO, EMAIL = :EMAIL, NEV = NEVTIPUS(:VNEV, :KNEV), " +
             "SZUL_DAT = :SZUL_DAT, MUNKA_ISKOLA = :MUNKA_ISKOLA " +
             "WHERE id = :id";
+    private static final String USER_ISMEROSEI = "select ID, JELSZO, EMAIL, f.NEV.VEZETEKNEV as VNEV, f.NEV.KERESZTNEV " +
+            "as KNEV, CSATL_DAT, SZUL_DAT, MUNKA_ISKOLA, PICTURE, ISADMIN from " +
+            "(select * from FELHASZNALO where ID = :ID) f inner join ISMEROS i on f.ID = i.FELHASZNALO1_ID where " +
+            "i.FELHASZNALO1_ID = :ID or i.FELHASZNALO2_ID = :ID";
 
     public UserRepo(NamedParameterJdbcTemplate namedJdbc, JdbcTemplate jdbcTemplate) {
         this.namedJdbc = namedJdbc;
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    /* a mapRow szebb megoldás lenne, de már nem fogom refaktorálni arra (lásd GroupRepo) */
     private static User extractUser(ResultSet rs) throws SQLException {
         User u = new User();
         if (rs.next()) getUser(rs, u);
@@ -138,5 +144,22 @@ public class UserRepo {
             ps.setString(1, uri);
             ps.setLong(2, id);
         });
+    }
+
+    public List<User> getIsmerosei(long id) {
+        return namedJdbc.query(
+                USER_ISMEROSEI,
+                new MapSqlParameterSource("ID", id),
+                rs -> {
+                    List<User> users = new ArrayList<>();
+                    User u;
+                    while (rs.next()) {
+                        u = new User();
+                        getUser(rs, u);
+                        users.add(u);
+                    }
+                    return users;
+                }
+        );
     }
 }

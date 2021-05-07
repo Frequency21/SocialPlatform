@@ -24,7 +24,7 @@ public class UserController {
         this.userRepo = userRepo;
     }
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @GetMapping(value = "")
     public ResponseEntity<User> getUser(
             @RequestParam("id") int id
     ) {
@@ -32,7 +32,7 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-    @RequestMapping(value = "{id}", method = RequestMethod.GET)
+    @GetMapping(value = "{id}")
     public ResponseEntity<User> getUserById(
             @PathVariable("id") int id
     ) {
@@ -40,13 +40,18 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-    @RequestMapping(value = "all", method = RequestMethod.GET)
+    @GetMapping(value = "all")
     public ResponseEntity<List<User>> getUsers() {
         List<User> users = userRepo.getUsers();
         return ResponseEntity.ok(users);
     }
 
-    @RequestMapping(value = "login", method = RequestMethod.POST)
+    @GetMapping(value = "ismerosei/{id}")
+    public List<User> getIsmerosei(@PathVariable("id") long id) {
+        return userRepo.getIsmerosei(id);
+    }
+
+    @PostMapping(value = "login")
     public User login(
             @RequestParam("email") String email,
             @RequestParam("jelszo") String password
@@ -54,14 +59,14 @@ public class UserController {
         return userRepo.getUser(email, password);
     }
 
-    @RequestMapping(value = "register", method = RequestMethod.POST)
+    @PostMapping(value = "register")
     public Long register(
             @RequestBody User user
     ) {
         return userRepo.insertUser(user);
     }
 
-    @RequestMapping(value = "update", method = RequestMethod.POST)
+    @PostMapping(value = "update")
     public Long updateUser(
             @RequestBody User user
     ) {
@@ -69,7 +74,7 @@ public class UserController {
         return userRepo.updateUser(user);
     }
 
-    @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+    @DeleteMapping(value = "{id}")
     public boolean deleteUser(
             @PathVariable("id") int id
     ) {
