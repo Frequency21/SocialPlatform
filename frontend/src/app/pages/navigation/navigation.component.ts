@@ -17,7 +17,6 @@ export class NavigationComponent implements OnInit, OnDestroy {
   password = '';
   user?: User;
   subscription: Subscription;
-  isLoggedIn: boolean = false;
 
   name = sessionStorage.getItem('name');
 
