@@ -3,6 +3,9 @@ package hu.adatb.controller;
 
 import hu.adatb.model.Post;
 import hu.adatb.repository.PostRepo;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
@@ -31,4 +34,13 @@ public class PostController {
         return ResponseEntity.ok(postRepo.getPostByUserId(id));
     }
 
+    @ExceptionHandler({DataIntegrityViolationException.class})
+    public HttpStatus conflict() {
+        return HttpStatus.CONFLICT;
+    }
+
+    @ExceptionHandler({EmptyResultDataAccessException.class})
+    public HttpStatus empty() {
+        return HttpStatus.NOT_FOUND;
+    }
 }

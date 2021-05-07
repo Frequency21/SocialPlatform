@@ -15,7 +15,9 @@
     <span class="vspace"></span>
     <span class="vspace"></span>
     <button mat-button [matMenuTriggerFor]="menu" >
-      tmp email&nbsp;
+      <ng-container *ngIf="user; else anonym">{{user.knev + ' ' + user.vnev}}</ng-container>
+      <ng-template #anonym>Vendég</ng-template>
+      &nbsp;
       <mat-icon>arrow_drop_down</mat-icon>
     </button>
 

@@ -5,6 +5,9 @@ import hu.adatb.service.ImageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -44,6 +47,16 @@ public class ImageController {
     ) throws IOException {
         log.debug("/api/user/profile/" + id);
         return imageService.getImage("" + id, "user", "profile");
+    }
+
+    @ExceptionHandler({DataIntegrityViolationException.class})
+    public HttpStatus conflict() {
+        return HttpStatus.CONFLICT;
+    }
+
+    @ExceptionHandler({EmptyResultDataAccessException.class})
+    public HttpStatus empty() {
+        return HttpStatus.NOT_FOUND;
     }
 
 }

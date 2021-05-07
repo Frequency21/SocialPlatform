@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { User, Ismeros, Fenykepalbum, Kategoria, Fenykep } from '../shared/models/user.model'
+import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
+import { User, Kategoria, Fenykep } from '../shared/models/user.model'
+import { tap } from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,8 @@ import { User, Ismeros, Fenykepalbum, Kategoria, Fenykep } from '../shared/model
 export class UserService {
 
   rootUrl: string = '/api/user/'
+  private _user = new ReplaySubject<User>(1);
+  userSource = this._user.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -20,7 +23,14 @@ export class UserService {
     let formData = new FormData();
     formData.append("email", email);
     formData.append("jelszo", jelszo);
-    return this.http.post<User>(this.rootUrl + 'login', formData);
+    return this.http.post<User>(this.rootUrl + 'login', formData).pipe(
+      tap(user => {
+        console.log('after login, user is:');
+        console.log(user);
+        this._user.next(user);
+        return user;
+      })
+    );
   }
 
   getUser(id: number): Observable<User> {
