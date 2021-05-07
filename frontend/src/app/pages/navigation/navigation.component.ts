@@ -36,7 +36,6 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
   public logout() {
     this.userService.logout();
-    this.router.navigate(['']);
   }
 
   public login() {
