@@ -1,4 +1,9 @@
 <div class="centering">
+  <div *ngFor="let item of komments">
+    <mat-card>
+      <label>{{item.szoveg}}</label>
+    </mat-card>
+  </div>
   <mat-card>
     <form [formGroup]="form" (ngSubmit)="posztKomment()">
       <h3>Új Komment</h3>

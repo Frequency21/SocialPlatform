@@ -17,6 +17,7 @@ export class ModalKommentComponent implements OnInit {
     szoveg: new FormControl(),
     isPublic: new FormControl()
   });
+  komments?: Komment[];
 
   constructor(
     public dialogRef: MatDialogRef<ModalKommentComponent>,

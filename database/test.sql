@@ -86,7 +86,6 @@ CREATE TABLE Komment
     id             NUMBER GENERATED ALWAYS as IDENTITY PRIMARY KEY,
     idopont        DATE           not null,
     komment_iro_id NUMBER,
-    poszt_felh_id  NUMBER         NOT NULL,
     poszt_id       NUMBER,
     szoveg         VARCHAR2(1000) NOT NULL,
     ertekeles      ERTEKELES      NOT NULL,

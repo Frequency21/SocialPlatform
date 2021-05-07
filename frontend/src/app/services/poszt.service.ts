@@ -29,6 +29,10 @@ export class PosztService {
     return this.http.post<Poszt>(this.rootUrl + 'add', poszt);
   }
 
+  getKomments(): Observable<Komment[]> {
+    return this.http.get<Komment[]>(this.rootUrl + "komments");
+  }
+
   addKomment(komment: Komment): Observable<Komment> {
     console.log("AddKomment(" + komment + ")");
     return this.http.post<Komment>(this.rootUrl + "addKomment", komment);
