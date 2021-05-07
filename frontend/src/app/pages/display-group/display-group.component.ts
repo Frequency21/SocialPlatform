@@ -12,6 +12,7 @@ export class DisplayGroupComponent implements OnInit {
 
   group?: Group[];
   ize = 1;
+  poszts?: Poszt[];
 
   constructor(private _Activatedroute: ActivatedRoute, private groupService: GroupService) { }
 
@@ -26,6 +27,13 @@ export class DisplayGroupComponent implements OnInit {
       this.group = group;
       console.log(this.group);
     })
+  }
+
+  getPoszts(id: number): void {
+    this.posztService.getPosztsByCsoportId(id).subscribe(poszts => {
+      this.poszts = poszts;
+      console.log(poszts);
+    });
   }
 
 }

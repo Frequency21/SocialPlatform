@@ -1,3 +1,4 @@
+import { DisplayPostsModule } from './../display-posts/display-posts.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { ModalPosztComponent } from './../modal-poszt/modal-poszt.component';
@@ -15,6 +16,7 @@ import { MatButton } from '@angular/material/button';
   declarations: [DisplayUserComponent],
   entryComponents: [ModalPosztComponent],
   imports: [
+    DisplayPostsModule,
     CommonModule,
     MatCardModule,
     MatToolbarModule,

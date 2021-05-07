@@ -17,8 +17,15 @@ export class PosztService {
     return this.http.get<Poszt[]>(this.rootUrl + 'all');
   }
 
+  getPosztsByFelhasznaloId(id: number):  Observable<Poszt[]> {
+    return this.http.get<Poszt[]>(this.rootUrl + id);
+  }
+
+  getPosztsByCsoportId(id: number):  Observable<Poszt[]> {
+    return this.http.get<Poszt[]>(this.rootUrl + id);
+  }
+
   addPoszt(poszt: Poszt): Observable<Poszt> {
-    console.log("helloka!");
     return this.http.post<Poszt>(this.rootUrl + 'add', poszt);
   }
 
