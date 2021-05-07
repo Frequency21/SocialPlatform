@@ -17,7 +17,6 @@ export class NavigationComponent implements OnInit, OnDestroy {
   password = '';
   user?: User;
   subscription: Subscription;
-  isLoggedIn: boolean = false;
 
   name = sessionStorage.getItem('name');
 
@@ -36,7 +35,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
 
   public logout() {
-    this.authentocationService.logOut();
+    this.userService.logout();
     this.router.navigate(['']);
   }
 
