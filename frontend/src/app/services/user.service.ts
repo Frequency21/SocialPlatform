@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {  Observable, ReplaySubject } from 'rxjs';
 import { User, Kategoria, Fenykep } from '../shared/models/user.model'
@@ -89,5 +89,12 @@ export class UserService {
 
   getFenykeps(fenykepalbum_id: number, kategorianev: string): Observable<Fenykep> {
     return this.http.get<Fenykep>(this.rootUrl + '/fenykeps?fa=' + fenykepalbum_id + '?kategorianev=' + kategorianev);
+  }
+
+  flagIsmeros(id_1: number, id_2: number): Observable<boolean> {
+    let params = new HttpParams()
+      .set('id_1', "" + id_1)
+      .set('id_2', "" + id_2);
+    return this.http.post<boolean>(this.rootUrl,params);
   }
 }

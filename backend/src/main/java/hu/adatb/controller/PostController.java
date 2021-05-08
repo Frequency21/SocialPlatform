@@ -35,12 +35,11 @@ public class PostController {
     }
 
     // TODO: 2021. 05. 07. post hozzáadás hírfolyamhoz
-    @PostMapping(value = "addKomment/{userId}")
+    @PostMapping(value = "/add")
     public long addPost(
-            @RequestBody Post post,
-            @PathVariable("userId") long id
+            @RequestBody Post post
     ) {
-        return 1;
+        return postRepo.insertPost(post);
     }
 
     @ExceptionHandler({DataIntegrityViolationException.class})

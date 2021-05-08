@@ -43,4 +43,10 @@ export class DisplayUsersComponent implements OnInit {
     return (this.user == undefined);
   }
 
+  flag(id: number): void {
+    this.userService.flagIsmeros(Number(this.user?.id), id).subscribe(ret => {
+      console.log(ret);
+    })
+  }
+
 }

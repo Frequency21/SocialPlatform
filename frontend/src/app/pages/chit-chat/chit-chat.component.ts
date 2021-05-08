@@ -20,6 +20,7 @@ export class ChitChatComponent implements OnInit {
   messages?: Uzenet[];
   chatId?: number;
   subscription: Subscription;
+  show: boolean = true;
 
   constructor(
     private userService: UserService,
@@ -51,7 +52,8 @@ export class ChitChatComponent implements OnInit {
     this.uzenetService.sendMessage(newUzenet).subscribe(ret => {
       console.log(ret);
     });
-    console.log(newUzenet);
+    this.form.reset();
+    this.reload();
   }
 
   getFriends(): void {
@@ -65,4 +67,22 @@ export class ChitChatComponent implements OnInit {
     this.loadMessages(id);
   }
 
+  mine(actId: number): boolean {
+    return this.sender?.id == actId;
+  }
+
+  deleteMessage(id?: number): void {
+    this.uzenetService.deleteMessage(id!).subscribe(ret => {
+      console.log(ret);
+    });
+    this.reload();
+  }
+
+  reload() {
+    this.show = false;
+    setTimeout(() =>{
+      this.loadMessages(Number(this.chatId));
+      this.show = true;
+    });
+  }
 }

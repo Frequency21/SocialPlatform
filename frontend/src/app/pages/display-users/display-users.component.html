@@ -3,7 +3,6 @@
 <ul class="users">
   <div class="user-container">
     <div *ngFor="let user of users">
-
       <mat-card class="card">
         <mat-card-header>
           <img mat-card-avatar *ngIf="user.picture" [src]="user!.picture"/>
@@ -19,14 +18,11 @@
           <a class="lookup-btn" mat-button [routerLink]="['../user/',user.id]">
             Megtekintés
           </a>
-          <button class="add-friend" mat-mini-fab *ngIf="!isLoggedIn()">
+          <button class="add-friend" mat-mini-fab *ngIf="!isLoggedIn()" (click)="flag(user.id)">
             <mat-icon class="mat-18">add</mat-icon>
           </button>
         </mat-card-actions>
       </mat-card>
-
     </div>
-
-
   </div>
 </ul>

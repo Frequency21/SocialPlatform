@@ -23,4 +23,8 @@ export class UzenetService {
     console.log(message);
     return this.http.post<boolean>(this.rootUrl, message);
   }
+
+  deleteMessage(id: number): Observable<boolean> {
+    return this.http.delete<boolean>(this.rootUrl + id);
+  }
 }

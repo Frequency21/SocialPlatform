@@ -45,9 +45,7 @@ export class ModalPosztComponent implements OnInit {
       },
       isPublic : !(this.form.value.isPublic)
     };
-    // console.log(newPost);
     this.posztService.addPoszt(newPost).subscribe(poszt => {
-      // console.log(poszt);
     });
     this.onNoClick();
   }

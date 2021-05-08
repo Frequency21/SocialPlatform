@@ -25,8 +25,8 @@ export class PosztService {
     return this.http.get<Poszt[]>(this.rootUrl + id);
   }
 
-  addPoszt(poszt: Poszt): Observable<Poszt> {
-    return this.http.post<Poszt>(this.rootUrl + 'add', poszt);
+  addPoszt(poszt: Poszt): Observable<number> {
+    return this.http.post<number>(this.rootUrl + 'add', poszt);
   }
 
   getKomments(): Observable<Komment[]> {

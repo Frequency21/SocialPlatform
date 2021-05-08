@@ -11,6 +11,11 @@
   height: 90%;
 }
 
+.message-container {
+  overflow: auto;
+  height: 88%;
+}
+
 .message-input {
   background-color: #c1eeff;
   position: fixed;
@@ -61,5 +66,33 @@
 .msg {
   display: inline-block;
   margin-left: 3%;
-  width: 87%;
+  width: 75%;
 }
+
+.date {
+  display: inline-block;
+  font-size: x-small;
+}
+
+.not-mine {
+  background-image: linear-gradient(to right, transparent, transparent, transparent, red);
+  border: 2px solid #fc0394;
+}
+
+.mine {
+  background-image: linear-gradient(to right, transparent, transparent, transparent, lightblue);
+  border: 2px solid #e0e4ff;
+}
+
+.mine:hover {
+  .delete-btn {
+    display: inline-block;
+    margin-left: 10%;
+    background-color: transparent;
+  }
+}
+
+.delete-btn {
+  display: none;
+}
+
