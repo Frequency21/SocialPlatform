@@ -1,0 +1,37 @@
+<form [formGroup]="myFormGroup">
+  <mat-form-field>
+    <mat-label>E-mail</mat-label>
+    <input type="email" name="email" matInput placeholder="Pl. pat@example.com" formControlName="email">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Vezetéknév</mat-label>
+    <input type="vnev" name="vnev" matInput placeholder="Pl. Pat" formControlName="vnev">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Keresztnév</mat-label>
+    <input type="knev" name="knev" matInput placeholder="Pl. Ko" formControlName="knev">
+  </mat-form-field>
+  <mat-form-field>
+    <!-- <mat-label>Születési dátum</mat-label> -->
+
+    <input matInput name="szul_dat" type="date" formControlName="szul_dat">
+    <!-- <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker> -->
+
+    <!-- <input type="date" name="szul_dat" matInput placeholder="YYYY/MM/DD" formControlName="szul_dat"> -->
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Munka/Iskola</mat-label>
+    <input type="munka_iskola" name="munka_iskola" matInput placeholder="Pl. Iskola" formControlName="munka_iskola">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Jelszó</mat-label>
+    <input type="password" name="password" matInput placeholder="Jelszó" formControlName="password1">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Jelszó újra</mat-label>
+    <input type="password" name="password" matInput #password2 placeholder="Jelszó újra" formControlName="password2">
+  </mat-form-field>
+  <input id="file-input" type="file" (change)="onSelectFile($event)">
+
+</form>

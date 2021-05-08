@@ -13,6 +13,7 @@ import { AuthGaurdService } from './services/auth-gaurd.service';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { FormComponent } from './pages/form/form.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomeComponent },
@@ -28,7 +29,8 @@ const routes: Routes = [
   { path: 'display/group/:id', component: DisplayGroupComponent },
   { path: 'display/poszts', component: DisplayPostsComponent },
   { path: 'chitChat', component: ChitChatComponent },
-  { path: 'album', component: DisplayKategoryComponent}
+  { path: 'album', component: DisplayKategoryComponent},
+  { path: 'test', component: FormComponent}
 ];
 
 @NgModule({

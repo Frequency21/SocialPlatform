@@ -15,6 +15,9 @@
     <a mat-button [routerLink]="['album']" *ngIf="!!user">
       <mat-icon>perm_media</mat-icon>Fényképalbum
     </a>
+    <a mat-button [routerLink]="['test']" *ngIf="user">
+      <mat-icon>perm_media</mat-icon>teszt form
+    </a>
     <!--<a mat-button [routerLink]="['/display/poszts']">
       Posztok
     </a>-->

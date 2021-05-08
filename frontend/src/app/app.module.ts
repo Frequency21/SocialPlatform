@@ -36,6 +36,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ChitChatComponent } from './pages/chit-chat/chit-chat.component';
 import { DisplayKategoryComponent } from './pages/display-kategory/display-kategory.component';
+import { FormModule } from "./pages/form/form.module";
 
 // MatNativeDateModule,
 
