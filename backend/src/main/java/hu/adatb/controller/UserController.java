@@ -15,7 +15,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/user/")
+@RequestMapping("/api/user")
 public class UserController {
     private final UserRepo userRepo;
     private final Logger log = LoggerFactory.getLogger(UserController.class);
@@ -24,7 +24,7 @@ public class UserController {
         this.userRepo = userRepo;
     }
 
-    @GetMapping(value = "")
+    @GetMapping
     public ResponseEntity<User> getUser(
             @RequestParam("id") int id
     ) {
@@ -32,7 +32,7 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-    @GetMapping(value = "{id}")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<User> getUserById(
             @PathVariable("id") int id
     ) {
@@ -40,18 +40,18 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-    @GetMapping(value = "all")
+    @GetMapping(value = "/all")
     public ResponseEntity<List<User>> getUsers() {
         List<User> users = userRepo.getUsers();
         return ResponseEntity.ok(users);
     }
 
-    @GetMapping(value = "ismerosei/{id}")
+    @GetMapping(value = "/ismerosei/{id}")
     public List<User> getIsmerosei(@PathVariable("id") long id) {
         return userRepo.getIsmerosei(id);
     }
 
-    @PostMapping(value = "login")
+    @PostMapping(value = "/login")
     public User login(
             @RequestParam("email") String email,
             @RequestParam("jelszo") String password
@@ -59,14 +59,14 @@ public class UserController {
         return userRepo.getUser(email, password);
     }
 
-    @PostMapping(value = "register")
+    @PostMapping(value = "/register")
     public Long register(
             @RequestBody User user
     ) {
         return userRepo.insertUser(user);
     }
 
-    @PostMapping(value = "update")
+    @PostMapping(value = "/update")
     public Long updateUser(
             @RequestBody User user
     ) {
@@ -74,17 +74,15 @@ public class UserController {
         return userRepo.updateUser(user);
     }
 
-    // TODO: 2021. 05. 07. ismerősnek jelölés
-    // /api/user?id_1=1&id_2=2
-    @PostMapping(value = "{id_1}/{id_2}")
+    @PostMapping
     public boolean friendRequest(
             @RequestParam("id_1") long id1,
             @RequestParam("id_2") long id2
     ) {
-        return true;
+        return userRepo.friendRequest(id1, id2);
     }
 
-    @DeleteMapping(value = "{id}")
+    @DeleteMapping(value = "/{id}")
     public boolean deleteUser(
             @PathVariable("id") int id
     ) {

@@ -42,6 +42,7 @@ public class UserRepo {
             "as KNEV, CSATL_DAT, SZUL_DAT, MUNKA_ISKOLA, PICTURE, ISADMIN from " +
             "FELHASZNALO f inner join ISMEROS i on f.ID = i.FELHASZNALO1_ID where " +
             "i.FELHASZNALO1_ID = :ID or i.FELHASZNALO2_ID = :ID";
+    private static final String FRIEND_REQUEST = "insert into ISMEROS values (?, ?)";
 
     public UserRepo(NamedParameterJdbcTemplate namedJdbc, JdbcTemplate jdbcTemplate) {
         this.namedJdbc = namedJdbc;
@@ -161,5 +162,9 @@ public class UserRepo {
                     return users;
                 }
         );
+    }
+
+    public boolean friendRequest(long id1, long id2) {
+        return jdbcTemplate.update(FRIEND_REQUEST, id1, id2) == 1;
     }
 }
