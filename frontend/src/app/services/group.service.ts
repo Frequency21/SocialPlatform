@@ -16,7 +16,7 @@ export class GroupService {
     return this.http.get<Group[]>(this.rootUrl + 'all');
   }
 
-  getGroupById(id: Number): Observable<Group[]> {
-    return this.http.get<Group[]>(this.rootUrl + '?id=' + id);
+  getGroupById(id: Number): Observable<Group> {
+    return this.http.get<Group>(this.rootUrl + id);
   }
 }

@@ -4,4 +4,5 @@ export interface Uzenet {
   kuldo_id: number;
   cimzett_id: number;
   szoveg: string;
+  fenykep?: Blob;
 }

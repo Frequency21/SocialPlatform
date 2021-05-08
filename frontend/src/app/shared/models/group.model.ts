@@ -1,8 +1,7 @@
 export interface Group {
-  id: number;
+  id: number | null;
   leiras: string;
   nev: string;
-  tulaj_vnev: string;
-  tulaj_knev: string;
+  tulaj_id: number;
   tagok: number;
 }

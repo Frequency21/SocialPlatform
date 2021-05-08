@@ -1,3 +1,4 @@
+import { DisplayKategoryComponent } from './pages/display-kategory/display-kategory.component';
 import { ChitChatComponent } from './pages/chit-chat/chit-chat.component';
 import { DisplayUserComponent } from './pages/display-user/display-user.component';
 import { NgModule } from '@angular/core';
@@ -26,7 +27,8 @@ const routes: Routes = [
   { path: 'display/user/:id', component: DisplayUserComponent },
   { path: 'display/group/:id', component: DisplayGroupComponent },
   { path: 'display/poszts', component: DisplayPostsComponent },
-  { path: 'chitChat', component: ChitChatComponent }
+  { path: 'chitChat', component: ChitChatComponent },
+  { path: 'album', component: DisplayKategoryComponent}
 ];
 
 @NgModule({

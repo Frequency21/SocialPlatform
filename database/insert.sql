@@ -11,6 +11,15 @@ INSERT INTO Felhasznalo (jelszo, email, nev, csatl_dat, szul_dat, munka_iskola, 
 commit;
 /
 
+INSERT INTO Csoport(leiras,nev,tulaj_id) VALUES('Számítógép alkatrészek, adok-veszek','Hardverapró',2);
+INSERT INTO Csoport(leiras,nev,tulaj_id) VALUES('Adatbázis alapú redszerek helyesírása','Adatb2',1);
+INSERT INTO Csoport(leiras,nev,tulaj_id) VALUES('Cryptovaluták nyaggatása','Brave New World',3);
+INSERT INTO Csoport(leiras,nev,tulaj_id) VALUES('SZTE legjobbjai, a jelszó meg: ******','SZTE4EVER',2);
+INSERT INTO Csoport(leiras,nev,tulaj_id) VALUES('Lelkisegélyszolgálat az egyetemisták ért','Cryout a hero',2);
+INSERT INTO Csoport(leiras,nev,tulaj_id) VALUES('Brühühűűűűűű, még nagyon sok mindent kell legépelnem','Suffer 2gether',2);
+commit;
+/
+
 INSERT INTO ISMEROS(felhasznalo1_id, felhasznalo2_id) VALUES(7, 1);
 INSERT INTO ISMEROS(felhasznalo1_id, felhasznalo2_id) VALUES(7, 2);
 INSERT INTO ISMEROS(felhasznalo1_id, felhasznalo2_id) VALUES(7, 3);

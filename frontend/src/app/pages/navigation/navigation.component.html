@@ -12,9 +12,12 @@
     <a mat-button [routerLink]="['chitChat']" *ngIf="!!user">
       <mat-icon>question_answer</mat-icon>Csevegés
     </a>
-    <a mat-button [routerLink]="['/display/poszts']">
-      Posztok
+    <a mat-button [routerLink]="['album']" *ngIf="!!user">
+      <mat-icon>perm_media</mat-icon>Fényképalbum
     </a>
+    <!--<a mat-button [routerLink]="['/display/poszts']">
+      Posztok
+    </a>-->
     <span class="vspace"></span>
     <span class="vspace"></span>
     <button mat-button [matMenuTriggerFor]="menu" >

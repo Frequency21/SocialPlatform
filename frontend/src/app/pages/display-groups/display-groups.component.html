@@ -6,14 +6,16 @@
       <mat-card class="card">
         <mat-card-header>
           <mat-card-title>{{group.nev}}</mat-card-title>
-          <mat-card-subtitle>#{{group.id}}</mat-card-subtitle>
+          <mat-card-subtitle>#{{group.csoport_id}}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
           <span>Leírás: {{group.leiras}}</span>
-          <span>Tulajdonos: {{group.tulaj_vnev + " " + group.tulaj_knev}}</span>
+        <!--<span>Tulajdonos: {{group.tulaj_vnev + " " + group.tulaj_knev}}</span>-->
         </mat-card-content>
         <mat-card-actions>
-          <a class="lookup-btn" mat-button [routerLink]="['../group/',group.id]" routerLinkActive="router-link-active" >Megtekintes</a>
+          <a class="lookup-btn" mat-button [routerLink]="['../group/',group.csoport_id]">
+            Megtekintes
+          </a>
         </mat-card-actions>
       </mat-card>
     </div>

@@ -1,9 +1,11 @@
+import { UserService } from 'src/app/services/user.service';
 import { GroupService } from './../../services/group.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Group } from 'src/app/shared/models/group.model';
 import { Poszt } from 'src/app/shared/models/poszt.model';
 import { PosztService } from 'src/app/services/poszt.service';
+import { User } from 'src/app/shared/models/user.model';
 
 @Component({
   selector: 'app-display-group',
@@ -12,13 +14,15 @@ import { PosztService } from 'src/app/services/poszt.service';
 })
 export class DisplayGroupComponent implements OnInit {
 
-  group?: Group[];
+  @Input() group!: Group;
   ize = 1;
   poszts?: Poszt[];
+  tulaj?: User;
 
   constructor(private _Activatedroute: ActivatedRoute,
     private groupService: GroupService,
     private posztService: PosztService,
+    private userService: UserService
     ) { }
 
   ngOnInit(): void {
@@ -27,10 +31,17 @@ export class DisplayGroupComponent implements OnInit {
     });
   }
 
-  getGroup(id: Number): void {
+  getTulaj(id: number): void {
+    this.userService.getUserByID(id).subscribe(user => {
+      this.tulaj = user;
+      console.log(this.tulaj);
+    });
+  }
+
+  getGroup(id: number): void {
     this.groupService.getGroupById(id).subscribe(group => {
       this.group = group;
-      // console.log(this.group);
+      this.getTulaj(group.tulaj_id);
     })
   }
 

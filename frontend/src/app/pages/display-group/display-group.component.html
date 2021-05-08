@@ -1,11 +1,11 @@
-<div *ngFor="let group of group">
+<div>
   <mat-toolbar>
     <mat-toolbar-row>
-      <span><h1>{{group.nev}}</h1></span>
+      <span><h1>{{group?.nev}}</h1></span>
       <span>|</span>
-      <span>Tagok: {{group.tagok}}</span>
+      <span>Tagok: {{group?.tagok}}</span>
       <span>|</span>
-      <span>Tulaj: {{group.tulaj_knev + " " + group.tulaj_vnev}}</span>
+      <span>Tulaj: {{tulaj?.knev + " " + tulaj?.vnev}}</span>
     </mat-toolbar-row>
   </mat-toolbar>
   <mat-card>
@@ -13,7 +13,7 @@
       <mat-card-title>Leírás</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      {{group.leiras}}
+      {{group?.leiras}}
     </mat-card-content>
   </mat-card>
 </div>
