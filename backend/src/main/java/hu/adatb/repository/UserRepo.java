@@ -43,6 +43,8 @@ public class UserRepo {
             "FELHASZNALO f inner join ISMEROS i on f.ID = i.FELHASZNALO1_ID where " +
             "i.FELHASZNALO1_ID = :ID AND f.ID NOT LIKE :ID " +
             "or i.FELHASZNALO2_ID = :ID AND f.ID NOT LIKE :ID";
+    private static final String FRIEND_REQUEST = "insert into ISMEROS values (?, ?)";
+
 
     public UserRepo(NamedParameterJdbcTemplate namedJdbc, JdbcTemplate jdbcTemplate) {
         this.namedJdbc = namedJdbc;
