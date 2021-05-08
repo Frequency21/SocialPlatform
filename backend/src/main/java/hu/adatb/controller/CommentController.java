@@ -11,7 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@RestController("/api/komment/")
+@RestController
+@RequestMapping(value = "/api/komment/")
 public class CommentController {
 
     private final CommentRepo commentRepo;
