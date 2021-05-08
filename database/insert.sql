@@ -11,6 +11,12 @@ INSERT INTO Felhasznalo (jelszo, email, nev, csatl_dat, szul_dat, munka_iskola, 
 commit;
 /
 
+INSERT INTO ISMEROS(felhasznalo1_id, felhasznalo2_id) VALUES(7, 1);
+INSERT INTO ISMEROS(felhasznalo1_id, felhasznalo2_id) VALUES(7, 2);
+INSERT INTO ISMEROS(felhasznalo1_id, felhasznalo2_id) VALUES(7, 3);
+COMMIT;
+/
+
 insert into POSZT(IDOPONT, SZERZO_ID, CSOPORT_ID, FELHASZNALO_ID, SZOVEG, ERTEKELES, ISPUBLIC)
 values (systimestamp, 1, null, 2, 'boldog születésnapot', ERTEKELES(1,2), 1);
 

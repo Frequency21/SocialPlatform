@@ -40,7 +40,7 @@ public class UserRepo {
             "WHERE id = :id";
     private static final String USER_ISMEROSEI = "select ID, JELSZO, EMAIL, f.NEV.VEZETEKNEV as VNEV, f.NEV.KERESZTNEV " +
             "as KNEV, CSATL_DAT, SZUL_DAT, MUNKA_ISKOLA, PICTURE, ISADMIN from " +
-            "(select * from FELHASZNALO where ID = :ID) f inner join ISMEROS i on f.ID = i.FELHASZNALO1_ID where " +
+            "FELHASZNALO f inner join ISMEROS i on f.ID = i.FELHASZNALO1_ID where " +
             "i.FELHASZNALO1_ID = :ID or i.FELHASZNALO2_ID = :ID";
 
     public UserRepo(NamedParameterJdbcTemplate namedJdbc, JdbcTemplate jdbcTemplate) {

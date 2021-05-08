@@ -2,6 +2,7 @@ import { UserService } from 'src/app/services/user.service';
 import { Uzenet } from './../../shared/models/uzenet.model';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Component, OnInit, Inject } from '@angular/core';
+import { User } from 'src/app/shared/models/user.model';
 
 @Component({
   selector: 'app-chit-chat',
@@ -13,12 +14,14 @@ export class ChitChatComponent implements OnInit {
     szoveg: new FormControl()
   })
   senderID?: number;
+  friends?: User[];
 
   constructor(
     private userService: UserService
   ) { }
 
   ngOnInit(): void {
+    this.getFriends();
   }
 
   sendMessage(): void {
@@ -37,6 +40,13 @@ export class ChitChatComponent implements OnInit {
     this.userService.userSource.subscribe(user => {
       this.senderID = Number(user.id);
     })
+  }
+
+  getFriends(): void {
+    this.getCurrentUser();
+    this.userService.getFriendsById(Number(this.senderID)).subscribe(friends => {
+      this.friends = friends;
+    });
   }
 
 }

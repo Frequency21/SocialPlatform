@@ -1,10 +1,14 @@
 <div class="user-list">
-  <section class="user">
-    |kép| Kiss János
-  </section>
-  <section class="user">
-    |kép| Nagy Katalin
-  </section>
+  <h3>Ismerősök</h3>
+  <hr>
+  <div class="container" *ngFor="let friend of friends">
+    <section >
+      <button mat-button class="user">
+        <img class="chat-head" mat-card-avatar *ngIf="friend.picture" [src]="friend!.picture"/>
+        {{friend.knev + " " + friend.vnev}}
+      </button>
+    </section>
+  </div>
 </div>
 
 <div class="message-area">

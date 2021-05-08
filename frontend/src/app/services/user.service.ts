@@ -27,6 +27,10 @@ export class UserService {
     return this.http.post<number>(this.rootUrl + 'update', user);
   }
 
+  public getFriendsById(id: number): Observable<User[]> {
+    return this.http.get<User[]>(this.rootUrl + "ismerosei/" + id);
+  }
+
   public deleteUser(id: number) {
     return this.http.delete<Boolean>(this.rootUrl + id);
   }
