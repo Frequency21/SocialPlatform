@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 
@@ -50,7 +51,7 @@ public class MessageRepo {
     }
 
     public boolean insert(Message message) {
-        return jdbcTemplate.update(INSERT_MESSAGE, message.getIdopont(), message.getKuldoId(), message.getCimzettId(),
+        return jdbcTemplate.update(INSERT_MESSAGE, new Date(System.currentTimeMillis()), message.getKuldoId(), message.getCimzettId(),
                 message.getSzoveg()) == 1;
     }
 

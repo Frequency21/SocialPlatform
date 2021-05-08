@@ -20,9 +20,13 @@ INSERT INTO Csoport(leiras,nev,tulaj_id) VALUES('Brühühűűűűűű, még nagy
 commit;
 /
 
-INSERT INTO ISMEROS(felhasznalo1_id, felhasznalo2_id) VALUES(7, 1);
-INSERT INTO ISMEROS(felhasznalo1_id, felhasznalo2_id) VALUES(7, 2);
-INSERT INTO ISMEROS(felhasznalo1_id, felhasznalo2_id) VALUES(7, 3);
+INSERT INTO ISMEROS(felhasznalo1_id, felhasznalo2_id) VALUES(1, 2);
+INSERT INTO ISMEROS(felhasznalo1_id, felhasznalo2_id) VALUES(1, 3);
+INSERT INTO ISMEROS(felhasznalo1_id, felhasznalo2_id) VALUES(1, 5);
+INSERT INTO ISMEROS(felhasznalo1_id, felhasznalo2_id) VALUES(1, 6);
+
+INSERT INTO ISMEROS(felhasznalo1_id, felhasznalo2_id) VALUES(2, 3);
+INSERT INTO ISMEROS(felhasznalo1_id, felhasznalo2_id) VALUES(2, 6);
 COMMIT;
 /
 
@@ -52,3 +56,13 @@ values (systimestamp, 5, null, 6, 'mi lesz a vacsi?', ERTEKELES(1,2), 1);
 
 commit;
 /
+
+insert into UZENET(IDOPONT, KULDO_ID, CIMZETT_ID, SZOVEG) values (systimestamp, 1, 2, 'olah');
+insert into UZENET(IDOPONT, KULDO_ID, CIMZETT_ID, SZOVEG) values (systimestamp, 2, 1, 'chirio');
+insert into UZENET(IDOPONT, KULDO_ID, CIMZETT_ID, SZOVEG) values (systimestamp, 1, 2, 'occam házi megvan már? :tireddolife:');
+insert into UZENET(IDOPONT, KULDO_ID, CIMZETT_ID, SZOVEG) values (systimestamp, 2, 1, ':peposuicide:');
+
+insert into UZENET(IDOPONT, KULDO_ID, CIMZETT_ID, SZOVEG) values (systimestamp, 1, 3, 'olah');
+insert into UZENET(IDOPONT, KULDO_ID, CIMZETT_ID, SZOVEG) values (systimestamp, 3, 1, 'chirio');
+insert into UZENET(IDOPONT, KULDO_ID, CIMZETT_ID, SZOVEG) values (systimestamp, 1, 3, 'prolog zh-ra készültél már?');
+insert into UZENET(IDOPONT, KULDO_ID, CIMZETT_ID, SZOVEG) values (systimestamp, 3, 1, ':peposuicide:');
