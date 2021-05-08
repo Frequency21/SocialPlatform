@@ -12,7 +12,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(value = "/api/komment/")
+@RequestMapping(value = "/api/komment")
 public class CommentController {
 
     private final CommentRepo commentRepo;
@@ -21,19 +21,19 @@ public class CommentController {
         this.commentRepo = commentRepo;
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public Comment get(
             @PathVariable("id") long id
     ) {
         return commentRepo.get(id);
     }
 
-    @GetMapping("all")
+    @GetMapping("/all")
     public List<Comment> getAll() {
         return commentRepo.getAll();
     }
 
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     public boolean update(
             @PathVariable("id") long id,
             @RequestBody Comment to
@@ -42,7 +42,7 @@ public class CommentController {
     }
 
     // TODO: 2021. 05. 07. összes komment adott poszthoz idősorrendben növekvő
-    @GetMapping(value = "posztok/{id}")
+    @GetMapping(value = "/posztok/{id}")
     public List<Comment> getCommentsForPost(
             @PathVariable("id") long id
     ) {
@@ -50,15 +50,15 @@ public class CommentController {
     }
 
     // TODO: 2021. 05. 07. kommentelés poszt alá
-    @PostMapping(value = "{poszt_id}")
-    public long getCommentsForPost(
-            @PathVariable("poszt_id") long posztId,
-            @RequestBody Comment comment
-    ) {
-        return 1;
-    }
+//    @PostMapping(value = "/{poszt_id}")
+//    public boolean addComment(
+//            @PathVariable("poszt_id") long posztId,
+//            @RequestBody Comment comment
+//    ) {
+//        return commentRepo.save(comment);
+//    }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public boolean delete(
             @PathVariable("id") long id
     ) {
