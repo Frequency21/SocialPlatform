@@ -4,7 +4,7 @@
   <div class="container" *ngFor="let friend of friends">
     <section >
       <button mat-button class="user" (click)="openChat(friend.id)">
-        <img class="chat-head" mat-card-avatar *ngIf="friend.picture" [src]="friend!.picture"/>
+        <img mat-card-avatar class="chat-head" [src]="friend!.picture" onerror="this.src='https://image.slidesharecdn.com/iamunhappybut-170217143318/95/i-am-unhappy-but-3-638.jpg?cb=1487342015'">
         {{friend.knev + " " + friend.vnev}}
       </button>
     </section>
@@ -16,7 +16,7 @@
     <img id="img" *ngIf="!messages" src="https://image.slidesharecdn.com/iamunhappybut-170217143318/95/i-am-unhappy-but-3-638.jpg?cb=1487342015" alt="WoW so empty!">
     <div *ngFor="let msg of messages">
       <div [ngClass]="{'mine': msg.kuldo_id == sender.id, 'not-mine': msg.kuldo_id != sender.id}">
-        <img class="sender-pic" *ngIf="!!messages" [src]="msg!.fenykep" alt="WoW so empty!">
+        <img class="sender-pic" *ngIf="!!messages" [src]="msg!.fenykep" alt="WoW so empty!" onerror="this.src='https://image.slidesharecdn.com/iamunhappybut-170217143318/95/i-am-unhappy-but-3-638.jpg?cb=1487342015'">
         <p class="msg">{{msg.szoveg}}</p>
         <button mat-mini-fab *ngIf="mine(msg.kuldo_id)" class="delete-btn" (click)="deleteMessage(msg.id)">
           <mat-icon>delete</mat-icon>
