@@ -50,7 +50,7 @@ public class CategoryRepo {
     public List<Category> getAllById(long id) {
         MapSqlParameterSource map = new MapSqlParameterSource()
                 .addValue("FELH_ID", id);
-        return jdbcTemplate.query(SELECT_ALL_BY_ID, map, CategoryRepo::mapRow);
+        return namedJdbc.query(SELECT_ALL_BY_ID, map, CategoryRepo::mapRow);
     }
 
     public boolean save(Category category) {

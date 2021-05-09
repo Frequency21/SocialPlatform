@@ -25,7 +25,7 @@ export class ModalKommentComponent implements OnInit {
   constructor(
     private router: Router,
     public dialogRef: MatDialogRef<ModalKommentComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: GroupDialog,
+    @Inject(MAT_DIALOG_DATA) public data: KommentDialog,
     private posztService: PosztService,
     private commentService: CommentService
   ) { }

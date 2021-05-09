@@ -24,9 +24,14 @@ INSERT INTO ISMEROS(felhasznalo1_id, felhasznalo2_id) VALUES(1, 2);
 INSERT INTO ISMEROS(felhasznalo1_id, felhasznalo2_id) VALUES(1, 3);
 INSERT INTO ISMEROS(felhasznalo1_id, felhasznalo2_id) VALUES(1, 5);
 INSERT INTO ISMEROS(felhasznalo1_id, felhasznalo2_id) VALUES(1, 6);
-
 INSERT INTO ISMEROS(felhasznalo1_id, felhasznalo2_id) VALUES(2, 3);
 INSERT INTO ISMEROS(felhasznalo1_id, felhasznalo2_id) VALUES(2, 6);
+INSERT INTO Ismeros(felhasznalo1_id, felhasznalo2_id) VALUES(7,12);
+insert into ismeros(felhasznalo1_id, felhasznalo2_id) VALUES (2, 3);
+insert into ismeros(felhasznalo1_id, felhasznalo2_id) VALUES (3, 6);
+insert into ismeros(felhasznalo1_id, felhasznalo2_id) VALUES (1, 4);
+insert into ismeros(felhasznalo1_id, felhasznalo2_id) VALUES (2, 5);
+insert into ismeros(felhasznalo1_id, felhasznalo2_id) VALUES (5, 6);
 COMMIT;
 /
 
@@ -61,7 +66,6 @@ insert into UZENET(IDOPONT, KULDO_ID, CIMZETT_ID, SZOVEG) values (systimestamp, 
 insert into UZENET(IDOPONT, KULDO_ID, CIMZETT_ID, SZOVEG) values (systimestamp, 2, 1, 'chirio');
 insert into UZENET(IDOPONT, KULDO_ID, CIMZETT_ID, SZOVEG) values (systimestamp, 1, 2, 'occam házi megvan már? :tireddolife:');
 insert into UZENET(IDOPONT, KULDO_ID, CIMZETT_ID, SZOVEG) values (systimestamp, 2, 1, ':peposuicide:');
-
 insert into UZENET(IDOPONT, KULDO_ID, CIMZETT_ID, SZOVEG) values (systimestamp, 1, 3, 'olah');
 insert into UZENET(IDOPONT, KULDO_ID, CIMZETT_ID, SZOVEG) values (systimestamp, 3, 1, 'chirio');
 insert into UZENET(IDOPONT, KULDO_ID, CIMZETT_ID, SZOVEG) values (systimestamp, 1, 3, 'prolog zh-ra készültél már?');

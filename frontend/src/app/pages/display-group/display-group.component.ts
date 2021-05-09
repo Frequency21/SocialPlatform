@@ -45,7 +45,7 @@ export class DisplayGroupComponent implements OnInit {
     this.groupService.getGroupById(id).subscribe(group => {
       this.group = group;
       this.getTulaj(group.tulaj_id);
-      this.getPoszts(group.csoport_id);
+      this.getPoszts(Number(group.csoport_id));
     })
   }
 
@@ -62,11 +62,6 @@ export class DisplayGroupComponent implements OnInit {
     });
   }
 
-  getMembers(id: number): void {
-    this.groupService.getMembers(id).subscribe(members => {
-      this.members = members;
-    });
-  }
 
   joinGroup(id: number): void {
     console.log("csoport id: " + id + "| felhasználó id: " + this.currentUser?.id);

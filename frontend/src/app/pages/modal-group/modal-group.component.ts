@@ -28,11 +28,11 @@ export class ModalGroupComponent implements OnInit {
 
   saveGroup(): void {
     var newGroup: Group = {
-      csoport_id: undefined,
+      csoport_id: null,
       leiras: this.form.value.leiras,
       nev: this.form.value.nev,
       tulaj_id: this.data.tulaj_id,
-      tagok: undefined
+      tagok: 0
     }
     this.groupService.addGroup(newGroup).subscribe(ret => {
       console.log(ret);

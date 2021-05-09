@@ -30,7 +30,7 @@ CREATE TYPE ERTEKELES AS OBJECT
 
 CREATE TABLE Felhasznalo
 (
-    ID           NUMBER GENERATED ALWAYS as IDENTITY PRIMARY KEY,
+    ID       map     NUMBER GENERATED ALWAYS as IDENTITY PRIMARY KEY,
     jelszo       VARCHAR2(32)                   NOT NULL,
     email        VARCHAR2(128)                  NOT NULL UNIQUE,
     nev          NEVTIPUS                       NOT NULL,
