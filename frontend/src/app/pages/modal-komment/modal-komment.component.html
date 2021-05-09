@@ -1,7 +1,15 @@
 <div class="centering">
   <div *ngFor="let komment of komments">
-    <mat-card>
-      <label>{{komment.szoveg}}</label>
+    <mat-card class="komment">
+      <label class="kommenter">
+        <mat-card-actions>
+          <a class="kommenter_lookup" mat-button [routerLink]="['../user/',komment.komment_iro_id]">
+            {{komment.szerzo_knev + " " + komment.szerzo_vnev}}
+          </a>
+        </mat-card-actions>
+      </label>
+      <hr>
+      {{komment.szoveg}}
     </mat-card>
   </div>
   <mat-card>

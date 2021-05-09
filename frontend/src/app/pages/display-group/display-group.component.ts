@@ -6,6 +6,7 @@ import { Group } from 'src/app/shared/models/group.model';
 import { Poszt } from 'src/app/shared/models/poszt.model';
 import { PosztService } from 'src/app/services/poszt.service';
 import { User } from 'src/app/shared/models/user.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-display-group',
@@ -18,12 +19,16 @@ export class DisplayGroupComponent implements OnInit {
   ize = 1;
   poszts?: Poszt[];
   tulaj?: User;
+  subscription: Subscription;
+  currentUser?: User;
 
   constructor(private _Activatedroute: ActivatedRoute,
     private groupService: GroupService,
     private posztService: PosztService,
-    private userService: UserService
-    ) { }
+    private userService: UserService,
+    ) {
+      this.subscription = this.userService.userSource.subscribe(user => this.currentUser = user);
+    }
 
   ngOnInit(): void {
     this._Activatedroute.paramMap.subscribe(params => {
@@ -52,4 +57,10 @@ export class DisplayGroupComponent implements OnInit {
     });
   }
 
+  joinGroup(id: number): void {
+    console.log("csoport id: " + id + "| felhasználó id: " + this.currentUser?.id);
+    this.userService.joinGroup(id, Number(this.currentUser?.id)).subscribe(ret => {
+      console.log("jeay")
+    });
+  }
 }

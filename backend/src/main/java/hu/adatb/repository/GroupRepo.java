@@ -3,6 +3,7 @@ package hu.adatb.repository;
 
 import hu.adatb.model.Group;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -19,6 +20,7 @@ public class GroupRepo {
     private final JdbcTemplate jdbcTemplate;
     private final NamedParameterJdbcTemplate namedJdbc;
     private static final String SAVE_GROUP = "insert into CSOPORT(NEV, LEIRAS, TULAJ_ID) VALUES (:NEV, :LEIRAS, :TULAJ_ID)";
+    private static final String JOIN_GROUP = "INSERT INTO TAGJA(FELHASZNALO_ID, CSOPORT_ID) VALUES(:FELHASZNALO_ID, :CSOPORT_ID)";
     private static final String SELECT_GROUP_BY_ID = "select * from CSOPORT where CSOPORT_ID = ?";
     private static final String SELECT_ALL = "select * from CSOPORT";
     private static final String UPDATE_BY_ID = "update CSOPORT set LEIRAS = ?, NEV = ?, TULAJ_ID = ? where CSOPORT_ID = ?";
@@ -50,6 +52,20 @@ public class GroupRepo {
                 new String[]{"CSOPORT_ID"}
         );
         return kh.getKey().longValue();
+    }
+
+    public boolean join(long csoport_id, long felh_id) {
+        try {
+            namedJdbc.update(
+                    JOIN_GROUP,
+                    new MapSqlParameterSource()
+                            .addValue("FELHASZNALO_ID", felh_id)
+                            .addValue("CSOPORT_ID", csoport_id));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     public Group get(long id) {

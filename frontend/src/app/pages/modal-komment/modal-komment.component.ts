@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { CommentService } from './../../services/comment.service';
 import { KommentDialog } from './../../shared/models/kommentDialog.model';
 import { Komment } from './../../shared/models/komment.model';
@@ -18,9 +19,10 @@ export class ModalKommentComponent implements OnInit {
     szoveg: new FormControl(),
     isPublic: new FormControl()
   });
-  komments?: Comment[];
+  komments?: Komment[];
 
   constructor(
+    private router: Router,
     public dialogRef: MatDialogRef<ModalKommentComponent>,
     @Inject(MAT_DIALOG_DATA) public data: KommentDialog,
     private posztService: PosztService,
@@ -35,6 +37,8 @@ export class ModalKommentComponent implements OnInit {
     let newKomment: Komment = {
       idopont: "",
       komment_iro_id: this.data.komment_iro_id,
+      szerzo_knev: "",
+      szerzo_vnev: "",
       poszt_id: Number(this.data.poszt_id),
       szoveg: this.form.value.szoveg,
       ertekeles : {

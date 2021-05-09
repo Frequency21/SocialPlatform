@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { ModalKommentComponent } from './modal-komment.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -14,6 +15,7 @@ import { MatDialogModule } from '@angular/material/dialog';
   declarations: [ModalKommentComponent],
   imports: [
     CommonModule,
+    RouterModule,
     MatDialogModule,
     MatButtonModule,
     MatDialogModule,

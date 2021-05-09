@@ -1,13 +1,12 @@
 package hu.adatb.controller;
 
-import hu.adatb.model.Comment;
+import hu.adatb.model.Komment;
 import hu.adatb.repository.CommentRepo;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -22,28 +21,28 @@ public class CommentController {
     }
 
     @GetMapping("/{id}")
-    public Comment get(
+    public Komment get(
             @PathVariable("id") long id
     ) {
         return commentRepo.get(id);
     }
 
     @GetMapping("/all")
-    public List<Comment> getAll() {
+    public List<Komment> getAll() {
         return commentRepo.getAll();
     }
 
     @PutMapping("/{id}")
     public boolean update(
             @PathVariable("id") long id,
-            @RequestBody Comment to
+            @RequestBody Komment to
     ) {
         return commentRepo.update(id, to);
     }
 
     // TODO: 2021. 05. 07. összes komment adott poszthoz idősorrendben növekvő
     @GetMapping(value = "/poszt/{id}")
-    public List<Comment> getCommentsForPost(
+    public List<Komment> getCommentsForPost(
             @PathVariable("id") long id
     ) {
         return this.commentRepo.getAllByPostId(id);
@@ -52,7 +51,7 @@ public class CommentController {
     // TODO: 2021. 05. 07. kommentelés poszt alá
     @PostMapping(value = "/")
     public Long addComment(
-            @RequestBody Comment comment
+            @RequestBody Komment comment
     ) {
         System.out.println(comment);
         return commentRepo.save(comment);

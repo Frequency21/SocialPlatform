@@ -5,11 +5,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Date;
 
 
-public class Comment {
+public class Komment {
     private long id;
     private Date idopont;
     @JsonProperty("komment_iro_id")
     private long kommentIroId;
+    @JsonProperty("szerzo_knev")
+    private String szerzoKNEV;
+    @JsonProperty("szerzo_vnev")
+    private String szerzoVNEV;
     @JsonProperty("poszt_id")
     private long posztId;
     private String szoveg;
@@ -17,7 +21,7 @@ public class Comment {
     private int dislike;
     private boolean isPublic;
 
-    public Comment() { }
+    public Komment() { }
 
     public long getId() {
         return id;
@@ -41,6 +45,22 @@ public class Comment {
 
     public void setKommentIroId(long kommentIroId) {
         this.kommentIroId = kommentIroId;
+    }
+
+    public String getSzerzoKNEV() {
+        return szerzoKNEV;
+    }
+
+    public void setSzerzoKNEV(String szerzoKNEV) {
+        this.szerzoKNEV = szerzoKNEV;
+    }
+
+    public String getSzerzoVNEV() {
+        return szerzoVNEV;
+    }
+
+    public void setSzerzoVNEV(String szerzoVNEV) {
+        this.szerzoVNEV = szerzoVNEV;
     }
 
     public long getPosztId() {
@@ -85,7 +105,7 @@ public class Comment {
 
     @Override
     public String toString() {
-        return "Comment{" +
+        return "Komment{" +
                 "id=" + id +
                 ", idopont=" + idopont +
                 ", kommentIroId=" + kommentIroId +

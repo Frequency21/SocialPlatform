@@ -34,6 +34,14 @@ public class GroupController {
         return groupRepo.save(group);
     }
 
+    @PostMapping(value = "join")
+    public boolean join(
+            @RequestParam("csoport_id") long csop_id,
+            @RequestParam("felh_id") long felh_id
+    ) {
+        return groupRepo.join(csop_id, felh_id);
+    }
+
     @DeleteMapping(value = "{id}")
     public boolean delete(@PathVariable("id") long id) {
         return groupRepo.delete(id);

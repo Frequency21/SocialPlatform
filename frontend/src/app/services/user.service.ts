@@ -97,4 +97,11 @@ export class UserService {
       .set('id_2', "" + id_2);
     return this.http.post<boolean>(this.rootUrl,params);
   }
+
+  joinGroup(csoport_id: number, felh_id: number): Observable<boolean> {
+    let params = new HttpParams()
+      .set('csoport_id', "" + csoport_id)
+      .set('felh_id', "" + felh_id);
+    return this.http.post<boolean>("http://localhost:8081/api/group/join", params);
+  }
 }

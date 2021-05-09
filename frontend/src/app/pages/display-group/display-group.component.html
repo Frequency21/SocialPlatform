@@ -14,6 +14,9 @@
     </mat-card-header>
     <mat-card-content>
       {{group?.leiras}}
+      <label>
+        <button mat-mini-fab (click)="joinGroup(group?.csoport_id)"><mat-icon>add</mat-icon></button>
+      </label>
     </mat-card-content>
   </mat-card>
 </div>

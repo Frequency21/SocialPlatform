@@ -1,3 +1,6 @@
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatButton } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -13,7 +16,9 @@ import { MatCardModule } from '@angular/material/card';
     CommonModule,
     MatToolbarModule,
     RouterModule,
-    MatCardModule
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule
   ],
   exports: [DisplayGroupComponent]
 })
