@@ -71,7 +71,7 @@ export class DisplayUserComponent implements OnInit {
     console.log("poszt id: " + Number(val_id));
     const dialogRef = this.dialog.open(ModalKommentComponent, {
       width: '40%',
-      data: {komment_iro_id : this.szerzo, poszt_felh_id: val_id, poszt_idopont: ""}
+      data: {komment_iro_id : this.currentUser?.id, poszt_felh_id: val_id, poszt_idopont: ""}
     });
 
     dialogRef.afterClosed().subscribe(result => {

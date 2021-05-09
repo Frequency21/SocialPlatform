@@ -5,7 +5,8 @@
     <div *ngFor="let user of users">
       <mat-card class="card">
         <mat-card-header>
-          <img mat-card-avatar *ngIf="user.picture" [src]="user!.picture"/>
+          <!--- *ngIf="user.picture" [src]="user!.picture"-->
+          <img mat-card-avatar [src]="user!.picture" onerror="this.src='https://image.slidesharecdn.com/iamunhappybut-170217143318/95/i-am-unhappy-but-3-638.jpg?cb=1487342015'">
           <mat-card-title>{{user.vnev + " " + user.knev}}</mat-card-title>
           <mat-card-subtitle>#{{user.id}}</mat-card-subtitle>
         </mat-card-header>
