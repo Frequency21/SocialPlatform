@@ -99,6 +99,7 @@ A posztokhoz tartozhatnak kommentek, bárki hagyhat kommentet aki láthatja a po
 ---
 
 ## Egyed-kapcsolat diagramm
+![Egyed-kapcsolat diagram](./ekSocialPlatform.png)
 
 
 
