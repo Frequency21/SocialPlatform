@@ -22,7 +22,7 @@ import java.util.List;
 public class PostRepo {
     private final NamedParameterJdbcTemplate namedJdbc;
     private final JdbcTemplate jdbcTemplate;
-
+    private static final String DELETE_POSZT = "delete from POSZT where ID = ?";
     private static final String SELECT_ALL = "select ID, IDOPONT, SZERZO_ID, CSOPORT_ID, FELHASZNALO_ID, SZOVEG, " +
             "p.ERTEKELES.LIKE_SZAMLALO as \"like\", p.ERTEKELES.DISLIKE_SZAMLALO as dislike, ISPUBLIC from POSZT p";
 
@@ -100,6 +100,10 @@ public class PostRepo {
     public List<Post> getPostByUserId(int id) {
         MapSqlParameterSource map = new MapSqlParameterSource("FELHASZNALO_ID", id);
         return namedJdbc.query(SELECT_ALL_BY_USER_ID, map, PostRepo::extractPosts);
+    }
+
+    public boolean deletePoszt(int id) {
+        return jdbcTemplate.update(DELETE_POSZT, id) == 1;
     }
 
 }

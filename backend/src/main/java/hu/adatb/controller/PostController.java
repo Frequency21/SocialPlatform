@@ -42,6 +42,13 @@ public class PostController {
         return postRepo.insertPost(post);
     }
 
+    @DeleteMapping(value = "/{id}")
+    public boolean deleteUser(
+            @PathVariable("id") int id
+    ) {
+        return postRepo.deletePoszt(id);
+    }
+
     @ExceptionHandler({DataIntegrityViolationException.class})
     public HttpStatus conflict() {
         return HttpStatus.CONFLICT;

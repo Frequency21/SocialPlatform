@@ -34,8 +34,11 @@ export class PosztService {
   }
 
   addKomment(komment: Komment): Observable<Komment> {
-    console.log("AddKomment(" + komment + ")");
     return this.http.post<Komment>(this.rootUrl + "addKomment", komment);
+  }
+
+  delete(id: number): Observable<boolean> {
+    return this.http.delete<boolean>(this.rootUrl + "/" + id);
   }
 
 }

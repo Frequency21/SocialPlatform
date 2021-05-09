@@ -47,6 +47,11 @@
           </div>
         </div>
       </section>
+      <button *ngIf="poszt.felhasznalo_id == currentUser?.id" mat-mini-fab (click)="deletePoszt(poszt.id)">
+        <mat-icon>
+          delete
+        </mat-icon>
+      </button>
     </mat-card>
   </div>
 </div>

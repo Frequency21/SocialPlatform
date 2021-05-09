@@ -83,4 +83,10 @@ export class DisplayUserComponent implements OnInit {
     return this.currentUser == undefined;
   }
 
+  deletePoszt(id: number): void {
+    this.posztService.delete(id).subscribe(ret => {
+      console.log(ret);
+    });
+  }
+
 }
