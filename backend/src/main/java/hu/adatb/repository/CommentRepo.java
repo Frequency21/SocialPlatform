@@ -23,10 +23,11 @@ public class CommentRepo {
     private static final String INSERT_COMMENT = "INSERT INTO KOMMENT(IDOPONT, KOMMENT_IRO_ID, POSZT_ID, SZOVEG, ERTEKELES, ISPUBLIC)" +
             "VALUES(:IDOPONT, :KOMMENT_IRO_ID, :POSZT_ID, :SZOVEG, ERTEKELES(:LIKE, :DISLIKE), :ISPUBLIC)";
     private static final String SELECT_BY_ID = "select ID, IDOPONT, KOMMENT_IRO_ID, POSZT_ID, SZOVEG, " +
-            "ERTEKELES.LIKE_SZAMLALO as \"like\", ERTEKELES.DISLIKE_SZAMLALO as dislike, ISPUBLIC from KOMMENT where ID = :ID";
+            "ERTEKELES.LIKE_SZAMLALO as \"like\", ERTEKELES .DISLIKE_SZAMLALO as dislike, ISPUBLIC from KOMMENT where ID = :ID";
     private static final String UPDATE_BY_ID = "update KOMMENT k set IDOPONT = ?, KOMMENT_IRO_ID = ?, POSZT_ID = ?, " +
             "SZOVEG = ?, k.ERTEKELES = ERTEKELES(?, ?), ISPUBLIC = ? where ID = ?";
     private static final String DELETE_BY_ID = "delete from KOMMENT where ID = ?";
+    private static final String SElECT_ALL_BY_POST_ID = "SELECT ID, IDOPONT, KOMMENT_IRO_ID, POSZT_ID, SZOVEG, k.ERTEKELES.LIKE_SZAMLALO as \"like\", k.ERTEKELES.DISLIKE_SZAMLALO as dislike, ISPUBLIC FROM KOMMENT k WHERE k.POSZT_ID = :POSZT_ID";
 
     public CommentRepo(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedJdbc) {
         this.jdbcTemplate = jdbcTemplate;
@@ -54,12 +55,6 @@ public class CommentRepo {
         return jdbcTemplate.query(SELECT_ALL, CommentRepo::mapRow);
     }
 
-    /*
-
-    private static final String INSERT_COMMENT = "INSERT INTO KOMMENT(IDOPONT, KOMMENT_IRO_ID, POSZT_ID, SZOVEG, ERTEKELES, ISPUBLIC)" +
-            "VALUES(:IDOPONT, :KOMMENT_IRO_ID, :POSZT_ID, :SZOVEG, ERTEKELES(:LIKE, :DISLIKE), :ISPUBLIC)";
-     */
-
     public Long save(Comment comment) {
         KeyHolder kh = new GeneratedKeyHolder();
         MapSqlParameterSource map = new MapSqlParameterSource()
@@ -77,6 +72,11 @@ public class CommentRepo {
             return null;
         }
         return kh.getKey().longValue();
+    }
+
+    public List<Comment> getAllByPostId(long id) {
+        MapSqlParameterSource map = new MapSqlParameterSource("POSZT_ID", id);
+        return namedJdbc.query(SElECT_ALL_BY_POST_ID, map, CommentRepo::mapRow);
     }
 
     public boolean update(long id, Comment to) {

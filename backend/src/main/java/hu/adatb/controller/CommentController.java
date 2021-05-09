@@ -42,11 +42,11 @@ public class CommentController {
     }
 
     // TODO: 2021. 05. 07. összes komment adott poszthoz idősorrendben növekvő
-    @GetMapping(value = "/posztok/{id}")
+    @GetMapping(value = "/poszt/{id}")
     public List<Comment> getCommentsForPost(
             @PathVariable("id") long id
     ) {
-        return new ArrayList<>();
+        return this.commentRepo.getAllByPostId(id);
     }
 
     // TODO: 2021. 05. 07. kommentelés poszt alá
