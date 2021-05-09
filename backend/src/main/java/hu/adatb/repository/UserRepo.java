@@ -1,24 +1,17 @@
 package hu.adatb.repository;
 
 import hu.adatb.model.User;
-import org.slf4j.LoggerFactory;
-import org.slf4j.Logger;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.*;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
-import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 @Repository
@@ -41,18 +34,12 @@ public class UserRepo {
             "SET JELSZO = :JELSZO, EMAIL = :EMAIL, NEV = NEVTIPUS(:VNEV, :KNEV), " +
             "SZUL_DAT = :SZUL_DAT, MUNKA_ISKOLA = :MUNKA_ISKOLA " +
             "WHERE id = :id";
-    private static final String USER_ISMEROSEI = "select ID, JELSZO, EMAIL, f.NEV.VEZETEKNEV as VNEV, f.NEV.KERESZTNEV " +
-            "as KNEV, CSATL_DAT, SZUL_DAT, MUNKA_ISKOLA, PICTURE, ISADMIN from " +
-            "FELHASZNALO f inner join ISMEROS i on f.ID = i.FELHASZNALO1_ID OR f.ID = i.FELHASZNALO2_ID where " +
-            "i.FELHASZNALO1_ID = :ID AND f.ID != :ID " +
-            "or i.FELHASZNALO2_ID = :ID AND f.ID != :ID";
     private static final String FRIEND_REQUEST = "insert into ISMEROS values (?, ?)";
 
 
     public UserRepo(NamedParameterJdbcTemplate namedJdbc, JdbcTemplate jdbcTemplate) {
         this.namedJdbc = namedJdbc;
         this.jdbcTemplate = jdbcTemplate;
-        DataSource ds = this.jdbcTemplate.getDataSource();
     }
 
     /* a mapRow szebb megoldás lenne, de már nem fogom refaktorálni arra (lásd GroupRepo) */

@@ -1,8 +1,6 @@
 package hu.adatb.repository;
 
 import hu.adatb.model.Post;
-import hu.adatb.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -53,12 +51,6 @@ public class PostRepo {
         return result;
     }
 
-    private static Post extractPost(ResultSet rs) throws SQLException {
-        Post result = new Post();
-        if (rs.next()) result = getPost(rs);
-        return result;
-    }
-
     private static Post getPost(ResultSet rs) throws SQLException {
         Post result;
         result = new Post();
@@ -96,7 +88,6 @@ public class PostRepo {
 
     @Transactional
     public List<Post> getPosts() {
-        List<Post> res = jdbcTemplate.query(SELECT_ALL, PostRepo::extractPosts);
         return jdbcTemplate.query(SELECT_ALL, PostRepo::extractPosts);
     }
 

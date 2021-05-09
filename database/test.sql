@@ -256,7 +256,11 @@ begin
     from
         FELHASZNALO f inner join ISMEROS i 
     on 
-            f.ID = i.FELHASZNALO1_ID where i.FELHASZNALO1_ID = felh_id AND f.ID != felh_id 
+            f.ID = i.FELHASZNALO1_ID
+        or
+            f.ID = i.FELHASZNALO2_ID
+    where 
+            i.FELHASZNALO1_ID = felh_id AND f.ID != felh_id 
         or 
             i.FELHASZNALO2_ID = felh_id AND f.ID != felh_id;
 end;
@@ -270,6 +274,15 @@ end;
 -- az ismerettség szimmetrikus reláció, értelmetlen lenne letárolni, hogy
 -- 1 ismeri 2-őt és 2 ismeri 1-et, ezért az ISMEROS tábla az id-kat rendezve
 -- tárolja --> egy trigger gondoskodik erről mind insert mind update előtt
+
+create or replace trigger CSOPORT_TRIGGER
+    after insert 
+    on CSOPORT
+    for each row
+begin
+    insert into TAGJA(FELHASZNALO_ID, CSOPORT_ID) VALUES (:NEW.TULAJ_ID, :NEW.CSOPORT_ID);
+end;
+/
 
 create or replace trigger ISMEROS_TRIGGER
     before insert or update

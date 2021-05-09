@@ -27,7 +27,10 @@ public class CommentRepo {
     private static final String UPDATE_BY_ID = "update KOMMENT k set IDOPONT = ?, KOMMENT_IRO_ID = ?, POSZT_ID = ?, " +
             "SZOVEG = ?, k.ERTEKELES = ERTEKELES(?, ?), ISPUBLIC = ? where ID = ?";
     private static final String DELETE_BY_ID = "delete from KOMMENT where ID = ?";
-    private static final String SElECT_ALL_BY_POST_ID = "SELECT k.ID, k.IDOPONT, k.KOMMENT_IRO_ID, k.POSZT_ID, k.SZOVEG, k.ERTEKELES.LIKE_SZAMLALO as \"like\", k.ERTEKELES.DISLIKE_SZAMLALO as dislike, k.ISPUBLIC, f.NEV.VEZETEKNEV AS vnev, f.NEV.KERESZTNEV AS knev FROM KOMMENT k INNER JOIN FELHASZNALO f ON f.ID = k.KOMMENT_IRO_ID WHERE k.POSZT_ID = :POSZT_ID";
+    private static final String SElECT_ALL_BY_POST_ID = "SELECT k.ID, k.IDOPONT, k.KOMMENT_IRO_ID, k.POSZT_ID, " +
+            "k.SZOVEG, k.ERTEKELES.LIKE_SZAMLALO as \"like\", k.ERTEKELES.DISLIKE_SZAMLALO as dislike, k.ISPUBLIC, " +
+            "f.NEV.VEZETEKNEV AS vnev, f.NEV.KERESZTNEV AS knev FROM KOMMENT k INNER JOIN FELHASZNALO f ON f.ID = " +
+            "k.KOMMENT_IRO_ID WHERE k.POSZT_ID = :POSZT_ID";
 
     public CommentRepo(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedJdbc) {
         this.jdbcTemplate = jdbcTemplate;
