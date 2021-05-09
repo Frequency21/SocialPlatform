@@ -1,3 +1,71 @@
 span {
   margin-left: 4em;
 }
+
+
+#profilePicture {
+  position: absolute;
+  right: 2em;
+  top: 5em;
+  width: 10em;
+  height: 10em;
+  border-radius: 50%;
+  border: 3px solid #FF729F;
+  box-shadow: 2px 2px 5px #C1EEFF;
+}
+
+#pic {
+  position: relative;
+  top: -0.8em;
+  right: 0.9em;
+  width: 9em;
+  height: 9em;
+  border-radius: 50%;
+}
+
+section {
+  display: table;
+}
+
+.example-label {
+  display: table-cell;
+  font-size: 14px;
+  margin-left: 8px;
+  min-width: 120px;
+}
+
+.example-button-row {
+  display: table-cell;
+  width: 490px;
+}
+
+.example-button-row .mat-button-base {
+  margin: 8px 8px 8px 0;
+}
+
+.example-flex-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.example-button-container {
+  display: flex;
+  justify-content: center;
+  width: 120px;
+}
+
+.poszt {
+  display: table-cell;
+  margin: 2%;
+  width: 25%;
+  border: 3px solid gray;
+}
+
+.header {
+  border-right: 2px dotted lightgray;
+}
+
+.content {
+  margin-left: 2%;
+}

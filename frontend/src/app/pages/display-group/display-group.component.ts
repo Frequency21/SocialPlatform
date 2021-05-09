@@ -7,6 +7,9 @@ import { Poszt } from 'src/app/shared/models/poszt.model';
 import { PosztService } from 'src/app/services/poszt.service';
 import { User } from 'src/app/shared/models/user.model';
 import { Subscription } from 'rxjs';
+import { ModalPosztComponent } from '../modal-poszt/modal-poszt.component';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalKommentComponent } from '../modal-komment/modal-komment.component';
 
 @Component({
   selector: 'app-display-group',
@@ -27,6 +30,7 @@ export class DisplayGroupComponent implements OnInit {
     private groupService: GroupService,
     private posztService: PosztService,
     private userService: UserService,
+    public dialog: MatDialog
     ) {
       this.subscription = this.userService.userSource.subscribe(user => this.currentUser = user);
     }
@@ -34,14 +38,6 @@ export class DisplayGroupComponent implements OnInit {
   ngOnInit(): void {
     this._Activatedroute.paramMap.subscribe(params => {
       this.getGroup(Number(params.get("id")));
-      this.getMembers(Number(params.get("id")));
-    });
-  }
-
-  getTulaj(id: number): void {
-    this.userService.getUserByID(id).subscribe(user => {
-      this.tulaj = user;
-      console.log(this.tulaj);
     });
   }
 
@@ -49,13 +45,20 @@ export class DisplayGroupComponent implements OnInit {
     this.groupService.getGroupById(id).subscribe(group => {
       this.group = group;
       this.getTulaj(group.tulaj_id);
+      this.getPoszts(group.csoport_id);
     })
+  }
+
+  getTulaj(id: number): void {
+    this.userService.getUserByID(id).subscribe(user => {
+      this.tulaj = user;
+    });
   }
 
   getPoszts(id: number): void {
     this.posztService.getPosztsByCsoportId(id).subscribe(poszts => {
       this.poszts = poszts;
-      //console.log(poszts);
+      console.log(poszts);
     });
   }
 
@@ -71,4 +74,31 @@ export class DisplayGroupComponent implements OnInit {
       //console.log("jeay")
     });
   }
+
+  openPosztDialog(){
+    const dialogRef = this.dialog.open(ModalPosztComponent, {
+      width: '40%',
+      data: {szerzo_id : this.currentUser?.id, szerzo_nev: this.currentUser?.knev+ " "+this.currentUser?.vnev, szerzo_profilkep: this.currentUser?.picture, csoport_id:this.group.csoport_id, felhasznalo_id:undefined}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log('The dialog was closed');
+    });
+  }
+
+  openKommentDialog(val_id: number): void {
+    const dialogRef = this.dialog.open(ModalKommentComponent, {
+      width: '40%',
+      data: {komment_iro_id : this.currentUser?.id, poszt_id: Number(val_id), poszt_idopont: ""}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+
+
+  isLoggedIn() {
+    return this.currentUser == undefined;
+  }
+
 }

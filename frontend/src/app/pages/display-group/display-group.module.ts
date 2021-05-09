@@ -1,3 +1,6 @@
+import { ModalKommentComponent } from './../modal-komment/modal-komment.component';
+import { ModalPosztComponent } from './../modal-poszt/modal-poszt.component';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButton } from '@angular/material/button';
@@ -12,13 +15,15 @@ import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [DisplayGroupComponent],
+  entryComponents: [ModalPosztComponent, ModalKommentComponent],
   imports: [
     CommonModule,
     MatToolbarModule,
     RouterModule,
     MatCardModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule
   ],
   exports: [DisplayGroupComponent]
 })

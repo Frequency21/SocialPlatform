@@ -18,11 +18,11 @@ export class PosztService {
   }
 
   getPosztsByFelhasznaloId(id: number):  Observable<Poszt[]> {
-    return this.http.get<Poszt[]>(this.rootUrl + id);
+    return this.http.get<Poszt[]>(this.rootUrl + "user/" + id);
   }
 
   getPosztsByCsoportId(id: number):  Observable<Poszt[]> {
-    return this.http.get<Poszt[]>(this.rootUrl + id);
+    return this.http.get<Poszt[]>(this.rootUrl + "group/" + id);
   }
 
   addPoszt(poszt: Poszt): Observable<number> {

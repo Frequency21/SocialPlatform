@@ -27,11 +27,18 @@ public class PostController {
         return ResponseEntity.ok(postRepo.getPosts());
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
     public ResponseEntity<List<Post>> getPostByUserId(
             @PathVariable int id
     ) {
         return ResponseEntity.ok(postRepo.getPostByUserId(id));
+    }
+
+    @RequestMapping(value = "/group/{id}", method = RequestMethod.GET)
+    public ResponseEntity<List<Post>> getPostByGroupId(
+            @PathVariable int id
+    ) {
+        return ResponseEntity.ok(postRepo.getPostByCsoportId(id));
     }
 
     // TODO: 2021. 05. 07. post hozzáadás hírfolyamhoz

@@ -1,18 +1,19 @@
 <div class="centering">
-  <div *ngFor="let komment of komments">
-    <mat-card class="komment">
-      <label class="kommenter">
-        <mat-card-actions>
+  <div class="komment-section" >
+    <div *ngFor="let komment of komments">
+      <mat-card class="komment">
+        <label class="kommenter">
           <a class="kommenter_lookup" mat-button [routerLink]="['../user/',komment.komment_iro_id]">
             {{komment.szerzo_knev + " " + komment.szerzo_vnev}}
           </a>
-        </mat-card-actions>
-      </label>
-      <hr>
-      {{komment.szoveg}}
-    </mat-card>
+        </label>
+        <hr>
+        {{komment.szoveg}}
+      </mat-card>
+    </div>
   </div>
-  <mat-card>
+
+  <mat-card *ngIf="!loggedIn()" class="nk">
     <form [formGroup]="form" (ngSubmit)="posztKomment()">
       <h3>Új Komment</h3>
       <textarea name="szoveg" id="1" cols="30" rows="10" formControlName="szoveg" class="max-width" required></textarea>

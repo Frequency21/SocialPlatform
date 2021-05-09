@@ -4,6 +4,8 @@
 
 .komment {
   border: 3px solid lightcoral;
+  height: 10%;
+  font-size: x-small;
 }
 
 .kommenter_lookup {
@@ -12,4 +14,19 @@
 
 hr {
   margin-top: 0;
+}
+
+.centering {
+  max-height: 40em;
+}
+
+.komment-section {
+  max-height: 15em;
+  overflow: auto;
+}
+
+.nk {
+  position: sticky;
+  bottom: 0;
+  max-height: 25em;
 }

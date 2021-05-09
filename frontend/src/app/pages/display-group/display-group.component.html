@@ -21,6 +21,19 @@
   </mat-card>
 </div>
 
+<section>
+  <div class="example-button-row">
+    <div class="example-flex-container">
+      <div class="example-button-container">
+        <button mat-fab color="primary" *ngIf="!isLoggedIn()" aria-label="Add button" (click)="openPosztDialog()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 <div class="posztok">
   <div class="posztContainer" *ngFor="let poszt of poszts">
     <mat-card class="poszt">
@@ -31,6 +44,22 @@
       <mat-card-content class="content">
         {{poszt.szoveg}}
       </mat-card-content>
+      <section>
+        <div class="example-button-row">
+          <div class="example-flex-container">
+            <div class="example-button-container">
+              <button mat-fab color="primary" aria-label="Add button" (click)="openKommentDialog(poszt.id)">
+                <mat-icon>comment</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <button *ngIf="poszt.felhasznalo_id == currentUser?.id" mat-mini-fab (click)="deletePoszt(poszt.id)">
+        <mat-icon>
+          delete
+        </mat-icon>
+      </button>
     </mat-card>
   </div>
 </div>

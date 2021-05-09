@@ -67,4 +67,8 @@ export class ModalKommentComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  loggedIn(): boolean {
+    return this.data.komment_iro_id == undefined
+  }
+
 }
