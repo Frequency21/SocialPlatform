@@ -24,7 +24,8 @@ export class DisplayUsersComponent implements OnInit {
   ngOnInit(): void {
     this.getUsers();
     this.userService.userSource.subscribe(user => {
-      this.user = user
+      this.user = user;
+      console.log(this.user?.id);
     });
   }
 

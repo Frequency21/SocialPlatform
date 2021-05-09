@@ -58,6 +58,8 @@ export class ChitChatComponent implements OnInit {
 
   getFriends(): void {
     this.userService.getFriendsById(Number(this.sender?.id)).subscribe(friends => {
+      console.log(friends)
+      console.log(this.sender!.id)
       this.friends = friends;
     });
   }

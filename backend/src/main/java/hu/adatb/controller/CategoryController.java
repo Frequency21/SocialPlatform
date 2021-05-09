@@ -20,9 +20,12 @@ public class CategoryController {
         this.categoryRepo = categoryRepo;
     }
 
-    @GetMapping("/{id}")
-    public Category get(@PathVariable("id") long id) {
-        return categoryRepo.get(id);
+    @GetMapping("/{id}/{nev}")
+    public Category get(
+            @PathVariable("id") long id,
+            @PathVariable("nev") String name
+    ) {
+        return categoryRepo.get(id, name);
     }
 
     @GetMapping("/all")

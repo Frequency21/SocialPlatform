@@ -6,7 +6,7 @@
             {{category.nev}}
         </mat-card-header>
         <mat-card-actions>
-            <button mat-button >
+            <button mat-button [routerLink]="['../', category.felh_id, '/', category.nev]" routerLinkActive="router-link-active" >
                 megtekintés
             </button>
         </mat-card-actions>

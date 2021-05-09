@@ -14,48 +14,23 @@
 
 ## Telepítés :computer:
 
-A `backend/` mappában hozzunk létre egy `db.config.js` fájlt amiben megmondjuk az oracle felhasználónk nevét, jelszavát és a connection stringet:
+- A backend mappában állítsuk be az adatbázisunk url-jét, és ha szükséges, akkor a felhasználónevünket és jelszavunkat is adjuk meg
+az alábbi útvonalon: `backend/src/main/resources/application.properties`. Itt kiválaszthajtuk, milyen portot használjon a backend.
 
-```js
-var oracledb = require('oracledb');
-oracledb.getConnection({
-      user: "XXXXXX",
-      password: "********,
-      connectString: "localhost:1521/xe" // pl.
-}, function(err, connection) {
-if (err) {
-    console.error(err.message);
-    return;
-}
-     connection.execute("SELECT * FROM table",[], function(err, result) { // teszt lekérdezés egy táblából, írjuk át!
-    if (err) { console.error(err.message);
-          doRelease(connection);
-          return;
-     }
-     console.log(result.metaData);
-     console.log(result.rows);
-     doRelease(connection);
-   });
-});
-function doRelease(connection) {
-       connection.release(function(err) {
-         if (err) {
-          console.error(err.message);
-        }
-      }
-   );
-}
-```
+- A frontend mappában `/frontend/proxy.conf.json` állítsuk be a target port számát ugyanarra, mint amire a backendét állítottuk.
 
-Ahhoz hogy ez működjön, kell hogy legyen a gépen oracle instantclient (basic package) és sdk (illetve ezeknek elérhetőnek kell lenniük a pathben). Ezeket [itt](https://www.oracle.com/database/technologies/instant-client/winx64-64-downloads.html) érhetjük el.
+Ha ezekkel megvolnánk, akkor a backendet indíthatjuk konzolból maven segítségével (backend directoryben ki kell adni, a `mvn clean install spring-boot:run` parancsot)
+vagy tetszőleges mavent támogató fejlesztőkörnyezet segítségével, pl Intelij idea.
 
-Ezt követően a node db.config.js parancsot kiadva ha minden igaz csatlakoztunk az adatbázishoz és sikeresen végrehajtottunk egy lekérdezést.
+A frontendet a frontend mappában kiadott `npm i` parancsot követő installáció után, az `ng s` utasítással indíthatjuk el.
+
+Ha a backend sikeresen csatlakozott az adatbázishoz és fut a frontenddel együtt, akkor az alkalmazást megtekinthetjük böngészőnkben a localhost:4200-as url-en.
 
 ---
 
 ## Feladat leírás :pencil:
 
-A feladat egy online közösségi oldal és a hozzá tartozó adatbázison alapuló szerver-kliens architektúrájú webalkalmazás megvalósítása. Ahol az adatbázis Oracle technológián nyugszik míg a webalkalmazást Angular és Node.js keretrendszerek segítségével készítjük el.
+A feladat egy online közösségi oldal és a hozzá tartozó adatbázison alapuló szerver-kliens architektúrájú webalkalmazás megvalósítása. Ahol az adatbázis Oracle technológián nyugszik míg a webalkalmazást Angular és Spring boot keretrendszerek segítségével készítjük el.
 
 Az alkalmazás egy egyszerű regisztrációt és bejelentkezést követően lehetőséget nyújt arra, hogy új ismerősöket jelölhessünk be illetve meglévőkkel válthassunk üzenetet. Böngészhetünk csoportok között melyekhez csatlakozhatunk. Csoportokat is alakíthatunk, ahol hasonló érdeklődési körrel rendelkezők gyűlhetnek össze -- hobbi, iskola, munkahely. A profilunkat testreszabhatjuk, megadhatjuk a születési dátumunkat, nevünket, volt iskoláinkat, munkahelyeinket, lakhelyünket, hobbijainkat. Létrehozhatunk fényképalbumokat, melyeket rendszerezhetünk és nevet is adhatunk nekik. Illetve a hírfolyamon is elhelyezhetünk eseményeket, képeket, bejegyzéseket melyekre jöhetnek likeok illetve megjegyzések.
 

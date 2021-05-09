@@ -221,7 +221,47 @@ FROM felhasznalo f
 
 -- nézettáblák end
 
+
+
+-- beszúrások begin
+INSERT INTO Felhasznalo (jelszo, email, nev, csatl_dat, szul_dat, munka_iskola, isAdmin) VALUES ('12345', 'oli@gmail.com', NEVTIPUS('Kiss', 'Olivér'), SYSTIMESTAMP, TO_DATE('2020/04/21', 'yyyy/mm/dd'), 'egyetem', 1);
+INSERT INTO Felhasznalo (jelszo, email, nev, csatl_dat, szul_dat, munka_iskola, isAdmin) VALUES ('12345', 'ralf@gmail.com', NEVTIPUS('Burza', 'Ralf'), SYSTIMESTAMP, TO_DATE('2020/04/21', 'yyyy/mm/dd'), 'egyetem', 1);
+INSERT INTO Felhasznalo (jelszo, email, nev, csatl_dat, szul_dat, munka_iskola, isAdmin) VALUES ('12345', 'etele@gmail.com', NEVTIPUS('Balogh', 'Etele'), SYSTIMESTAMP, TO_DATE('2020/04/21', 'yyyy/mm/dd'), 'egyetem', 1);
+INSERT INTO Felhasznalo (jelszo, email, nev, csatl_dat, szul_dat, munka_iskola, isAdmin) VALUES ('12345', 'taylor@gmail.com', NEVTIPUS('Mária', 'Magdolna'), SYSTIMESTAMP, TO_DATE('2020/04/21', 'yyyy/mm/dd'), 'reptér', 1);
+INSERT INTO Felhasznalo (jelszo, email, nev, csatl_dat, szul_dat, munka_iskola, isAdmin) VALUES ('12345', 'deny@gmail.com', NEVTIPUS('Szent', 'Péter'), SYSTIMESTAMP, TO_DATE('2020/04/21', 'yyyy/mm/dd'), 'vasút', 1);
+INSERT INTO Felhasznalo (jelszo, email, nev, csatl_dat, szul_dat, munka_iskola, isAdmin) VALUES ('12345', 'yndi@gmail.com', NEVTIPUS('Anna', 'Konda'), SYSTIMESTAMP, TO_DATE('2020/04/21', 'yyyy/mm/dd'), 'kórház', 1);
+
+INSERT INTO ISMEROS(felhasznalo1_id, felhasznalo2_id) VALUES(1, 2);
+INSERT INTO ISMEROS(felhasznalo1_id, felhasznalo2_id) VALUES(1, 3);
+INSERT INTO ISMEROS(felhasznalo1_id, felhasznalo2_id) VALUES(1, 5);
+INSERT INTO ISMEROS(felhasznalo1_id, felhasznalo2_id) VALUES(1, 6);
+
+INSERT INTO ISMEROS(felhasznalo1_id, felhasznalo2_id) VALUES(2, 3);
+INSERT INTO ISMEROS(felhasznalo1_id, felhasznalo2_id) VALUES(2, 6);
+COMMIT;
+-- beszúrások begin
+
+
+
+
 -- eljárások / functionök begin
+
+set serveroutput on;
+
+
+create or replace procedure ismerosok (felh_id in number, var_ref in out sys_refcursor) is
+begin
+    open var_ref for 
+    select ID, JELSZO, EMAIL, f.NEV.VEZETEKNEV as VNEV, f.NEV.KERESZTNEV as KNEV, CSATL_DAT, SZUL_DAT, MUNKA_ISKOLA, PICTURE, ISADMIN 
+    from
+        FELHASZNALO f inner join ISMEROS i 
+    on 
+            f.ID = i.FELHASZNALO1_ID where i.FELHASZNALO1_ID = felh_id AND f.ID != felh_id 
+        or 
+            i.FELHASZNALO2_ID = felh_id AND f.ID != felh_id;
+end;
+/
+
 
 -- eljárások / functionök end
 

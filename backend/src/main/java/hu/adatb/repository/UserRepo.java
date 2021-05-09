@@ -1,21 +1,24 @@
 package hu.adatb.repository;
 
 import hu.adatb.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.dao.DataAccessException;
-import org.springframework.http.ResponseEntity;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.*;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import javax.sql.DataSource;
+import java.sql.*;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Repository
@@ -41,14 +44,15 @@ public class UserRepo {
     private static final String USER_ISMEROSEI = "select ID, JELSZO, EMAIL, f.NEV.VEZETEKNEV as VNEV, f.NEV.KERESZTNEV " +
             "as KNEV, CSATL_DAT, SZUL_DAT, MUNKA_ISKOLA, PICTURE, ISADMIN from " +
             "FELHASZNALO f inner join ISMEROS i on f.ID = i.FELHASZNALO1_ID OR f.ID = i.FELHASZNALO2_ID where " +
-            "i.FELHASZNALO1_ID = :ID AND f.ID NOT LIKE :ID " +
-            "or i.FELHASZNALO2_ID = :ID AND f.ID NOT LIKE :ID";
+            "i.FELHASZNALO1_ID = :ID AND f.ID != :ID " +
+            "or i.FELHASZNALO2_ID = :ID AND f.ID != :ID";
     private static final String FRIEND_REQUEST = "insert into ISMEROS values (?, ?)";
 
 
     public UserRepo(NamedParameterJdbcTemplate namedJdbc, JdbcTemplate jdbcTemplate) {
         this.namedJdbc = namedJdbc;
         this.jdbcTemplate = jdbcTemplate;
+        DataSource ds = this.jdbcTemplate.getDataSource();
     }
 
     /* a mapRow szebb megoldás lenne, de már nem fogom refaktorálni arra (lásd GroupRepo) */
@@ -149,11 +153,17 @@ public class UserRepo {
         });
     }
 
-    public List<User> getIsmerosei(long id) {
-        return namedJdbc.query(
-                USER_ISMEROSEI,
-                new MapSqlParameterSource("ID", id),
-                rs -> {
+    /* példa prodecure hívásra aminek be- kimenő paramétere egy cursor */
+    public List<User> getIsmerosei(long felhId) {
+        return jdbcTemplate.execute(
+                connection -> {
+                    CallableStatement statement = connection.prepareCall("{call ISMEROSOK(?, ?)}");
+                    statement.setLong(1, felhId);
+                    statement.registerOutParameter(2, Types.REF_CURSOR);
+                    return statement;
+                }, (CallableStatementCallback<List<User>>) callableStatement -> {
+                    callableStatement.execute();
+                    ResultSet rs = (ResultSet) callableStatement.getObject(2);
                     List<User> users = new ArrayList<>();
                     User u;
                     while (rs.next()) {
@@ -161,6 +171,7 @@ public class UserRepo {
                         getUser(rs, u);
                         users.add(u);
                     }
+                    rs.close();
                     return users;
                 }
         );
@@ -169,4 +180,6 @@ public class UserRepo {
     public boolean friendRequest(long id1, long id2) {
         return jdbcTemplate.update(FRIEND_REQUEST, id1, id2) == 1;
     }
+
 }
+

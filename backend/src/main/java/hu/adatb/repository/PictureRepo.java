@@ -34,7 +34,7 @@ public class PictureRepo {
     public List<Picture> getAll(String katNev, String felhId) {
         return jdbcTemplate.query(
                 SELECT_ALL,
-                (RowMapper<Picture>) PictureRepo::mapRow,
+                PictureRepo::mapRow,
                 felhId, katNev
         );
     }

@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -48,6 +49,7 @@ public class UserController {
 
     @GetMapping(value = "/ismerosei/{id}")
     public List<User> getIsmerosei(@PathVariable("id") long id) {
+        log.debug("" + id);
         return userRepo.getIsmerosei(id);
     }
 
@@ -87,6 +89,11 @@ public class UserController {
             @PathVariable("id") int id
     ) {
         return userRepo.deleteUser(id);
+    }
+
+    @GetMapping("cursor/{id}")
+    public List<User> getIsmerosok(@PathVariable("id") long id) {
+        return userRepo.getIsmerosei(id);
     }
 
     @ExceptionHandler({DataIntegrityViolationException.class})
