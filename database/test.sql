@@ -248,7 +248,6 @@ COMMIT;
 
 set serveroutput on;
 
-
 create or replace procedure ismerosok (felh_id in number, var_ref in out sys_refcursor) is
 begin
     open var_ref for 
@@ -274,6 +273,16 @@ end;
 -- az ismerettség szimmetrikus reláció, értelmetlen lenne letárolni, hogy
 -- 1 ismeri 2-őt és 2 ismeri 1-et, ezért az ISMEROS tábla az id-kat rendezve
 -- tárolja --> egy trigger gondoskodik erről mind insert mind update előtt
+
+create or replace trigger ISMEROS_KOSZONTES
+    after insert
+    on ISMEROS
+    for each row
+begin
+    insert into UZENET(IDOPONT, KULDO_ID, CIMZETT_ID, SZOVEG) VALUES(SYSTIMESTAMP, :NEW.FELHASZNALO1_ID, :NEW.FELHASZNALO2_ID, 'keep distance');
+    insert into UZENET(IDOPONT, KULDO_ID, CIMZETT_ID, SZOVEG) VALUES(SYSTIMESTAMP, :NEW.FELHASZNALO2_ID, :NEW.FELHASZNALO1_ID, 'you too!');
+end;
+/
 
 create or replace trigger CSOPORT_TRIGGER
     after insert 
