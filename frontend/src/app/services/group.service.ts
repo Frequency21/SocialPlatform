@@ -24,4 +24,8 @@ export class GroupService {
   getMembes(id: number): Observable<User[]> {
     return this.http.get<User[]>(this.rootUrl + "members/" + id);
   }
+
+  addGroup(group: Group): Observable<number> {
+    return this.http.post<number>(this.rootUrl + "add", group);
+  }
 }

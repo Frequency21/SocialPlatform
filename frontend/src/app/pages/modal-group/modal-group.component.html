@@ -1,0 +1,13 @@
+<form [formGroup]="form" (ngSubmit)="saveGroup()">
+  <h1>Csoport létrehozása</h1>
+  <input matInput formControlName="nev"
+        type="text"
+        required
+        placeholder="Csoport neve">
+  <br>
+  <br>
+  <textarea formControlName="leiras" name="leiras" id="" cols="30" rows="10" required>  Leírás . . .</textarea>
+  <br>
+  <button type="submit" mat-button [disabled]="form.invalid">Mentés</button>
+</form>
+<button type="submit" mat-button (click)="onNoClick()">Mégse</button>

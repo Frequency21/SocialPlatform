@@ -2,6 +2,7 @@
 <hr>
 <ul class="groups">
   <div class="group-container">
+    <button mat-button *ngIf="!loggedIn()" (click)="openDialog()">Új csoport</button>
     <div *ngFor="let group of groups">
       <mat-card class="card">
         <mat-card-header>
@@ -9,7 +10,7 @@
           <mat-card-subtitle>#{{group.csoport_id}}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
-          <span>Leírás: {{group.leiras}}</span>
+          <span>Leírás: {{group.leiras}} | {{group.tagok}}</span>
         <!--<span>Tulajdonos: {{group.tulaj_vnev + " " + group.tulaj_knev}}</span>-->
         </mat-card-content>
         <mat-card-actions>

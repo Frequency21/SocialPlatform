@@ -1,3 +1,4 @@
+import { GroupDialog } from './../../shared/models/groupDialog.modell';
 import { Router } from '@angular/router';
 import { CommentService } from './../../services/comment.service';
 import { KommentDialog } from './../../shared/models/kommentDialog.model';
@@ -24,7 +25,7 @@ export class ModalKommentComponent implements OnInit {
   constructor(
     private router: Router,
     public dialogRef: MatDialogRef<ModalKommentComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: KommentDialog,
+    @Inject(MAT_DIALOG_DATA) public data: GroupDialog,
     private posztService: PosztService,
     private commentService: CommentService
   ) { }
