@@ -48,6 +48,7 @@ export class DisplayUserComponent implements OnInit {
   getPoszts(id: number): void {
     this.posztService.getPosztsByFelhasznaloId(id).subscribe(poszts => {
       this.poszts = poszts;
+      console.log(this.poszts);
     });
   }
 
@@ -71,7 +72,7 @@ export class DisplayUserComponent implements OnInit {
     console.log("poszt id: " + Number(val_id));
     const dialogRef = this.dialog.open(ModalKommentComponent, {
       width: '40%',
-      data: {komment_iro_id : this.currentUser?.id, poszt_felh_id: val_id, poszt_idopont: ""}
+      data: {komment_iro_id : this.currentUser?.id, poszt_id: Number(val_id), poszt_idopont: ""}
     });
 
     dialogRef.afterClosed().subscribe(result => {

@@ -23,10 +23,10 @@ public class PostRepo {
     private final NamedParameterJdbcTemplate namedJdbc;
     private final JdbcTemplate jdbcTemplate;
 
-    private static final String SELECT_ALL = "select IDOPONT, SZERZO_ID, CSOPORT_ID, FELHASZNALO_ID, SZOVEG, " +
+    private static final String SELECT_ALL = "select ID, IDOPONT, SZERZO_ID, CSOPORT_ID, FELHASZNALO_ID, SZOVEG, " +
             "p.ERTEKELES.LIKE_SZAMLALO as \"like\", p.ERTEKELES.DISLIKE_SZAMLALO as dislike, ISPUBLIC from POSZT p";
 
-    private static final String SELECT_ALL_BY_USER_ID = "select IDOPONT, SZERZO_ID, CSOPORT_ID, FELHASZNALO_ID, SZOVEG, " +
+    private static final String SELECT_ALL_BY_USER_ID = "select ID, IDOPONT, SZERZO_ID, CSOPORT_ID, FELHASZNALO_ID, SZOVEG, " +
             "p.ERTEKELES.LIKE_SZAMLALO as \"like\", p.ERTEKELES.DISLIKE_SZAMLALO as dislike, ISPUBLIC from POSZT p " +
             "where FELHASZNALO_ID = :FELHASZNALO_ID";
     private static final String INSERT_POSZT =
@@ -58,6 +58,7 @@ public class PostRepo {
     private static Post getPost(ResultSet rs) throws SQLException {
         Post result;
         result = new Post();
+        result.setId(rs.getLong("ID"));
         result.setIdopont(rs.getDate("IDOPONT"));
         result.setSzerzoId(rs.getInt("SZERZO_ID"));
         result.setCsoportId(rs.getInt("CSOPORT_ID"));

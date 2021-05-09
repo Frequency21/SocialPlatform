@@ -1,3 +1,4 @@
+import { CommentService } from './../../services/comment.service';
 import { KommentDialog } from './../../shared/models/kommentDialog.model';
 import { Komment } from './../../shared/models/komment.model';
 import { Component, Inject, OnInit } from '@angular/core';
@@ -22,7 +23,8 @@ export class ModalKommentComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<ModalKommentComponent>,
     @Inject(MAT_DIALOG_DATA) public data: KommentDialog,
-    private posztService: PosztService
+    private posztService: PosztService,
+    private commentService: CommentService
   ) { }
 
   ngOnInit(): void {
@@ -32,8 +34,7 @@ export class ModalKommentComponent implements OnInit {
     let newKomment: Komment = {
       idopont: "",
       komment_iro_id: this.data.komment_iro_id,
-      poszt_felh_id: this.data.poszt_felh_id,
-      poszt_idopont: this.data.poszt_idopont,
+      poszt_id: Number(this.data.poszt_id),
       szoveg: this.form.value.szoveg,
       ertekeles : {
         like : 0,
@@ -41,9 +42,9 @@ export class ModalKommentComponent implements OnInit {
       },
       isPublic: (this.form.value.isPublic != null)
     }
-    // console.log(newKomment);
-    this.posztService.addKomment(newKomment).subscribe(retKomment => {
-      // console.log(retKomment);
+    console.log(newKomment);
+    this.commentService.saveKomment(newKomment).subscribe(retKomment => {
+      console.log(retKomment);
     });
     this.onNoClick();
   }

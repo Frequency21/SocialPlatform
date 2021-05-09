@@ -50,13 +50,13 @@ public class CommentController {
     }
 
     // TODO: 2021. 05. 07. kommentelés poszt alá
-//    @PostMapping(value = "/{poszt_id}")
-//    public boolean addComment(
-//            @PathVariable("poszt_id") long posztId,
-//            @RequestBody Comment comment
-//    ) {
-//        return commentRepo.save(comment);
-//    }
+    @PostMapping(value = "/")
+    public Long addComment(
+            @RequestBody Comment comment
+    ) {
+        System.out.println(comment);
+        return commentRepo.save(comment);
+    }
 
     @DeleteMapping("/{id}")
     public boolean delete(

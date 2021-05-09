@@ -1,12 +1,17 @@
 package hu.adatb.repository;
 
 import hu.adatb.model.Comment;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 
@@ -15,6 +20,8 @@ public class CommentRepo {
     private final JdbcTemplate jdbcTemplate;
     private final NamedParameterJdbcTemplate namedJdbc;
     private static final String SELECT_ALL = "";
+    private static final String INSERT_COMMENT = "INSERT INTO KOMMENT(IDOPONT, KOMMENT_IRO_ID, POSZT_ID, SZOVEG, ERTEKELES, ISPUBLIC)" +
+            "VALUES(:IDOPONT, :KOMMENT_IRO_ID, :POSZT_ID, :SZOVEG, ERTEKELES(:LIKE, :DISLIKE), :ISPUBLIC)";
     private static final String SELECT_BY_ID = "select ID, IDOPONT, KOMMENT_IRO_ID, POSZT_ID, SZOVEG, " +
             "ERTEKELES.LIKE_SZAMLALO as \"like\", ERTEKELES.DISLIKE_SZAMLALO as dislike, ISPUBLIC from KOMMENT where ID = :ID";
     private static final String UPDATE_BY_ID = "update KOMMENT k set IDOPONT = ?, KOMMENT_IRO_ID = ?, POSZT_ID = ?, " +
@@ -45,6 +52,31 @@ public class CommentRepo {
 
     public List<Comment> getAll() {
         return jdbcTemplate.query(SELECT_ALL, CommentRepo::mapRow);
+    }
+
+    /*
+
+    private static final String INSERT_COMMENT = "INSERT INTO KOMMENT(IDOPONT, KOMMENT_IRO_ID, POSZT_ID, SZOVEG, ERTEKELES, ISPUBLIC)" +
+            "VALUES(:IDOPONT, :KOMMENT_IRO_ID, :POSZT_ID, :SZOVEG, ERTEKELES(:LIKE, :DISLIKE), :ISPUBLIC)";
+     */
+
+    public Long save(Comment comment) {
+        KeyHolder kh = new GeneratedKeyHolder();
+        MapSqlParameterSource map = new MapSqlParameterSource()
+                .addValue("IDOPONT", new Date(System.currentTimeMillis()))
+                .addValue("KOMMENT_IRO_ID", comment.getKommentIroId())
+                .addValue("POSZT_ID", comment.getPosztId())
+                .addValue("SZOVEG", comment.getSzoveg())
+                .addValue("LIKE", comment.getLike())
+                .addValue("DISLIKE", comment.getDislike())
+                .addValue("ISPUBLIC", comment.isPublic());
+        try {
+            namedJdbc.update(INSERT_COMMENT, map, kh, new String[]{"ID"});
+        } catch (DataAccessException dae) {
+            dae.printStackTrace();
+            return null;
+        }
+        return kh.getKey().longValue();
     }
 
     public boolean update(long id, Comment to) {
