@@ -21,6 +21,7 @@ export class DisplayGroupComponent implements OnInit {
   tulaj?: User;
   subscription: Subscription;
   currentUser?: User;
+  members?: User[];
 
   constructor(private _Activatedroute: ActivatedRoute,
     private groupService: GroupService,
@@ -33,6 +34,7 @@ export class DisplayGroupComponent implements OnInit {
   ngOnInit(): void {
     this._Activatedroute.paramMap.subscribe(params => {
       this.getGroup(Number(params.get("id")));
+      this.getMembers(Number(params.get("id")));
     });
   }
 
@@ -57,10 +59,16 @@ export class DisplayGroupComponent implements OnInit {
     });
   }
 
+  getMembers(id: number): void {
+    this.groupService.getMembers(id).subscribe(members => {
+      this.members = members;
+    });
+  }
+
   joinGroup(id: number): void {
     console.log("csoport id: " + id + "| felhasználó id: " + this.currentUser?.id);
     this.userService.joinGroup(id, Number(this.currentUser?.id)).subscribe(ret => {
-      console.log("jeay")
+      //console.log("jeay")
     });
   }
 }

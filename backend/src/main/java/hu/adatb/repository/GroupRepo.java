@@ -2,6 +2,7 @@ package hu.adatb.repository;
 
 
 import hu.adatb.model.Group;
+import hu.adatb.model.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -25,6 +26,7 @@ public class GroupRepo {
     private static final String SELECT_ALL = "select * from CSOPORT";
     private static final String UPDATE_BY_ID = "update CSOPORT set LEIRAS = ?, NEV = ?, TULAJ_ID = ? where CSOPORT_ID = ?";
     private static final String DELETE_BY_ID = "delete from CSOPORT where CSOPORT_ID = ?";
+    private static final String SELECT_MEMBERS = "SELECT f.* FROM FELHASZNALO f INNER JOIN TAGJA t ON t.FELHASZNALO_ID = f.ID WHERE t.CSOPORT_ID = :ID";
 
     public GroupRepo(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedJdbc) {
         this.jdbcTemplate = jdbcTemplate;
