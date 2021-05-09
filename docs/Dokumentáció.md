@@ -12,6 +12,21 @@
 
 ---
 
+## Telepítés :computer:
+
+- Az adatbázist definiáló és feltöltő szkriptek a `database/db-export.sql` útvonalon találhatók (a ddl.sql, insert.sql az eredeti, ám nem teljes, kézzel írt verziók).
+- A backend mappában állítsuk be az adatbázisunk url-jét, és ha szükséges, akkor a felhasználónevünket és jelszavunkat is adjuk meg
+az alábbi útvonalon: `backend/src/main/resources/application.properties`. Itt kiválaszthajtuk, milyen portot használjon a backend.
+
+- A frontend mappában `/frontend/proxy.conf.json` állítsuk be a target port számát ugyanarra, mint amire a backendét állítottuk.
+
+Ha ezekkel megvolnánk, akkor a backendet indíthatjuk konzolból maven segítségével (backend directoryben ki kell adni, a `mvn clean install spring-boot:run` parancsot)
+vagy tetszőleges mavent támogató fejlesztőkörnyezet segítségével, pl Intelij idea.
+
+A frontendet a frontend mappában kiadott `npm i` parancsot követő installáció után, az `ng s` utasítással indíthatjuk el.
+
+Ha a backend sikeresen csatlakozott az adatbázishoz és fut a frontenddel együtt, akkor az alkalmazást megtekinthetjük böngészőnkben a localhost:4200-as url-en.
+
 ## Feladat leírás
 
 A feladat egy online közösségi oldal és a hozzá tartozó adatbázison alapuló szerver-kliens architektúrájú webalkalmazás megvalósítása. Ahol az adatbázis Oracle technológián nyugszik míg a webalkalmazást Angular és Node.js keretrendszerek segítségével készítjük el.

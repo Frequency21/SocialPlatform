@@ -14,6 +14,7 @@
 
 ## Telepítés :computer:
 
+- Az adatbázist definiáló és feltöltő szkriptek a `database/db-export.sql` útvonalon találhatók (a ddl.sql, insert.sql az eredeti, ám nem teljes, kézzel írt verziók).
 - A backend mappában állítsuk be az adatbázisunk url-jét, és ha szükséges, akkor a felhasználónevünket és jelszavunkat is adjuk meg
 az alábbi útvonalon: `backend/src/main/resources/application.properties`. Itt kiválaszthajtuk, milyen portot használjon a backend.
 
