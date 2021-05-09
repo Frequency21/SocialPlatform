@@ -22,12 +22,12 @@ public class PostController {
         this.postRepo = postRepo;
     }
 
-    @RequestMapping(value = "all", method = RequestMethod.GET)
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ResponseEntity<List<Post>> getAllPost() {
         return ResponseEntity.ok(postRepo.getPosts());
     }
 
-    @RequestMapping(value = "{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<List<Post>> getPostByUserId(
             @PathVariable int id
     ) {

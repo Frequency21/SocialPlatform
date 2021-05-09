@@ -29,7 +29,7 @@ public class PostRepo {
     private static final String SELECT_ALL_BY_USER_ID = "select IDOPONT, SZERZO_ID, CSOPORT_ID, FELHASZNALO_ID, SZOVEG, " +
             "p.ERTEKELES.LIKE_SZAMLALO as \"like\", p.ERTEKELES.DISLIKE_SZAMLALO as dislike, ISPUBLIC from POSZT p " +
             "where FELHASZNALO_ID = :FELHASZNALO_ID";
-    private static final String INSERT_POSZT = "" +
+    private static final String INSERT_POSZT =
             "INSERT INTO POSZT(IDOPONT, SZERZO_ID, CSOPORT_ID, FELHASZNALO_ID, SZOVEG, ERTEKELES, ISPUBLIC)" +
             "VALUES(:IDOPONT, :SZERZO_ID, :CSOPORT_ID, :FELHASZNALO_ID, :SZOVEG, ERTEKELES(:LIKE , :DISLIKE), :ISPUBLIC)";
 
@@ -100,6 +100,5 @@ public class PostRepo {
         MapSqlParameterSource map = new MapSqlParameterSource("FELHASZNALO_ID", id);
         return namedJdbc.query(SELECT_ALL_BY_USER_ID, map, PostRepo::extractPosts);
     }
-
 
 }

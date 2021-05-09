@@ -35,7 +35,8 @@ import { ProfileModule } from './pages/profile/profile.module';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ChitChatComponent } from './pages/chit-chat/chit-chat.component';
-import { DisplayKategoryComponent } from './pages/display-kategory/display-kategory.component';
+import { CategoriesModule } from './pages/categories/categories.module';
+
 
 // MatNativeDateModule,
 
@@ -43,7 +44,6 @@ import { DisplayKategoryComponent } from './pages/display-kategory/display-kateg
   declarations: [
     AppComponent,
     HomeComponent,
-    DisplayKategoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,6 +68,8 @@ import { DisplayKategoryComponent } from './pages/display-kategory/display-kateg
     DisplayPostsModule,
     DisplayGroupModule,
     DisplayGroupsModule,
+    CategoriesModule,
+    CategoriesModule,
     ModalPosztModule,
     ModalKommentModule,
     LoginModule,
