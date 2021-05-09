@@ -33,6 +33,13 @@ public class CategoryController {
         return categoryRepo.getAll();
     }
 
+    @GetMapping("/{id}")
+    public List<Category> getAllById(
+            @PathVariable("id") long id
+    ) {
+        return categoryRepo.getAllById(id);
+    }
+
     /* return generated id */
     @PostMapping
     public boolean save(@RequestBody Category category) {

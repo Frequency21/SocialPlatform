@@ -16,6 +16,7 @@ public class CategoryRepo {
     private final NamedParameterJdbcTemplate namedJdbc;
     private final JdbcTemplate jdbcTemplate;
     private static final String SELECT_ALL = "select * from KATEGORIA";
+    private static final String SELECT_ALL_BY_ID = "SELECT * FROM KATEGORIA WHERE FELH_ID = :FELH_ID";
     private static final String SELECT_BY_FELH_ID = "select * from KATEGORIA where FELH_ID = :FELH_ID and NEV = :NEV";
     private static final String SAVE_CATEGORY = "insert into KATEGORIA(NEV, FELH_ID) VALUES (:NEV, :FELH_ID)";
     private static final String DELETE_CATEGORY = "delete from KATEGORIA where NEV = ? and FELH_ID = ?";
@@ -44,6 +45,12 @@ public class CategoryRepo {
 
     public List<Category> getAll() {
         return jdbcTemplate.query(SELECT_ALL, CategoryRepo::mapRow);
+    }
+
+    public List<Category> getAllById(long id) {
+        MapSqlParameterSource map = new MapSqlParameterSource()
+                .addValue("FELH_ID", id);
+        return jdbcTemplate.query(SELECT_ALL_BY_ID, map, CategoryRepo::mapRow);
     }
 
     public boolean save(Category category) {
