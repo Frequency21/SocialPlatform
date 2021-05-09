@@ -1,0 +1,11 @@
+<form [formGroup]="form" (ngSubmit)="saveC()">
+  <h1>Csoport létrehozása</h1>
+  <input matInput formControlName="nev"
+        type="text"
+        required
+        placeholder="Csoport neve">
+  <br>
+  <hr>
+  <button type="submit" mat-button [disabled]="form.invalid">Mentés</button>
+</form>
+<button type="submit" mat-button (click)="onNoClick()">Mégse</button>

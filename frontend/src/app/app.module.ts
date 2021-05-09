@@ -37,6 +37,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { ChitChatComponent } from './pages/chit-chat/chit-chat.component';
 import { CategoriesModule } from './pages/categories/categories.module';
 import { ModalGroupComponent } from './pages/modal-group/modal-group.component';
+import { ModalKategoryComponent } from './pages/modal-kategory/modal-kategory.component';
 
 
 // MatNativeDateModule,
@@ -46,6 +47,7 @@ import { ModalGroupComponent } from './pages/modal-group/modal-group.component';
     AppComponent,
     HomeComponent,
     ModalGroupComponent,
+    ModalKategoryComponent,
   ],
   imports: [
     BrowserModule,

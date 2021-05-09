@@ -18,4 +18,8 @@ export class CategoryService {
     return this.http.get<Category[]>(this.rootUrl + '/all');
   }
 
+  saveCategory(n: Category): Observable<boolean> {
+    return this.http.post<boolean>(this.rootUrl, n);
+  }
+
 }
