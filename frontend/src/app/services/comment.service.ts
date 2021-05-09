@@ -16,7 +16,8 @@ export class CommentService {
     return this.http.post<number>(this.rootUrl + "/", komment);
   }
 
-  getKommnetById(id: number) {
-    return this.http.get(this.rootUrl + "/posztok/${id}")
+  getKommnetByPosztId(id: number): Observable<Comment[]> {
+    console.log(id);
+    return this.http.get<Comment[]>(this.rootUrl + "/poszt/" + idid);
   }
 }

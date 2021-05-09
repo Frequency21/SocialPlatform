@@ -18,7 +18,7 @@ export class ModalKommentComponent implements OnInit {
     szoveg: new FormControl(),
     isPublic: new FormControl()
   });
-  komments?: Komment[];
+  komments?: Comment[];
 
   constructor(
     public dialogRef: MatDialogRef<ModalKommentComponent>,
@@ -28,6 +28,7 @@ export class ModalKommentComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.getKomments();
   }
 
   posztKomment(): void {
@@ -47,6 +48,14 @@ export class ModalKommentComponent implements OnInit {
       console.log(retKomment);
     });
     this.onNoClick();
+  }
+
+  getKomments(): void {
+    console.log(this.data.poszt_id);
+    this.commentService.getKommnetByPosztId(Number(this.data.poszt_id)).subscribe(komments => {
+      this.komments = komments;
+      console.log(this.komments);
+    })
   }
 
   onNoClick(): void {
